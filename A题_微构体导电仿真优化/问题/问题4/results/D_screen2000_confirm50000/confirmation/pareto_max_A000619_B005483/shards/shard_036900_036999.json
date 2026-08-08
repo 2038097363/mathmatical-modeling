@@ -1,0 +1,6031 @@
+{
+  "kind": "mixed_pareto_frontier_shard",
+  "schema_version": 1,
+  "configuration": {
+    "schema_version": 1,
+    "algorithm_version": "mixed-fixed-design-d-clipped-sphere-v3",
+    "a_algorithm_version": "flat-cylinder-periodic-numba-cached-v4",
+    "n_a": 619,
+    "n_b": 5483,
+    "trial_count": 50000,
+    "master_seed": 20260801,
+    "stream_id": 5,
+    "boundary_mode": "D",
+    "box_length_nm": 10000.0,
+    "a_length_nm": 5000.0,
+    "a_radius_nm": 30.0,
+    "b_radius_nm": 200.0,
+    "contact_cutoff_nm": 1.8,
+    "cell_size_nm": 625.0,
+    "broad_phase_guard_nm": 1e-08,
+    "gjk_absolute_tolerance_nm": 1e-10,
+    "gjk_relative_tolerance": 1e-13,
+    "gjk_max_iterations": 512
+  },
+  "configuration_fingerprint": "A89B7544E6D0696E62C7ABC8E34E3DA1718E5DA541D57E1FDB9CF7EC00696F77",
+  "trial_ids": [
+    36900,
+    36901,
+    36902,
+    36903,
+    36904,
+    36905,
+    36906,
+    36907,
+    36908,
+    36909,
+    36910,
+    36911,
+    36912,
+    36913,
+    36914,
+    36915,
+    36916,
+    36917,
+    36918,
+    36919,
+    36920,
+    36921,
+    36922,
+    36923,
+    36924,
+    36925,
+    36926,
+    36927,
+    36928,
+    36929,
+    36930,
+    36931,
+    36932,
+    36933,
+    36934,
+    36935,
+    36936,
+    36937,
+    36938,
+    36939,
+    36940,
+    36941,
+    36942,
+    36943,
+    36944,
+    36945,
+    36946,
+    36947,
+    36948,
+    36949,
+    36950,
+    36951,
+    36952,
+    36953,
+    36954,
+    36955,
+    36956,
+    36957,
+    36958,
+    36959,
+    36960,
+    36961,
+    36962,
+    36963,
+    36964,
+    36965,
+    36966,
+    36967,
+    36968,
+    36969,
+    36970,
+    36971,
+    36972,
+    36973,
+    36974,
+    36975,
+    36976,
+    36977,
+    36978,
+    36979,
+    36980,
+    36981,
+    36982,
+    36983,
+    36984,
+    36985,
+    36986,
+    36987,
+    36988,
+    36989,
+    36990,
+    36991,
+    36992,
+    36993,
+    36994,
+    36995,
+    36996,
+    36997,
+    36998,
+    36999
+  ],
+  "records": [
+    {
+      "trial_id": 36900,
+      "connectivity_frontier": [
+        [
+          201,
+          5283
+        ],
+        [
+          249,
+          4901
+        ],
+        [
+          264,
+          4189
+        ],
+        [
+          293,
+          3822
+        ],
+        [
+          304,
+          3681
+        ],
+        [
+          311,
+          553
+        ],
+        [
+          443,
+          398
+        ],
+        [
+          457,
+          0
+        ]
+      ],
+      "a_fragment_count": 1104,
+      "b_fragment_count": 6137,
+      "clipped_b_fragment_count": 1259,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132650,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124455,
+      "narrow_phase_calls": 8195,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 512,
+      "ab_contacts": 3214,
+      "bb_contacts": 4411,
+      "electrode_contacts": 783,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7243,
+        "edge_count": 8920,
+        "generated_labels": 734400,
+        "accepted_labels": 236,
+        "dominated_prunes": 228,
+        "target_prunes": 349675,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36901,
+      "connectivity_frontier": [
+        [
+          243,
+          4583
+        ],
+        [
+          289,
+          2147
+        ],
+        [
+          340,
+          1003
+        ],
+        [
+          403,
+          0
+        ]
+      ],
+      "a_fragment_count": 1091,
+      "b_fragment_count": 6212,
+      "clipped_b_fragment_count": 1399,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128246,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 120069,
+      "narrow_phase_calls": 8177,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 489,
+      "ab_contacts": 3197,
+      "bb_contacts": 4434,
+      "electrode_contacts": 817,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7305,
+        "edge_count": 8937,
+        "generated_labels": 757469,
+        "accepted_labels": 153,
+        "dominated_prunes": 149,
+        "target_prunes": 223267,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36902,
+      "connectivity_frontier": [
+        [
+          143,
+          4048
+        ],
+        [
+          245,
+          3337
+        ],
+        [
+          297,
+          3084
+        ],
+        [
+          316,
+          2862
+        ],
+        [
+          416,
+          2784
+        ],
+        [
+          444,
+          1215
+        ],
+        [
+          504,
+          241
+        ]
+      ],
+      "a_fragment_count": 1075,
+      "b_fragment_count": 6137,
+      "clipped_b_fragment_count": 1270,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133092,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124973,
+      "narrow_phase_calls": 8119,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 473,
+      "ab_contacts": 3225,
+      "bb_contacts": 4369,
+      "electrode_contacts": 736,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7214,
+        "edge_count": 8803,
+        "generated_labels": 892545,
+        "accepted_labels": 460,
+        "dominated_prunes": 453,
+        "target_prunes": 702321,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36903,
+      "connectivity_frontier": [
+        [
+          199,
+          5397
+        ],
+        [
+          240,
+          4090
+        ],
+        [
+          324,
+          2957
+        ],
+        [
+          362,
+          1129
+        ],
+        [
+          386,
+          1057
+        ],
+        [
+          502,
+          0
+        ]
+      ],
+      "a_fragment_count": 1084,
+      "b_fragment_count": 6145,
+      "clipped_b_fragment_count": 1279,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133659,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125712,
+      "narrow_phase_calls": 7947,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 484,
+      "ab_contacts": 3138,
+      "bb_contacts": 4285,
+      "electrode_contacts": 807,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7231,
+        "edge_count": 8714,
+        "generated_labels": 858943,
+        "accepted_labels": 283,
+        "dominated_prunes": 277,
+        "target_prunes": 355766,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36904,
+      "connectivity_frontier": [
+        [
+          191,
+          4889
+        ],
+        [
+          234,
+          3939
+        ],
+        [
+          333,
+          3456
+        ],
+        [
+          335,
+          2639
+        ],
+        [
+          385,
+          2376
+        ],
+        [
+          387,
+          531
+        ],
+        [
+          435,
+          0
+        ]
+      ],
+      "a_fragment_count": 1072,
+      "b_fragment_count": 6184,
+      "clipped_b_fragment_count": 1366,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133048,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124978,
+      "narrow_phase_calls": 8070,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 511,
+      "ab_contacts": 3151,
+      "bb_contacts": 4355,
+      "electrode_contacts": 784,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7258,
+        "edge_count": 8801,
+        "generated_labels": 832379,
+        "accepted_labels": 236,
+        "dominated_prunes": 229,
+        "target_prunes": 260316,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36905,
+      "connectivity_frontier": [
+        [
+          220,
+          4951
+        ],
+        [
+          244,
+          3397
+        ],
+        [
+          262,
+          1819
+        ],
+        [
+          438,
+          1111
+        ],
+        [
+          499,
+          160
+        ],
+        [
+          531,
+          0
+        ]
+      ],
+      "a_fragment_count": 1068,
+      "b_fragment_count": 6221,
+      "clipped_b_fragment_count": 1415,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136687,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128622,
+      "narrow_phase_calls": 8065,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 507,
+      "ab_contacts": 3158,
+      "bb_contacts": 4352,
+      "electrode_contacts": 826,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7291,
+        "edge_count": 8843,
+        "generated_labels": 764510,
+        "accepted_labels": 302,
+        "dominated_prunes": 296,
+        "target_prunes": 502042,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36906,
+      "connectivity_frontier": [
+        [
+          153,
+          5230
+        ],
+        [
+          169,
+          1081
+        ],
+        [
+          357,
+          827
+        ],
+        [
+          505,
+          742
+        ],
+        [
+          554,
+          0
+        ]
+      ],
+      "a_fragment_count": 1056,
+      "b_fragment_count": 6164,
+      "clipped_b_fragment_count": 1322,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133323,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125349,
+      "narrow_phase_calls": 7974,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 482,
+      "ab_contacts": 3153,
+      "bb_contacts": 4291,
+      "electrode_contacts": 741,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7222,
+        "edge_count": 8667,
+        "generated_labels": 551392,
+        "accepted_labels": 367,
+        "dominated_prunes": 362,
+        "target_prunes": 733262,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36907,
+      "connectivity_frontier": [
+        [
+          126,
+          4585
+        ],
+        [
+          152,
+          4382
+        ],
+        [
+          175,
+          3569
+        ],
+        [
+          277,
+          2979
+        ],
+        [
+          280,
+          2961
+        ],
+        [
+          347,
+          2094
+        ],
+        [
+          378,
+          0
+        ]
+      ],
+      "a_fragment_count": 1048,
+      "b_fragment_count": 6145,
+      "clipped_b_fragment_count": 1278,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131517,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123553,
+      "narrow_phase_calls": 7964,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 504,
+      "ab_contacts": 3072,
+      "bb_contacts": 4339,
+      "electrode_contacts": 737,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7195,
+        "edge_count": 8652,
+        "generated_labels": 669673,
+        "accepted_labels": 238,
+        "dominated_prunes": 231,
+        "target_prunes": 234360,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36908,
+      "connectivity_frontier": [
+        [
+          237,
+          4799
+        ],
+        [
+          245,
+          3352
+        ],
+        [
+          297,
+          1775
+        ],
+        [
+          540,
+          0
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6159,
+      "clipped_b_fragment_count": 1309,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129184,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121000,
+      "narrow_phase_calls": 8184,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 500,
+      "ab_contacts": 3184,
+      "bb_contacts": 4458,
+      "electrode_contacts": 734,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7246,
+        "edge_count": 8876,
+        "generated_labels": 895900,
+        "accepted_labels": 292,
+        "dominated_prunes": 288,
+        "target_prunes": 469620,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36909,
+      "connectivity_frontier": [
+        [
+          71,
+          3704
+        ],
+        [
+          302,
+          3534
+        ],
+        [
+          310,
+          3144
+        ],
+        [
+          411,
+          2996
+        ],
+        [
+          441,
+          1955
+        ],
+        [
+          464,
+          1933
+        ],
+        [
+          489,
+          1163
+        ],
+        [
+          542,
+          1113
+        ],
+        [
+          579,
+          723
+        ],
+        [
+          603,
+          11
+        ]
+      ],
+      "a_fragment_count": 1083,
+      "b_fragment_count": 6169,
+      "clipped_b_fragment_count": 1330,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133158,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125091,
+      "narrow_phase_calls": 8067,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 416,
+      "ab_contacts": 3132,
+      "bb_contacts": 4478,
+      "electrode_contacts": 812,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7254,
+        "edge_count": 8838,
+        "generated_labels": 883268,
+        "accepted_labels": 519,
+        "dominated_prunes": 509,
+        "target_prunes": 692722,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36910,
+      "connectivity_frontier": [
+        [
+          178,
+          4972
+        ],
+        [
+          236,
+          4906
+        ],
+        [
+          295,
+          3195
+        ],
+        [
+          336,
+          1774
+        ],
+        [
+          370,
+          231
+        ],
+        [
+          394,
+          0
+        ]
+      ],
+      "a_fragment_count": 1068,
+      "b_fragment_count": 6136,
+      "clipped_b_fragment_count": 1262,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133510,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125543,
+      "narrow_phase_calls": 7967,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 519,
+      "ab_contacts": 3126,
+      "bb_contacts": 4267,
+      "electrode_contacts": 737,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7206,
+        "edge_count": 8649,
+        "generated_labels": 790086,
+        "accepted_labels": 207,
+        "dominated_prunes": 201,
+        "target_prunes": 188983,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36911,
+      "connectivity_frontier": [
+        [
+          246,
+          4393
+        ],
+        [
+          255,
+          2842
+        ],
+        [
+          366,
+          2528
+        ],
+        [
+          395,
+          1964
+        ],
+        [
+          415,
+          1264
+        ],
+        [
+          425,
+          1138
+        ],
+        [
+          531,
+          542
+        ],
+        [
+          535,
+          0
+        ]
+      ],
+      "a_fragment_count": 1090,
+      "b_fragment_count": 6172,
+      "clipped_b_fragment_count": 1325,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133257,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125340,
+      "narrow_phase_calls": 7917,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 487,
+      "ab_contacts": 3104,
+      "bb_contacts": 4272,
+      "electrode_contacts": 834,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7264,
+        "edge_count": 8697,
+        "generated_labels": 874829,
+        "accepted_labels": 275,
+        "dominated_prunes": 267,
+        "target_prunes": 442289,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36912,
+      "connectivity_frontier": [
+        [
+          123,
+          3646
+        ],
+        [
+          229,
+          1888
+        ],
+        [
+          236,
+          1642
+        ],
+        [
+          386,
+          1445
+        ],
+        [
+          389,
+          573
+        ],
+        [
+          392,
+          381
+        ],
+        [
+          477,
+          0
+        ]
+      ],
+      "a_fragment_count": 1095,
+      "b_fragment_count": 6213,
+      "clipped_b_fragment_count": 1411,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135995,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128006,
+      "narrow_phase_calls": 7989,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 507,
+      "ab_contacts": 3116,
+      "bb_contacts": 4311,
+      "electrode_contacts": 851,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7310,
+        "edge_count": 8785,
+        "generated_labels": 579913,
+        "accepted_labels": 329,
+        "dominated_prunes": 322,
+        "target_prunes": 541487,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36913,
+      "connectivity_frontier": [
+        [
+          188,
+          4950
+        ],
+        [
+          223,
+          3988
+        ],
+        [
+          255,
+          3749
+        ],
+        [
+          258,
+          2083
+        ],
+        [
+          278,
+          1321
+        ],
+        [
+          364,
+          799
+        ],
+        [
+          393,
+          0
+        ]
+      ],
+      "a_fragment_count": 1064,
+      "b_fragment_count": 6124,
+      "clipped_b_fragment_count": 1245,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132254,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124286,
+      "narrow_phase_calls": 7968,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 478,
+      "ab_contacts": 3174,
+      "bb_contacts": 4273,
+      "electrode_contacts": 739,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7190,
+        "edge_count": 8664,
+        "generated_labels": 677057,
+        "accepted_labels": 190,
+        "dominated_prunes": 183,
+        "target_prunes": 274147,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36914,
+      "connectivity_frontier": [
+        [
+          226,
+          4632
+        ],
+        [
+          243,
+          4259
+        ],
+        [
+          321,
+          177
+        ],
+        [
+          609,
+          0
+        ]
+      ],
+      "a_fragment_count": 1086,
+      "b_fragment_count": 6182,
+      "clipped_b_fragment_count": 1340,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130610,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122599,
+      "narrow_phase_calls": 8011,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 440,
+      "ab_contacts": 3139,
+      "bb_contacts": 4375,
+      "electrode_contacts": 765,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7270,
+        "edge_count": 8719,
+        "generated_labels": 728738,
+        "accepted_labels": 354,
+        "dominated_prunes": 350,
+        "target_prunes": 706861,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36915,
+      "connectivity_frontier": [
+        [
+          153,
+          4777
+        ],
+        [
+          233,
+          4069
+        ],
+        [
+          242,
+          3262
+        ],
+        [
+          279,
+          2931
+        ],
+        [
+          296,
+          2377
+        ],
+        [
+          368,
+          2362
+        ],
+        [
+          392,
+          2148
+        ],
+        [
+          405,
+          911
+        ],
+        [
+          474,
+          0
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6139,
+      "clipped_b_fragment_count": 1262,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128501,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 120658,
+      "narrow_phase_calls": 7843,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 482,
+      "ab_contacts": 3186,
+      "bb_contacts": 4136,
+      "electrode_contacts": 785,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7226,
+        "edge_count": 8589,
+        "generated_labels": 751769,
+        "accepted_labels": 295,
+        "dominated_prunes": 286,
+        "target_prunes": 371701,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36916,
+      "connectivity_frontier": [
+        [
+          163,
+          5417
+        ],
+        [
+          181,
+          3957
+        ],
+        [
+          293,
+          2408
+        ],
+        [
+          360,
+          735
+        ],
+        [
+          477,
+          0
+        ]
+      ],
+      "a_fragment_count": 1062,
+      "b_fragment_count": 6165,
+      "clipped_b_fragment_count": 1321,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131112,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123298,
+      "narrow_phase_calls": 7814,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 460,
+      "ab_contacts": 3084,
+      "bb_contacts": 4220,
+      "electrode_contacts": 738,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7229,
+        "edge_count": 8502,
+        "generated_labels": 728335,
+        "accepted_labels": 300,
+        "dominated_prunes": 295,
+        "target_prunes": 411515,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36917,
+      "connectivity_frontier": [
+        [
+          158,
+          5133
+        ],
+        [
+          194,
+          3250
+        ],
+        [
+          215,
+          2847
+        ],
+        [
+          301,
+          1271
+        ],
+        [
+          447,
+          725
+        ],
+        [
+          535,
+          0
+        ]
+      ],
+      "a_fragment_count": 1073,
+      "b_fragment_count": 6167,
+      "clipped_b_fragment_count": 1327,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131874,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123778,
+      "narrow_phase_calls": 8096,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 473,
+      "ab_contacts": 3126,
+      "bb_contacts": 4448,
+      "electrode_contacts": 800,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7242,
+        "edge_count": 8847,
+        "generated_labels": 705782,
+        "accepted_labels": 353,
+        "dominated_prunes": 347,
+        "target_prunes": 578782,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36918,
+      "connectivity_frontier": [
+        [
+          180,
+          3963
+        ],
+        [
+          331,
+          3385
+        ],
+        [
+          344,
+          123
+        ],
+        [
+          446,
+          0
+        ]
+      ],
+      "a_fragment_count": 1095,
+      "b_fragment_count": 6115,
+      "clipped_b_fragment_count": 1228,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132613,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124689,
+      "narrow_phase_calls": 7924,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 464,
+      "ab_contacts": 3100,
+      "bb_contacts": 4312,
+      "electrode_contacts": 767,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7212,
+        "edge_count": 8643,
+        "generated_labels": 713357,
+        "accepted_labels": 245,
+        "dominated_prunes": 241,
+        "target_prunes": 354693,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36919,
+      "connectivity_frontier": [
+        [
+          88,
+          1602
+        ],
+        [
+          228,
+          1412
+        ],
+        [
+          281,
+          661
+        ],
+        [
+          327,
+          0
+        ]
+      ],
+      "a_fragment_count": 1082,
+      "b_fragment_count": 6216,
+      "clipped_b_fragment_count": 1411,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132697,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124713,
+      "narrow_phase_calls": 7984,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 487,
+      "ab_contacts": 3084,
+      "bb_contacts": 4356,
+      "electrode_contacts": 852,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7300,
+        "edge_count": 8779,
+        "generated_labels": 361854,
+        "accepted_labels": 224,
+        "dominated_prunes": 220,
+        "target_prunes": 433583,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36920,
+      "connectivity_frontier": [
+        [
+          178,
+          5397
+        ],
+        [
+          217,
+          4342
+        ],
+        [
+          233,
+          3646
+        ],
+        [
+          368,
+          2871
+        ],
+        [
+          375,
+          1699
+        ],
+        [
+          446,
+          1360
+        ],
+        [
+          466,
+          485
+        ],
+        [
+          547,
+          0
+        ]
+      ],
+      "a_fragment_count": 1057,
+      "b_fragment_count": 6155,
+      "clipped_b_fragment_count": 1306,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133097,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125161,
+      "narrow_phase_calls": 7936,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 485,
+      "ab_contacts": 3126,
+      "bb_contacts": 4278,
+      "electrode_contacts": 778,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7214,
+        "edge_count": 8667,
+        "generated_labels": 865916,
+        "accepted_labels": 351,
+        "dominated_prunes": 343,
+        "target_prunes": 471004,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36921,
+      "connectivity_frontier": [
+        [
+          77,
+          5481
+        ],
+        [
+          222,
+          4008
+        ],
+        [
+          288,
+          1292
+        ],
+        [
+          346,
+          951
+        ],
+        [
+          384,
+          924
+        ],
+        [
+          516,
+          0
+        ]
+      ],
+      "a_fragment_count": 1064,
+      "b_fragment_count": 6091,
+      "clipped_b_fragment_count": 1180,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134171,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126193,
+      "narrow_phase_calls": 7978,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 461,
+      "ab_contacts": 3236,
+      "bb_contacts": 4252,
+      "electrode_contacts": 731,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7157,
+        "edge_count": 8680,
+        "generated_labels": 791435,
+        "accepted_labels": 420,
+        "dominated_prunes": 414,
+        "target_prunes": 520931,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36922,
+      "connectivity_frontier": [
+        [
+          261,
+          5234
+        ],
+        [
+          274,
+          4785
+        ],
+        [
+          278,
+          4366
+        ],
+        [
+          289,
+          4157
+        ],
+        [
+          290,
+          4123
+        ],
+        [
+          299,
+          3783
+        ],
+        [
+          312,
+          3399
+        ],
+        [
+          382,
+          2526
+        ],
+        [
+          389,
+          2074
+        ],
+        [
+          438,
+          1691
+        ],
+        [
+          453,
+          1344
+        ],
+        [
+          471,
+          978
+        ],
+        [
+          473,
+          542
+        ],
+        [
+          539,
+          257
+        ],
+        [
+          562,
+          52
+        ],
+        [
+          565,
+          0
+        ]
+      ],
+      "a_fragment_count": 1117,
+      "b_fragment_count": 6179,
+      "clipped_b_fragment_count": 1350,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 127204,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 119336,
+      "narrow_phase_calls": 7868,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 486,
+      "ab_contacts": 3097,
+      "bb_contacts": 4241,
+      "electrode_contacts": 783,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7298,
+        "edge_count": 8607,
+        "generated_labels": 918177,
+        "accepted_labels": 276,
+        "dominated_prunes": 260,
+        "target_prunes": 418088,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36923,
+      "connectivity_frontier": [
+        [
+          213,
+          4602
+        ],
+        [
+          241,
+          4495
+        ],
+        [
+          243,
+          2172
+        ],
+        [
+          319,
+          1882
+        ],
+        [
+          327,
+          595
+        ],
+        [
+          488,
+          436
+        ],
+        [
+          520,
+          339
+        ]
+      ],
+      "a_fragment_count": 1114,
+      "b_fragment_count": 6181,
+      "clipped_b_fragment_count": 1345,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128636,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 120516,
+      "narrow_phase_calls": 8120,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 449,
+      "ab_contacts": 3187,
+      "bb_contacts": 4436,
+      "electrode_contacts": 860,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7297,
+        "edge_count": 8932,
+        "generated_labels": 729315,
+        "accepted_labels": 380,
+        "dominated_prunes": 373,
+        "target_prunes": 791403,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36924,
+      "connectivity_frontier": [
+        [
+          135,
+          4354
+        ],
+        [
+          269,
+          4302
+        ],
+        [
+          349,
+          4003
+        ],
+        [
+          358,
+          3082
+        ],
+        [
+          370,
+          2002
+        ],
+        [
+          449,
+          1487
+        ],
+        [
+          476,
+          0
+        ]
+      ],
+      "a_fragment_count": 1077,
+      "b_fragment_count": 6186,
+      "clipped_b_fragment_count": 1370,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132205,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124302,
+      "narrow_phase_calls": 7903,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 455,
+      "ab_contacts": 3048,
+      "bb_contacts": 4361,
+      "electrode_contacts": 789,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7265,
+        "edge_count": 8653,
+        "generated_labels": 830718,
+        "accepted_labels": 319,
+        "dominated_prunes": 312,
+        "target_prunes": 288457,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36925,
+      "connectivity_frontier": [
+        [
+          204,
+          3819
+        ],
+        [
+          221,
+          2729
+        ],
+        [
+          274,
+          1724
+        ],
+        [
+          410,
+          752
+        ],
+        [
+          426,
+          0
+        ]
+      ],
+      "a_fragment_count": 1050,
+      "b_fragment_count": 6128,
+      "clipped_b_fragment_count": 1253,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132088,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124047,
+      "narrow_phase_calls": 8041,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 498,
+      "ab_contacts": 3234,
+      "bb_contacts": 4247,
+      "electrode_contacts": 734,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7180,
+        "edge_count": 8713,
+        "generated_labels": 678295,
+        "accepted_labels": 207,
+        "dominated_prunes": 202,
+        "target_prunes": 326303,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36926,
+      "connectivity_frontier": [
+        [
+          227,
+          5129
+        ],
+        [
+          229,
+          4420
+        ],
+        [
+          237,
+          3567
+        ],
+        [
+          245,
+          2709
+        ],
+        [
+          265,
+          2642
+        ],
+        [
+          279,
+          2507
+        ],
+        [
+          386,
+          881
+        ],
+        [
+          418,
+          400
+        ],
+        [
+          425,
+          0
+        ]
+      ],
+      "a_fragment_count": 1089,
+      "b_fragment_count": 6162,
+      "clipped_b_fragment_count": 1316,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132624,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124571,
+      "narrow_phase_calls": 8053,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 484,
+      "ab_contacts": 3130,
+      "bb_contacts": 4384,
+      "electrode_contacts": 771,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7253,
+        "edge_count": 8769,
+        "generated_labels": 767752,
+        "accepted_labels": 194,
+        "dominated_prunes": 185,
+        "target_prunes": 294968,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36927,
+      "connectivity_frontier": [
+        [
+          137,
+          4796
+        ],
+        [
+          196,
+          3003
+        ],
+        [
+          427,
+          2556
+        ],
+        [
+          486,
+          2200
+        ],
+        [
+          502,
+          1120
+        ],
+        [
+          554,
+          854
+        ],
+        [
+          590,
+          0
+        ]
+      ],
+      "a_fragment_count": 1105,
+      "b_fragment_count": 6172,
+      "clipped_b_fragment_count": 1321,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131604,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123678,
+      "narrow_phase_calls": 7926,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 485,
+      "ab_contacts": 3055,
+      "bb_contacts": 4348,
+      "electrode_contacts": 816,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7279,
+        "edge_count": 8704,
+        "generated_labels": 870665,
+        "accepted_labels": 425,
+        "dominated_prunes": 418,
+        "target_prunes": 538591,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36928,
+      "connectivity_frontier": [
+        [
+          129,
+          5178
+        ],
+        [
+          180,
+          2109
+        ],
+        [
+          216,
+          856
+        ],
+        [
+          427,
+          726
+        ],
+        [
+          503,
+          620
+        ],
+        [
+          606,
+          384
+        ]
+      ],
+      "a_fragment_count": 1081,
+      "b_fragment_count": 6193,
+      "clipped_b_fragment_count": 1377,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131668,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123741,
+      "narrow_phase_calls": 7927,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 501,
+      "ab_contacts": 3107,
+      "bb_contacts": 4274,
+      "electrode_contacts": 789,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7276,
+        "edge_count": 8671,
+        "generated_labels": 586155,
+        "accepted_labels": 453,
+        "dominated_prunes": 447,
+        "target_prunes": 869013,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36929,
+      "connectivity_frontier": [
+        [
+          155,
+          3924
+        ],
+        [
+          238,
+          2657
+        ],
+        [
+          256,
+          0
+        ]
+      ],
+      "a_fragment_count": 1065,
+      "b_fragment_count": 6191,
+      "clipped_b_fragment_count": 1353,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136776,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128788,
+      "narrow_phase_calls": 7988,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 518,
+      "ab_contacts": 3137,
+      "bb_contacts": 4273,
+      "electrode_contacts": 794,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7258,
+        "edge_count": 8722,
+        "generated_labels": 545979,
+        "accepted_labels": 99,
+        "dominated_prunes": 96,
+        "target_prunes": 87036,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36930,
+      "connectivity_frontier": [
+        [
+          244,
+          4942
+        ],
+        [
+          274,
+          3137
+        ],
+        [
+          302,
+          2691
+        ],
+        [
+          387,
+          432
+        ],
+        [
+          403,
+          0
+        ]
+      ],
+      "a_fragment_count": 1075,
+      "b_fragment_count": 6181,
+      "clipped_b_fragment_count": 1340,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134758,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126783,
+      "narrow_phase_calls": 7975,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 475,
+      "ab_contacts": 3141,
+      "bb_contacts": 4311,
+      "electrode_contacts": 765,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7258,
+        "edge_count": 8692,
+        "generated_labels": 817470,
+        "accepted_labels": 152,
+        "dominated_prunes": 147,
+        "target_prunes": 177474,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36931,
+      "connectivity_frontier": [
+        [
+          98,
+          4792
+        ],
+        [
+          235,
+          3734
+        ],
+        [
+          324,
+          3733
+        ],
+        [
+          334,
+          3279
+        ],
+        [
+          384,
+          2242
+        ],
+        [
+          400,
+          1890
+        ],
+        [
+          403,
+          0
+        ]
+      ],
+      "a_fragment_count": 1107,
+      "b_fragment_count": 6150,
+      "clipped_b_fragment_count": 1296,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134066,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126004,
+      "narrow_phase_calls": 8062,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 481,
+      "ab_contacts": 3221,
+      "bb_contacts": 4312,
+      "electrode_contacts": 787,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7259,
+        "edge_count": 8801,
+        "generated_labels": 786228,
+        "accepted_labels": 289,
+        "dominated_prunes": 282,
+        "target_prunes": 197580,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36932,
+      "connectivity_frontier": [
+        [
+          170,
+          5458
+        ],
+        [
+          209,
+          5002
+        ],
+        [
+          245,
+          4703
+        ],
+        [
+          264,
+          2215
+        ],
+        [
+          383,
+          0
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6165,
+      "clipped_b_fragment_count": 1326,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132070,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124014,
+      "narrow_phase_calls": 8056,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 472,
+      "ab_contacts": 3164,
+      "bb_contacts": 4385,
+      "electrode_contacts": 804,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7252,
+        "edge_count": 8825,
+        "generated_labels": 737380,
+        "accepted_labels": 199,
+        "dominated_prunes": 194,
+        "target_prunes": 191162,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36933,
+      "connectivity_frontier": [
+        [
+          123,
+          4968
+        ],
+        [
+          155,
+          4882
+        ],
+        [
+          156,
+          4248
+        ],
+        [
+          166,
+          0
+        ]
+      ],
+      "a_fragment_count": 1070,
+      "b_fragment_count": 6163,
+      "clipped_b_fragment_count": 1325,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136613,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128637,
+      "narrow_phase_calls": 7976,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 526,
+      "ab_contacts": 3119,
+      "bb_contacts": 4273,
+      "electrode_contacts": 743,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7235,
+        "edge_count": 8661,
+        "generated_labels": 398930,
+        "accepted_labels": 42,
+        "dominated_prunes": 38,
+        "target_prunes": 16136,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36934,
+      "connectivity_frontier": [
+        [
+          169,
+          3841
+        ],
+        [
+          263,
+          2483
+        ],
+        [
+          378,
+          216
+        ],
+        [
+          446,
+          0
+        ]
+      ],
+      "a_fragment_count": 1087,
+      "b_fragment_count": 6119,
+      "clipped_b_fragment_count": 1237,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132676,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124716,
+      "narrow_phase_calls": 7960,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 468,
+      "ab_contacts": 3183,
+      "bb_contacts": 4276,
+      "electrode_contacts": 734,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7208,
+        "edge_count": 8661,
+        "generated_labels": 699347,
+        "accepted_labels": 258,
+        "dominated_prunes": 254,
+        "target_prunes": 374173,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36935,
+      "connectivity_frontier": [
+        [
+          211,
+          5180
+        ],
+        [
+          226,
+          4384
+        ],
+        [
+          282,
+          3126
+        ],
+        [
+          353,
+          926
+        ],
+        [
+          466,
+          0
+        ]
+      ],
+      "a_fragment_count": 1080,
+      "b_fragment_count": 6156,
+      "clipped_b_fragment_count": 1280,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134952,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126941,
+      "narrow_phase_calls": 8011,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 515,
+      "ab_contacts": 3130,
+      "bb_contacts": 4327,
+      "electrode_contacts": 784,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7238,
+        "edge_count": 8756,
+        "generated_labels": 814814,
+        "accepted_labels": 236,
+        "dominated_prunes": 231,
+        "target_prunes": 327942,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36936,
+      "connectivity_frontier": [
+        [
+          201,
+          5392
+        ],
+        [
+          216,
+          5035
+        ],
+        [
+          250,
+          2698
+        ],
+        [
+          355,
+          1096
+        ],
+        [
+          474,
+          329
+        ],
+        [
+          485,
+          120
+        ],
+        [
+          542,
+          0
+        ]
+      ],
+      "a_fragment_count": 1072,
+      "b_fragment_count": 6149,
+      "clipped_b_fragment_count": 1283,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133704,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125625,
+      "narrow_phase_calls": 8079,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 457,
+      "ab_contacts": 3259,
+      "bb_contacts": 4321,
+      "electrode_contacts": 806,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7223,
+        "edge_count": 8843,
+        "generated_labels": 811723,
+        "accepted_labels": 328,
+        "dominated_prunes": 321,
+        "target_prunes": 546524,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36937,
+      "connectivity_frontier": [
+        [
+          238,
+          5305
+        ],
+        [
+          256,
+          4216
+        ],
+        [
+          281,
+          3656
+        ],
+        [
+          344,
+          2164
+        ],
+        [
+          365,
+          550
+        ],
+        [
+          419,
+          0
+        ]
+      ],
+      "a_fragment_count": 1073,
+      "b_fragment_count": 6201,
+      "clipped_b_fragment_count": 1399,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130162,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121994,
+      "narrow_phase_calls": 8168,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 473,
+      "ab_contacts": 3241,
+      "bb_contacts": 4398,
+      "electrode_contacts": 792,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7276,
+        "edge_count": 8904,
+        "generated_labels": 818768,
+        "accepted_labels": 176,
+        "dominated_prunes": 170,
+        "target_prunes": 224617,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36938,
+      "connectivity_frontier": [
+        [
+          140,
+          5291
+        ],
+        [
+          189,
+          5037
+        ],
+        [
+          238,
+          2382
+        ],
+        [
+          316,
+          1986
+        ],
+        [
+          392,
+          1475
+        ],
+        [
+          405,
+          59
+        ],
+        [
+          531,
+          0
+        ]
+      ],
+      "a_fragment_count": 1120,
+      "b_fragment_count": 6179,
+      "clipped_b_fragment_count": 1346,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129719,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121527,
+      "narrow_phase_calls": 8192,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 463,
+      "ab_contacts": 3272,
+      "bb_contacts": 4408,
+      "electrode_contacts": 811,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7301,
+        "edge_count": 8954,
+        "generated_labels": 763864,
+        "accepted_labels": 371,
+        "dominated_prunes": 364,
+        "target_prunes": 578643,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36939,
+      "connectivity_frontier": [
+        [
+          179,
+          3657
+        ],
+        [
+          285,
+          3198
+        ],
+        [
+          314,
+          1468
+        ],
+        [
+          416,
+          0
+        ]
+      ],
+      "a_fragment_count": 1106,
+      "b_fragment_count": 6150,
+      "clipped_b_fragment_count": 1291,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129619,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121585,
+      "narrow_phase_calls": 8034,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 461,
+      "ab_contacts": 3148,
+      "bb_contacts": 4378,
+      "electrode_contacts": 767,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7258,
+        "edge_count": 8754,
+        "generated_labels": 699800,
+        "accepted_labels": 223,
+        "dominated_prunes": 219,
+        "target_prunes": 296725,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36940,
+      "connectivity_frontier": [
+        [
+          156,
+          5415
+        ],
+        [
+          217,
+          5188
+        ],
+        [
+          245,
+          4944
+        ],
+        [
+          248,
+          4301
+        ],
+        [
+          323,
+          3974
+        ],
+        [
+          342,
+          2862
+        ],
+        [
+          376,
+          0
+        ]
+      ],
+      "a_fragment_count": 1075,
+      "b_fragment_count": 6154,
+      "clipped_b_fragment_count": 1282,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132370,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124305,
+      "narrow_phase_calls": 8065,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 469,
+      "ab_contacts": 3169,
+      "bb_contacts": 4394,
+      "electrode_contacts": 792,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7231,
+        "edge_count": 8824,
+        "generated_labels": 844947,
+        "accepted_labels": 207,
+        "dominated_prunes": 200,
+        "target_prunes": 103917,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36941,
+      "connectivity_frontier": [
+        [
+          176,
+          3401
+        ],
+        [
+          204,
+          3262
+        ],
+        [
+          262,
+          2831
+        ],
+        [
+          272,
+          2653
+        ],
+        [
+          276,
+          2560
+        ],
+        [
+          450,
+          0
+        ]
+      ],
+      "a_fragment_count": 1071,
+      "b_fragment_count": 6167,
+      "clipped_b_fragment_count": 1318,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131168,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123161,
+      "narrow_phase_calls": 8007,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 501,
+      "ab_contacts": 3123,
+      "bb_contacts": 4339,
+      "electrode_contacts": 780,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7240,
+        "edge_count": 8743,
+        "generated_labels": 791171,
+        "accepted_labels": 259,
+        "dominated_prunes": 253,
+        "target_prunes": 334469,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36942,
+      "connectivity_frontier": [
+        [
+          179,
+          4475
+        ],
+        [
+          182,
+          4142
+        ],
+        [
+          243,
+          2772
+        ],
+        [
+          256,
+          0
+        ]
+      ],
+      "a_fragment_count": 1054,
+      "b_fragment_count": 6164,
+      "clipped_b_fragment_count": 1323,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132673,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124507,
+      "narrow_phase_calls": 8166,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 501,
+      "ab_contacts": 3097,
+      "bb_contacts": 4520,
+      "electrode_contacts": 804,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7220,
+        "edge_count": 8922,
+        "generated_labels": 597613,
+        "accepted_labels": 73,
+        "dominated_prunes": 69,
+        "target_prunes": 57527,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36943,
+      "connectivity_frontier": [
+        [
+          187,
+          4853
+        ],
+        [
+          194,
+          3458
+        ],
+        [
+          262,
+          0
+        ]
+      ],
+      "a_fragment_count": 1074,
+      "b_fragment_count": 6210,
+      "clipped_b_fragment_count": 1400,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133420,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125470,
+      "narrow_phase_calls": 7950,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 466,
+      "ab_contacts": 3122,
+      "bb_contacts": 4308,
+      "electrode_contacts": 869,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7286,
+        "edge_count": 8765,
+        "generated_labels": 543872,
+        "accepted_labels": 73,
+        "dominated_prunes": 70,
+        "target_prunes": 64240,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36944,
+      "connectivity_frontier": [
+        [
+          212,
+          5255
+        ],
+        [
+          239,
+          4816
+        ],
+        [
+          244,
+          3872
+        ],
+        [
+          304,
+          2930
+        ],
+        [
+          352,
+          2492
+        ],
+        [
+          420,
+          2340
+        ],
+        [
+          461,
+          1529
+        ],
+        [
+          465,
+          1369
+        ],
+        [
+          501,
+          53
+        ],
+        [
+          528,
+          0
+        ]
+      ],
+      "a_fragment_count": 1110,
+      "b_fragment_count": 6170,
+      "clipped_b_fragment_count": 1340,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 126786,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 118858,
+      "narrow_phase_calls": 7928,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 472,
+      "ab_contacts": 3119,
+      "bb_contacts": 4280,
+      "electrode_contacts": 819,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7282,
+        "edge_count": 8690,
+        "generated_labels": 919019,
+        "accepted_labels": 302,
+        "dominated_prunes": 292,
+        "target_prunes": 392893,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36945,
+      "connectivity_frontier": [
+        [
+          164,
+          5277
+        ],
+        [
+          194,
+          5067
+        ],
+        [
+          221,
+          3366
+        ],
+        [
+          264,
+          2223
+        ],
+        [
+          459,
+          1404
+        ],
+        [
+          500,
+          133
+        ],
+        [
+          560,
+          123
+        ]
+      ],
+      "a_fragment_count": 1071,
+      "b_fragment_count": 6180,
+      "clipped_b_fragment_count": 1338,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128660,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 120820,
+      "narrow_phase_calls": 7840,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 452,
+      "ab_contacts": 3088,
+      "bb_contacts": 4239,
+      "electrode_contacts": 765,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7253,
+        "edge_count": 8544,
+        "generated_labels": 836761,
+        "accepted_labels": 434,
+        "dominated_prunes": 427,
+        "target_prunes": 705499,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36946,
+      "connectivity_frontier": [
+        [
+          71,
+          4993
+        ],
+        [
+          157,
+          3034
+        ],
+        [
+          360,
+          2716
+        ],
+        [
+          383,
+          2521
+        ],
+        [
+          421,
+          2294
+        ],
+        [
+          448,
+          1020
+        ],
+        [
+          576,
+          386
+        ],
+        [
+          595,
+          0
+        ]
+      ],
+      "a_fragment_count": 1083,
+      "b_fragment_count": 6169,
+      "clipped_b_fragment_count": 1326,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132032,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123943,
+      "narrow_phase_calls": 8089,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 486,
+      "ab_contacts": 3191,
+      "bb_contacts": 4370,
+      "electrode_contacts": 785,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7254,
+        "edge_count": 8832,
+        "generated_labels": 782343,
+        "accepted_labels": 495,
+        "dominated_prunes": 487,
+        "target_prunes": 666317,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36947,
+      "connectivity_frontier": [
+        [
+          165,
+          4441
+        ],
+        [
+          173,
+          4132
+        ],
+        [
+          252,
+          3399
+        ],
+        [
+          296,
+          2797
+        ],
+        [
+          364,
+          375
+        ],
+        [
+          561,
+          321
+        ],
+        [
+          562,
+          0
+        ]
+      ],
+      "a_fragment_count": 1053,
+      "b_fragment_count": 6194,
+      "clipped_b_fragment_count": 1376,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134321,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126287,
+      "narrow_phase_calls": 8034,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 498,
+      "ab_contacts": 3202,
+      "bb_contacts": 4290,
+      "electrode_contacts": 789,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7249,
+        "edge_count": 8779,
+        "generated_labels": 726446,
+        "accepted_labels": 377,
+        "dominated_prunes": 370,
+        "target_prunes": 628558,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36948,
+      "connectivity_frontier": [
+        [
+          193,
+          2436
+        ],
+        [
+          398,
+          1126
+        ],
+        [
+          408,
+          0
+        ]
+      ],
+      "a_fragment_count": 1080,
+      "b_fragment_count": 6140,
+      "clipped_b_fragment_count": 1265,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134337,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126388,
+      "narrow_phase_calls": 7949,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 454,
+      "ab_contacts": 3163,
+      "bb_contacts": 4291,
+      "electrode_contacts": 755,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7222,
+        "edge_count": 8663,
+        "generated_labels": 691712,
+        "accepted_labels": 201,
+        "dominated_prunes": 198,
+        "target_prunes": 290410,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36949,
+      "connectivity_frontier": [
+        [
+          170,
+          5277
+        ],
+        [
+          275,
+          4382
+        ],
+        [
+          287,
+          2548
+        ],
+        [
+          317,
+          1113
+        ],
+        [
+          500,
+          973
+        ],
+        [
+          556,
+          0
+        ]
+      ],
+      "a_fragment_count": 1078,
+      "b_fragment_count": 6172,
+      "clipped_b_fragment_count": 1326,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132640,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124508,
+      "narrow_phase_calls": 8132,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 466,
+      "ab_contacts": 3235,
+      "bb_contacts": 4364,
+      "electrode_contacts": 763,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7252,
+        "edge_count": 8828,
+        "generated_labels": 838860,
+        "accepted_labels": 363,
+        "dominated_prunes": 357,
+        "target_prunes": 534020,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36950,
+      "connectivity_frontier": [
+        [
+          173,
+          4121
+        ],
+        [
+          202,
+          3012
+        ],
+        [
+          219,
+          2545
+        ],
+        [
+          240,
+          1947
+        ],
+        [
+          335,
+          1440
+        ],
+        [
+          509,
+          592
+        ],
+        [
+          520,
+          0
+        ]
+      ],
+      "a_fragment_count": 1097,
+      "b_fragment_count": 6167,
+      "clipped_b_fragment_count": 1320,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129403,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121260,
+      "narrow_phase_calls": 8143,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 494,
+      "ab_contacts": 3204,
+      "bb_contacts": 4392,
+      "electrode_contacts": 812,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7266,
+        "edge_count": 8902,
+        "generated_labels": 732176,
+        "accepted_labels": 326,
+        "dominated_prunes": 319,
+        "target_prunes": 564163,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36951,
+      "connectivity_frontier": [
+        [
+          149,
+          5421
+        ],
+        [
+          179,
+          5093
+        ],
+        [
+          197,
+          3539
+        ],
+        [
+          344,
+          3324
+        ],
+        [
+          374,
+          3161
+        ],
+        [
+          426,
+          2866
+        ],
+        [
+          471,
+          1697
+        ],
+        [
+          515,
+          1429
+        ],
+        [
+          558,
+          597
+        ],
+        [
+          613,
+          579
+        ],
+        [
+          616,
+          46
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6152,
+      "clipped_b_fragment_count": 1298,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134878,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126769,
+      "narrow_phase_calls": 8109,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 450,
+      "ab_contacts": 3196,
+      "bb_contacts": 4403,
+      "electrode_contacts": 818,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7239,
+        "edge_count": 8867,
+        "generated_labels": 977723,
+        "accepted_labels": 440,
+        "dominated_prunes": 429,
+        "target_prunes": 547405,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36952,
+      "connectivity_frontier": [
+        [
+          136,
+          4015
+        ],
+        [
+          255,
+          1940
+        ],
+        [
+          277,
+          1857
+        ],
+        [
+          306,
+          1752
+        ],
+        [
+          340,
+          1671
+        ],
+        [
+          416,
+          1622
+        ],
+        [
+          419,
+          740
+        ],
+        [
+          520,
+          0
+        ]
+      ],
+      "a_fragment_count": 1047,
+      "b_fragment_count": 6154,
+      "clipped_b_fragment_count": 1308,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131341,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123261,
+      "narrow_phase_calls": 8080,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 497,
+      "ab_contacts": 3119,
+      "bb_contacts": 4426,
+      "electrode_contacts": 733,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7203,
+        "edge_count": 8775,
+        "generated_labels": 726865,
+        "accepted_labels": 366,
+        "dominated_prunes": 358,
+        "target_prunes": 572417,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36953,
+      "connectivity_frontier": [
+        [
+          159,
+          4542
+        ],
+        [
+          187,
+          3889
+        ],
+        [
+          217,
+          3721
+        ],
+        [
+          233,
+          2710
+        ],
+        [
+          281,
+          2579
+        ],
+        [
+          373,
+          1105
+        ],
+        [
+          379,
+          872
+        ],
+        [
+          520,
+          0
+        ]
+      ],
+      "a_fragment_count": 1078,
+      "b_fragment_count": 6177,
+      "clipped_b_fragment_count": 1340,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132275,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124305,
+      "narrow_phase_calls": 7970,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 492,
+      "ab_contacts": 3197,
+      "bb_contacts": 4248,
+      "electrode_contacts": 810,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7257,
+        "edge_count": 8747,
+        "generated_labels": 723070,
+        "accepted_labels": 336,
+        "dominated_prunes": 328,
+        "target_prunes": 498546,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36954,
+      "connectivity_frontier": [
+        [
+          258,
+          5360
+        ],
+        [
+          263,
+          5335
+        ],
+        [
+          271,
+          4415
+        ],
+        [
+          289,
+          2657
+        ],
+        [
+          334,
+          2539
+        ],
+        [
+          349,
+          1457
+        ],
+        [
+          390,
+          1086
+        ],
+        [
+          485,
+          890
+        ],
+        [
+          519,
+          7
+        ],
+        [
+          547,
+          0
+        ]
+      ],
+      "a_fragment_count": 1069,
+      "b_fragment_count": 6161,
+      "clipped_b_fragment_count": 1295,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131566,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123534,
+      "narrow_phase_calls": 8032,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 486,
+      "ab_contacts": 3134,
+      "bb_contacts": 4355,
+      "electrode_contacts": 826,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7232,
+        "edge_count": 8801,
+        "generated_labels": 871842,
+        "accepted_labels": 276,
+        "dominated_prunes": 266,
+        "target_prunes": 500340,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36955,
+      "connectivity_frontier": [
+        [
+          295,
+          4665
+        ],
+        [
+          301,
+          4189
+        ],
+        [
+          348,
+          3036
+        ],
+        [
+          365,
+          2902
+        ],
+        [
+          370,
+          2706
+        ],
+        [
+          378,
+          2589
+        ],
+        [
+          401,
+          565
+        ],
+        [
+          574,
+          148
+        ],
+        [
+          575,
+          0
+        ]
+      ],
+      "a_fragment_count": 1086,
+      "b_fragment_count": 6184,
+      "clipped_b_fragment_count": 1350,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135590,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 127690,
+      "narrow_phase_calls": 7900,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 516,
+      "ab_contacts": 3102,
+      "bb_contacts": 4241,
+      "electrode_contacts": 806,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7272,
+        "edge_count": 8665,
+        "generated_labels": 899900,
+        "accepted_labels": 266,
+        "dominated_prunes": 257,
+        "target_prunes": 456113,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36956,
+      "connectivity_frontier": [
+        [
+          161,
+          5123
+        ],
+        [
+          226,
+          4147
+        ],
+        [
+          279,
+          3633
+        ],
+        [
+          369,
+          2917
+        ],
+        [
+          405,
+          1436
+        ],
+        [
+          417,
+          359
+        ],
+        [
+          440,
+          0
+        ]
+      ],
+      "a_fragment_count": 1117,
+      "b_fragment_count": 6157,
+      "clipped_b_fragment_count": 1276,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131389,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123359,
+      "narrow_phase_calls": 8030,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 516,
+      "ab_contacts": 3078,
+      "bb_contacts": 4377,
+      "electrode_contacts": 791,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7276,
+        "edge_count": 8762,
+        "generated_labels": 844084,
+        "accepted_labels": 264,
+        "dominated_prunes": 257,
+        "target_prunes": 222881,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36957,
+      "connectivity_frontier": [
+        [
+          170,
+          5162
+        ],
+        [
+          172,
+          4325
+        ],
+        [
+          175,
+          3646
+        ],
+        [
+          235,
+          1969
+        ],
+        [
+          306,
+          1436
+        ],
+        [
+          496,
+          990
+        ],
+        [
+          512,
+          0
+        ]
+      ],
+      "a_fragment_count": 1080,
+      "b_fragment_count": 6154,
+      "clipped_b_fragment_count": 1299,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134262,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126189,
+      "narrow_phase_calls": 8073,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 516,
+      "ab_contacts": 3142,
+      "bb_contacts": 4368,
+      "electrode_contacts": 794,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7236,
+        "edge_count": 8820,
+        "generated_labels": 728365,
+        "accepted_labels": 332,
+        "dominated_prunes": 325,
+        "target_prunes": 555925,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36958,
+      "connectivity_frontier": [
+        [
+          203,
+          2855
+        ],
+        [
+          241,
+          2853
+        ],
+        [
+          258,
+          808
+        ],
+        [
+          454,
+          0
+        ]
+      ],
+      "a_fragment_count": 1104,
+      "b_fragment_count": 6109,
+      "clipped_b_fragment_count": 1203,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129156,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121379,
+      "narrow_phase_calls": 7777,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 498,
+      "ab_contacts": 3133,
+      "bb_contacts": 4108,
+      "electrode_contacts": 759,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7215,
+        "edge_count": 8498,
+        "generated_labels": 613231,
+        "accepted_labels": 236,
+        "dominated_prunes": 232,
+        "target_prunes": 454241,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36959,
+      "connectivity_frontier": [
+        [
+          158,
+          5412
+        ],
+        [
+          176,
+          5172
+        ],
+        [
+          209,
+          4424
+        ],
+        [
+          312,
+          4025
+        ],
+        [
+          326,
+          3026
+        ],
+        [
+          372,
+          1041
+        ],
+        [
+          451,
+          974
+        ],
+        [
+          491,
+          201
+        ],
+        [
+          515,
+          0
+        ]
+      ],
+      "a_fragment_count": 1083,
+      "b_fragment_count": 6121,
+      "clipped_b_fragment_count": 1242,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133903,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126065,
+      "narrow_phase_calls": 7838,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 428,
+      "ab_contacts": 3102,
+      "bb_contacts": 4270,
+      "electrode_contacts": 694,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7206,
+        "edge_count": 8494,
+        "generated_labels": 832765,
+        "accepted_labels": 335,
+        "dominated_prunes": 326,
+        "target_prunes": 410139,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36960,
+      "connectivity_frontier": [
+        [
+          199,
+          4915
+        ],
+        [
+          267,
+          4341
+        ],
+        [
+          274,
+          80
+        ],
+        [
+          417,
+          0
+        ]
+      ],
+      "a_fragment_count": 1074,
+      "b_fragment_count": 6162,
+      "clipped_b_fragment_count": 1319,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 140280,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 132264,
+      "narrow_phase_calls": 8016,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 503,
+      "ab_contacts": 3168,
+      "bb_contacts": 4293,
+      "electrode_contacts": 762,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7238,
+        "edge_count": 8726,
+        "generated_labels": 656539,
+        "accepted_labels": 210,
+        "dominated_prunes": 206,
+        "target_prunes": 368309,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36961,
+      "connectivity_frontier": [
+        [
+          137,
+          5480
+        ],
+        [
+          184,
+          4705
+        ],
+        [
+          199,
+          3737
+        ],
+        [
+          239,
+          3382
+        ],
+        [
+          244,
+          3204
+        ],
+        [
+          287,
+          2790
+        ],
+        [
+          316,
+          1072
+        ],
+        [
+          439,
+          117
+        ],
+        [
+          584,
+          0
+        ]
+      ],
+      "a_fragment_count": 1073,
+      "b_fragment_count": 6147,
+      "clipped_b_fragment_count": 1290,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132377,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124248,
+      "narrow_phase_calls": 8129,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 476,
+      "ab_contacts": 3176,
+      "bb_contacts": 4437,
+      "electrode_contacts": 743,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7222,
+        "edge_count": 8832,
+        "generated_labels": 708301,
+        "accepted_labels": 414,
+        "dominated_prunes": 405,
+        "target_prunes": 693439,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36962,
+      "connectivity_frontier": [
+        [
+          236,
+          4566
+        ],
+        [
+          264,
+          4264
+        ],
+        [
+          284,
+          4099
+        ],
+        [
+          295,
+          4094
+        ],
+        [
+          325,
+          3572
+        ],
+        [
+          387,
+          1230
+        ],
+        [
+          439,
+          860
+        ],
+        [
+          584,
+          357
+        ]
+      ],
+      "a_fragment_count": 1094,
+      "b_fragment_count": 6170,
+      "clipped_b_fragment_count": 1319,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133824,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125763,
+      "narrow_phase_calls": 8061,
+      "narrow_nonconverged": 6,
+      "aa_contacts": 480,
+      "ab_contacts": 3168,
+      "bb_contacts": 4359,
+      "electrode_contacts": 770,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7266,
+        "edge_count": 8777,
+        "generated_labels": 959680,
+        "accepted_labels": 361,
+        "dominated_prunes": 353,
+        "target_prunes": 586120,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36963,
+      "connectivity_frontier": [
+        [
+          127,
+          4470
+        ],
+        [
+          292,
+          4210
+        ],
+        [
+          298,
+          2697
+        ],
+        [
+          338,
+          2404
+        ],
+        [
+          363,
+          1280
+        ],
+        [
+          503,
+          804
+        ],
+        [
+          513,
+          387
+        ],
+        [
+          519,
+          0
+        ]
+      ],
+      "a_fragment_count": 1076,
+      "b_fragment_count": 6173,
+      "clipped_b_fragment_count": 1333,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135280,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 127279,
+      "narrow_phase_calls": 8001,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 506,
+      "ab_contacts": 3157,
+      "bb_contacts": 4286,
+      "electrode_contacts": 819,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7251,
+        "edge_count": 8768,
+        "generated_labels": 819449,
+        "accepted_labels": 376,
+        "dominated_prunes": 368,
+        "target_prunes": 455929,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36964,
+      "connectivity_frontier": [
+        [
+          228,
+          4710
+        ],
+        [
+          236,
+          3310
+        ],
+        [
+          249,
+          3238
+        ],
+        [
+          274,
+          2082
+        ],
+        [
+          320,
+          1230
+        ],
+        [
+          437,
+          653
+        ],
+        [
+          466,
+          0
+        ]
+      ],
+      "a_fragment_count": 1090,
+      "b_fragment_count": 6157,
+      "clipped_b_fragment_count": 1307,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128934,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121015,
+      "narrow_phase_calls": 7919,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 525,
+      "ab_contacts": 3073,
+      "bb_contacts": 4263,
+      "electrode_contacts": 807,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7249,
+        "edge_count": 8668,
+        "generated_labels": 743300,
+        "accepted_labels": 228,
+        "dominated_prunes": 221,
+        "target_prunes": 391756,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36965,
+      "connectivity_frontier": [
+        [
+          209,
+          5057
+        ],
+        [
+          218,
+          4909
+        ],
+        [
+          235,
+          3862
+        ],
+        [
+          288,
+          3490
+        ],
+        [
+          358,
+          2845
+        ],
+        [
+          407,
+          2843
+        ],
+        [
+          425,
+          1619
+        ],
+        [
+          452,
+          1097
+        ],
+        [
+          493,
+          812
+        ],
+        [
+          510,
+          660
+        ],
+        [
+          550,
+          572
+        ],
+        [
+          572,
+          0
+        ]
+      ],
+      "a_fragment_count": 1074,
+      "b_fragment_count": 6188,
+      "clipped_b_fragment_count": 1370,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135654,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 127674,
+      "narrow_phase_calls": 7980,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 476,
+      "ab_contacts": 3162,
+      "bb_contacts": 4285,
+      "electrode_contacts": 768,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7264,
+        "edge_count": 8691,
+        "generated_labels": 969212,
+        "accepted_labels": 350,
+        "dominated_prunes": 338,
+        "target_prunes": 494338,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36966,
+      "connectivity_frontier": [
+        [
+          139,
+          3917
+        ],
+        [
+          290,
+          3009
+        ],
+        [
+          380,
+          2831
+        ],
+        [
+          383,
+          1904
+        ],
+        [
+          388,
+          1141
+        ],
+        [
+          416,
+          0
+        ]
+      ],
+      "a_fragment_count": 1101,
+      "b_fragment_count": 6135,
+      "clipped_b_fragment_count": 1261,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 128732,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 120821,
+      "narrow_phase_calls": 7911,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 457,
+      "ab_contacts": 3108,
+      "bb_contacts": 4302,
+      "electrode_contacts": 717,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7238,
+        "edge_count": 8584,
+        "generated_labels": 733629,
+        "accepted_labels": 254,
+        "dominated_prunes": 248,
+        "target_prunes": 264695,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36967,
+      "connectivity_frontier": [
+        [
+          110,
+          4924
+        ],
+        [
+          153,
+          4754
+        ],
+        [
+          160,
+          4259
+        ],
+        [
+          256,
+          2727
+        ],
+        [
+          325,
+          2505
+        ],
+        [
+          375,
+          1889
+        ],
+        [
+          421,
+          793
+        ],
+        [
+          436,
+          0
+        ]
+      ],
+      "a_fragment_count": 1105,
+      "b_fragment_count": 6186,
+      "clipped_b_fragment_count": 1352,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132851,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124804,
+      "narrow_phase_calls": 8047,
+      "narrow_nonconverged": 6,
+      "aa_contacts": 531,
+      "ab_contacts": 3155,
+      "bb_contacts": 4305,
+      "electrode_contacts": 839,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7293,
+        "edge_count": 8830,
+        "generated_labels": 711144,
+        "accepted_labels": 298,
+        "dominated_prunes": 290,
+        "target_prunes": 290311,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36968,
+      "connectivity_frontier": [
+        [
+          173,
+          4756
+        ],
+        [
+          210,
+          654
+        ],
+        [
+          500,
+          86
+        ],
+        [
+          526,
+          0
+        ]
+      ],
+      "a_fragment_count": 1064,
+      "b_fragment_count": 6146,
+      "clipped_b_fragment_count": 1285,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132896,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125005,
+      "narrow_phase_calls": 7891,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 473,
+      "ab_contacts": 3199,
+      "bb_contacts": 4177,
+      "electrode_contacts": 761,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7212,
+        "edge_count": 8610,
+        "generated_labels": 590342,
+        "accepted_labels": 333,
+        "dominated_prunes": 329,
+        "target_prunes": 693688,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36969,
+      "connectivity_frontier": [
+        [
+          194,
+          4876
+        ],
+        [
+          224,
+          4728
+        ],
+        [
+          255,
+          3535
+        ],
+        [
+          275,
+          2477
+        ],
+        [
+          320,
+          2315
+        ],
+        [
+          436,
+          852
+        ],
+        [
+          458,
+          0
+        ]
+      ],
+      "a_fragment_count": 1062,
+      "b_fragment_count": 6146,
+      "clipped_b_fragment_count": 1266,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 129233,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 121357,
+      "narrow_phase_calls": 7876,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 465,
+      "ab_contacts": 3089,
+      "bb_contacts": 4266,
+      "electrode_contacts": 789,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7210,
+        "edge_count": 8609,
+        "generated_labels": 812690,
+        "accepted_labels": 244,
+        "dominated_prunes": 237,
+        "target_prunes": 297466,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36970,
+      "connectivity_frontier": [
+        [
+          230,
+          5031
+        ],
+        [
+          303,
+          4983
+        ],
+        [
+          322,
+          4530
+        ],
+        [
+          345,
+          3953
+        ],
+        [
+          350,
+          3645
+        ],
+        [
+          369,
+          1985
+        ],
+        [
+          397,
+          1050
+        ],
+        [
+          529,
+          846
+        ],
+        [
+          543,
+          228
+        ],
+        [
+          562,
+          0
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6165,
+      "clipped_b_fragment_count": 1330,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135410,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 127273,
+      "narrow_phase_calls": 8137,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 458,
+      "ab_contacts": 3193,
+      "bb_contacts": 4434,
+      "electrode_contacts": 804,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7252,
+        "edge_count": 8889,
+        "generated_labels": 900561,
+        "accepted_labels": 311,
+        "dominated_prunes": 301,
+        "target_prunes": 404347,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36971,
+      "connectivity_frontier": [
+        [
+          197,
+          5451
+        ],
+        [
+          249,
+          5258
+        ],
+        [
+          280,
+          4934
+        ],
+        [
+          282,
+          4697
+        ],
+        [
+          321,
+          3430
+        ],
+        [
+          355,
+          2657
+        ],
+        [
+          392,
+          2507
+        ],
+        [
+          408,
+          1593
+        ],
+        [
+          493,
+          0
+        ]
+      ],
+      "a_fragment_count": 1077,
+      "b_fragment_count": 6189,
+      "clipped_b_fragment_count": 1361,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136225,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128297,
+      "narrow_phase_calls": 7928,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 466,
+      "ab_contacts": 3158,
+      "bb_contacts": 4259,
+      "electrode_contacts": 797,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7268,
+        "edge_count": 8680,
+        "generated_labels": 907027,
+        "accepted_labels": 274,
+        "dominated_prunes": 265,
+        "target_prunes": 262705,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36972,
+      "connectivity_frontier": [
+        [
+          180,
+          4224
+        ],
+        [
+          285,
+          4211
+        ],
+        [
+          294,
+          3103
+        ],
+        [
+          350,
+          2396
+        ],
+        [
+          412,
+          2238
+        ],
+        [
+          475,
+          2127
+        ],
+        [
+          498,
+          1950
+        ],
+        [
+          521,
+          1894
+        ],
+        [
+          530,
+          1068
+        ],
+        [
+          536,
+          0
+        ]
+      ],
+      "a_fragment_count": 1065,
+      "b_fragment_count": 6140,
+      "clipped_b_fragment_count": 1269,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133903,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125918,
+      "narrow_phase_calls": 7985,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 492,
+      "ab_contacts": 3115,
+      "bb_contacts": 4327,
+      "electrode_contacts": 736,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7207,
+        "edge_count": 8670,
+        "generated_labels": 893366,
+        "accepted_labels": 337,
+        "dominated_prunes": 327,
+        "target_prunes": 387320,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36973,
+      "connectivity_frontier": [
+        [
+          178,
+          5319
+        ],
+        [
+          216,
+          4387
+        ],
+        [
+          223,
+          4338
+        ],
+        [
+          242,
+          3706
+        ],
+        [
+          313,
+          3606
+        ],
+        [
+          322,
+          2578
+        ],
+        [
+          338,
+          2509
+        ],
+        [
+          350,
+          2084
+        ],
+        [
+          382,
+          253
+        ],
+        [
+          602,
+          36
+        ]
+      ],
+      "a_fragment_count": 1090,
+      "b_fragment_count": 6114,
+      "clipped_b_fragment_count": 1227,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132231,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124312,
+      "narrow_phase_calls": 7919,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 491,
+      "ab_contacts": 3111,
+      "bb_contacts": 4274,
+      "electrode_contacts": 706,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7206,
+        "edge_count": 8582,
+        "generated_labels": 747386,
+        "accepted_labels": 421,
+        "dominated_prunes": 411,
+        "target_prunes": 703118,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36974,
+      "connectivity_frontier": [
+        [
+          141,
+          3413
+        ],
+        [
+          236,
+          1136
+        ],
+        [
+          327,
+          1088
+        ],
+        [
+          398,
+          28
+        ],
+        [
+          501,
+          0
+        ]
+      ],
+      "a_fragment_count": 1087,
+      "b_fragment_count": 6147,
+      "clipped_b_fragment_count": 1294,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134901,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126957,
+      "narrow_phase_calls": 7944,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 497,
+      "ab_contacts": 3134,
+      "bb_contacts": 4276,
+      "electrode_contacts": 838,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7236,
+        "edge_count": 8745,
+        "generated_labels": 585132,
+        "accepted_labels": 339,
+        "dominated_prunes": 334,
+        "target_prunes": 654812,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36975,
+      "connectivity_frontier": [
+        [
+          184,
+          3585
+        ],
+        [
+          251,
+          2409
+        ],
+        [
+          343,
+          1083
+        ],
+        [
+          380,
+          0
+        ]
+      ],
+      "a_fragment_count": 1090,
+      "b_fragment_count": 6121,
+      "clipped_b_fragment_count": 1240,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134521,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126573,
+      "narrow_phase_calls": 7948,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 488,
+      "ab_contacts": 3122,
+      "bb_contacts": 4295,
+      "electrode_contacts": 713,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7213,
+        "edge_count": 8618,
+        "generated_labels": 640466,
+        "accepted_labels": 181,
+        "dominated_prunes": 177,
+        "target_prunes": 243001,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36976,
+      "connectivity_frontier": [
+        [
+          163,
+          4739
+        ],
+        [
+          210,
+          3739
+        ],
+        [
+          241,
+          3247
+        ],
+        [
+          363,
+          2634
+        ],
+        [
+          377,
+          1504
+        ],
+        [
+          546,
+          1490
+        ],
+        [
+          554,
+          1389
+        ],
+        [
+          556,
+          1134
+        ],
+        [
+          593,
+          900
+        ]
+      ],
+      "a_fragment_count": 1057,
+      "b_fragment_count": 6185,
+      "clipped_b_fragment_count": 1355,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 137254,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 129417,
+      "narrow_phase_calls": 7837,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 437,
+      "ab_contacts": 3012,
+      "bb_contacts": 4347,
+      "electrode_contacts": 798,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7244,
+        "edge_count": 8594,
+        "generated_labels": 881064,
+        "accepted_labels": 424,
+        "dominated_prunes": 415,
+        "target_prunes": 611635,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36977,
+      "connectivity_frontier": [
+        [
+          160,
+          4734
+        ],
+        [
+          193,
+          3248
+        ],
+        [
+          307,
+          2600
+        ],
+        [
+          360,
+          2132
+        ],
+        [
+          386,
+          0
+        ]
+      ],
+      "a_fragment_count": 1059,
+      "b_fragment_count": 6115,
+      "clipped_b_fragment_count": 1229,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134089,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126115,
+      "narrow_phase_calls": 7974,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 472,
+      "ab_contacts": 3118,
+      "bb_contacts": 4335,
+      "electrode_contacts": 699,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7176,
+        "edge_count": 8624,
+        "generated_labels": 733722,
+        "accepted_labels": 215,
+        "dominated_prunes": 210,
+        "target_prunes": 231970,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36978,
+      "connectivity_frontier": [
+        [
+          195,
+          5164
+        ],
+        [
+          245,
+          4871
+        ],
+        [
+          261,
+          4527
+        ],
+        [
+          304,
+          4212
+        ],
+        [
+          328,
+          3701
+        ],
+        [
+          333,
+          1096
+        ],
+        [
+          362,
+          433
+        ],
+        [
+          367,
+          0
+        ]
+      ],
+      "a_fragment_count": 1067,
+      "b_fragment_count": 6173,
+      "clipped_b_fragment_count": 1329,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 135824,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 127825,
+      "narrow_phase_calls": 7999,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 501,
+      "ab_contacts": 3094,
+      "bb_contacts": 4346,
+      "electrode_contacts": 805,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7242,
+        "edge_count": 8746,
+        "generated_labels": 777965,
+        "accepted_labels": 163,
+        "dominated_prunes": 155,
+        "target_prunes": 117483,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36979,
+      "connectivity_frontier": [
+        [
+          219,
+          2486
+        ],
+        [
+          312,
+          2388
+        ],
+        [
+          354,
+          2374
+        ],
+        [
+          367,
+          1676
+        ],
+        [
+          436,
+          1284
+        ],
+        [
+          479,
+          1207
+        ],
+        [
+          523,
+          730
+        ],
+        [
+          603,
+          135
+        ]
+      ],
+      "a_fragment_count": 1080,
+      "b_fragment_count": 6123,
+      "clipped_b_fragment_count": 1224,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130496,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122532,
+      "narrow_phase_calls": 7964,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 529,
+      "ab_contacts": 3152,
+      "bb_contacts": 4243,
+      "electrode_contacts": 729,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7205,
+        "edge_count": 8653,
+        "generated_labels": 812702,
+        "accepted_labels": 376,
+        "dominated_prunes": 368,
+        "target_prunes": 684784,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36980,
+      "connectivity_frontier": [
+        [
+          215,
+          4484
+        ],
+        [
+          253,
+          4102
+        ],
+        [
+          270,
+          4047
+        ],
+        [
+          305,
+          2755
+        ],
+        [
+          384,
+          2441
+        ],
+        [
+          448,
+          2013
+        ],
+        [
+          554,
+          1116
+        ],
+        [
+          573,
+          0
+        ]
+      ],
+      "a_fragment_count": 1081,
+      "b_fragment_count": 6146,
+      "clipped_b_fragment_count": 1283,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133695,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125805,
+      "narrow_phase_calls": 7890,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 464,
+      "ab_contacts": 3144,
+      "bb_contacts": 4229,
+      "electrode_contacts": 750,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7229,
+        "edge_count": 8587,
+        "generated_labels": 928114,
+        "accepted_labels": 332,
+        "dominated_prunes": 324,
+        "target_prunes": 417071,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36981,
+      "connectivity_frontier": [
+        [
+          180,
+          5008
+        ],
+        [
+          197,
+          4703
+        ],
+        [
+          214,
+          4641
+        ],
+        [
+          263,
+          3794
+        ],
+        [
+          296,
+          3612
+        ],
+        [
+          366,
+          3200
+        ],
+        [
+          467,
+          2618
+        ],
+        [
+          486,
+          1259
+        ],
+        [
+          606,
+          204
+        ],
+        [
+          608,
+          0
+        ]
+      ],
+      "a_fragment_count": 1093,
+      "b_fragment_count": 6131,
+      "clipped_b_fragment_count": 1241,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 127904,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 119909,
+      "narrow_phase_calls": 7995,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 481,
+      "ab_contacts": 3081,
+      "bb_contacts": 4391,
+      "electrode_contacts": 736,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7226,
+        "edge_count": 8689,
+        "generated_labels": 1031414,
+        "accepted_labels": 411,
+        "dominated_prunes": 401,
+        "target_prunes": 482890,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36982,
+      "connectivity_frontier": [
+        [
+          154,
+          3481
+        ],
+        [
+          243,
+          2991
+        ],
+        [
+          251,
+          2817
+        ],
+        [
+          263,
+          2636
+        ],
+        [
+          278,
+          1470
+        ],
+        [
+          376,
+          640
+        ],
+        [
+          443,
+          344
+        ],
+        [
+          544,
+          0
+        ]
+      ],
+      "a_fragment_count": 1065,
+      "b_fragment_count": 6173,
+      "clipped_b_fragment_count": 1337,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 132280,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 124364,
+      "narrow_phase_calls": 7916,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 437,
+      "ab_contacts": 3139,
+      "bb_contacts": 4288,
+      "electrode_contacts": 803,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7240,
+        "edge_count": 8667,
+        "generated_labels": 664646,
+        "accepted_labels": 362,
+        "dominated_prunes": 354,
+        "target_prunes": 666229,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36983,
+      "connectivity_frontier": [
+        [
+          154,
+          4878
+        ],
+        [
+          249,
+          4564
+        ],
+        [
+          346,
+          2702
+        ],
+        [
+          414,
+          803
+        ],
+        [
+          576,
+          0
+        ]
+      ],
+      "a_fragment_count": 1100,
+      "b_fragment_count": 6172,
+      "clipped_b_fragment_count": 1314,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134074,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126167,
+      "narrow_phase_calls": 7907,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 510,
+      "ab_contacts": 3077,
+      "bb_contacts": 4289,
+      "electrode_contacts": 780,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7274,
+        "edge_count": 8656,
+        "generated_labels": 917995,
+        "accepted_labels": 403,
+        "dominated_prunes": 398,
+        "target_prunes": 500455,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36984,
+      "connectivity_frontier": [
+        [
+          201,
+          5258
+        ],
+        [
+          220,
+          4573
+        ],
+        [
+          271,
+          3078
+        ],
+        [
+          376,
+          3009
+        ],
+        [
+          427,
+          2818
+        ],
+        [
+          448,
+          1635
+        ],
+        [
+          470,
+          1479
+        ],
+        [
+          497,
+          606
+        ],
+        [
+          524,
+          524
+        ],
+        [
+          555,
+          0
+        ]
+      ],
+      "a_fragment_count": 1103,
+      "b_fragment_count": 6143,
+      "clipped_b_fragment_count": 1283,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 123890,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 115682,
+      "narrow_phase_calls": 8208,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 471,
+      "ab_contacts": 3234,
+      "bb_contacts": 4454,
+      "electrode_contacts": 836,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7248,
+        "edge_count": 8995,
+        "generated_labels": 937066,
+        "accepted_labels": 336,
+        "dominated_prunes": 326,
+        "target_prunes": 448322,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36985,
+      "connectivity_frontier": [
+        [
+          215,
+          5293
+        ],
+        [
+          244,
+          4511
+        ],
+        [
+          257,
+          3552
+        ],
+        [
+          361,
+          0
+        ]
+      ],
+      "a_fragment_count": 1085,
+      "b_fragment_count": 6163,
+      "clipped_b_fragment_count": 1311,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133099,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125113,
+      "narrow_phase_calls": 7986,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 484,
+      "ab_contacts": 3193,
+      "bb_contacts": 4260,
+      "electrode_contacts": 831,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7250,
+        "edge_count": 8768,
+        "generated_labels": 788478,
+        "accepted_labels": 141,
+        "dominated_prunes": 137,
+        "target_prunes": 105047,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36986,
+      "connectivity_frontier": [
+        [
+          168,
+          2151
+        ],
+        [
+          424,
+          1505
+        ],
+        [
+          441,
+          1470
+        ],
+        [
+          443,
+          511
+        ],
+        [
+          502,
+          138
+        ],
+        [
+          581,
+          0
+        ]
+      ],
+      "a_fragment_count": 1103,
+      "b_fragment_count": 6206,
+      "clipped_b_fragment_count": 1400,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130883,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122839,
+      "narrow_phase_calls": 8044,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 473,
+      "ab_contacts": 3124,
+      "bb_contacts": 4390,
+      "electrode_contacts": 804,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7311,
+        "edge_count": 8791,
+        "generated_labels": 690071,
+        "accepted_labels": 384,
+        "dominated_prunes": 378,
+        "target_prunes": 708553,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36987,
+      "connectivity_frontier": [
+        [
+          164,
+          4936
+        ],
+        [
+          268,
+          4203
+        ],
+        [
+          326,
+          3871
+        ],
+        [
+          335,
+          3547
+        ],
+        [
+          352,
+          1823
+        ],
+        [
+          451,
+          422
+        ],
+        [
+          523,
+          0
+        ]
+      ],
+      "a_fragment_count": 1108,
+      "b_fragment_count": 6182,
+      "clipped_b_fragment_count": 1350,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131356,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123451,
+      "narrow_phase_calls": 7905,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 463,
+      "ab_contacts": 3112,
+      "bb_contacts": 4277,
+      "electrode_contacts": 824,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7292,
+        "edge_count": 8676,
+        "generated_labels": 811185,
+        "accepted_labels": 337,
+        "dominated_prunes": 330,
+        "target_prunes": 370161,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36988,
+      "connectivity_frontier": [
+        [
+          160,
+          4793
+        ],
+        [
+          260,
+          3842
+        ],
+        [
+          314,
+          1640
+        ],
+        [
+          373,
+          0
+        ]
+      ],
+      "a_fragment_count": 1092,
+      "b_fragment_count": 6155,
+      "clipped_b_fragment_count": 1298,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130838,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122785,
+      "narrow_phase_calls": 8053,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 493,
+      "ab_contacts": 3212,
+      "bb_contacts": 4297,
+      "electrode_contacts": 790,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7249,
+        "edge_count": 8792,
+        "generated_labels": 738451,
+        "accepted_labels": 201,
+        "dominated_prunes": 197,
+        "target_prunes": 175223,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36989,
+      "connectivity_frontier": [
+        [
+          179,
+          3421
+        ],
+        [
+          182,
+          3001
+        ],
+        [
+          207,
+          2470
+        ],
+        [
+          255,
+          2393
+        ],
+        [
+          354,
+          1950
+        ],
+        [
+          358,
+          116
+        ],
+        [
+          359,
+          105
+        ],
+        [
+          415,
+          0
+        ]
+      ],
+      "a_fragment_count": 1071,
+      "b_fragment_count": 6146,
+      "clipped_b_fragment_count": 1281,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 137016,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 129162,
+      "narrow_phase_calls": 7854,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 535,
+      "ab_contacts": 3141,
+      "bb_contacts": 4129,
+      "electrode_contacts": 750,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7219,
+        "edge_count": 8555,
+        "generated_labels": 617805,
+        "accepted_labels": 219,
+        "dominated_prunes": 211,
+        "target_prunes": 349395,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36990,
+      "connectivity_frontier": [
+        [
+          198,
+          5004
+        ],
+        [
+          223,
+          2642
+        ],
+        [
+          263,
+          1444
+        ],
+        [
+          455,
+          0
+        ]
+      ],
+      "a_fragment_count": 1074,
+      "b_fragment_count": 6151,
+      "clipped_b_fragment_count": 1279,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133095,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125295,
+      "narrow_phase_calls": 7800,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 476,
+      "ab_contacts": 3035,
+      "bb_contacts": 4240,
+      "electrode_contacts": 800,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7227,
+        "edge_count": 8551,
+        "generated_labels": 686152,
+        "accepted_labels": 241,
+        "dominated_prunes": 237,
+        "target_prunes": 394438,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36991,
+      "connectivity_frontier": [
+        [
+          257,
+          3863
+        ],
+        [
+          274,
+          3755
+        ],
+        [
+          275,
+          3060
+        ],
+        [
+          278,
+          2491
+        ],
+        [
+          298,
+          1061
+        ],
+        [
+          485,
+          371
+        ],
+        [
+          612,
+          0
+        ]
+      ],
+      "a_fragment_count": 1087,
+      "b_fragment_count": 6116,
+      "clipped_b_fragment_count": 1234,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130413,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122355,
+      "narrow_phase_calls": 8058,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 473,
+      "ab_contacts": 3229,
+      "bb_contacts": 4319,
+      "electrode_contacts": 736,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7205,
+        "edge_count": 8757,
+        "generated_labels": 784173,
+        "accepted_labels": 341,
+        "dominated_prunes": 334,
+        "target_prunes": 706779,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36992,
+      "connectivity_frontier": [
+        [
+          267,
+          5312
+        ],
+        [
+          273,
+          4955
+        ],
+        [
+          278,
+          3955
+        ],
+        [
+          299,
+          2329
+        ],
+        [
+          338,
+          1694
+        ],
+        [
+          514,
+          0
+        ]
+      ],
+      "a_fragment_count": 1086,
+      "b_fragment_count": 6165,
+      "clipped_b_fragment_count": 1328,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 133174,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 125396,
+      "narrow_phase_calls": 7778,
+      "narrow_nonconverged": 4,
+      "aa_contacts": 493,
+      "ab_contacts": 3017,
+      "bb_contacts": 4218,
+      "electrode_contacts": 830,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7253,
+        "edge_count": 8558,
+        "generated_labels": 850552,
+        "accepted_labels": 226,
+        "dominated_prunes": 220,
+        "target_prunes": 342536,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36993,
+      "connectivity_frontier": [
+        [
+          219,
+          1455
+        ],
+        [
+          377,
+          952
+        ],
+        [
+          480,
+          0
+        ]
+      ],
+      "a_fragment_count": 1079,
+      "b_fragment_count": 6179,
+      "clipped_b_fragment_count": 1348,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134719,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126741,
+      "narrow_phase_calls": 7978,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 504,
+      "ab_contacts": 3146,
+      "bb_contacts": 4277,
+      "electrode_contacts": 825,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7260,
+        "edge_count": 8752,
+        "generated_labels": 694600,
+        "accepted_labels": 250,
+        "dominated_prunes": 247,
+        "target_prunes": 502931,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36994,
+      "connectivity_frontier": [
+        [
+          117,
+          3687
+        ],
+        [
+          268,
+          3659
+        ],
+        [
+          297,
+          2786
+        ],
+        [
+          333,
+          2205
+        ],
+        [
+          367,
+          1730
+        ],
+        [
+          485,
+          973
+        ],
+        [
+          531,
+          399
+        ],
+        [
+          548,
+          278
+        ],
+        [
+          575,
+          0
+        ]
+      ],
+      "a_fragment_count": 1063,
+      "b_fragment_count": 6121,
+      "clipped_b_fragment_count": 1246,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136098,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128093,
+      "narrow_phase_calls": 8005,
+      "narrow_nonconverged": 5,
+      "aa_contacts": 493,
+      "ab_contacts": 3087,
+      "bb_contacts": 4378,
+      "electrode_contacts": 731,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7186,
+        "edge_count": 8689,
+        "generated_labels": 786123,
+        "accepted_labels": 429,
+        "dominated_prunes": 420,
+        "target_prunes": 637080,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36995,
+      "connectivity_frontier": [
+        [
+          224,
+          5235
+        ],
+        [
+          234,
+          5142
+        ],
+        [
+          236,
+          1979
+        ],
+        [
+          372,
+          1157
+        ],
+        [
+          381,
+          692
+        ],
+        [
+          431,
+          0
+        ]
+      ],
+      "a_fragment_count": 1112,
+      "b_fragment_count": 6174,
+      "clipped_b_fragment_count": 1341,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130032,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122093,
+      "narrow_phase_calls": 7939,
+      "narrow_nonconverged": 2,
+      "aa_contacts": 465,
+      "ab_contacts": 3120,
+      "bb_contacts": 4295,
+      "electrode_contacts": 830,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7288,
+        "edge_count": 8710,
+        "generated_labels": 740815,
+        "accepted_labels": 193,
+        "dominated_prunes": 187,
+        "target_prunes": 330617,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36996,
+      "connectivity_frontier": [
+        [
+          123,
+          4455
+        ],
+        [
+          147,
+          4124
+        ],
+        [
+          222,
+          3782
+        ],
+        [
+          267,
+          2915
+        ],
+        [
+          376,
+          2642
+        ],
+        [
+          403,
+          2515
+        ],
+        [
+          431,
+          1000
+        ],
+        [
+          555,
+          799
+        ],
+        [
+          557,
+          0
+        ]
+      ],
+      "a_fragment_count": 1068,
+      "b_fragment_count": 6147,
+      "clipped_b_fragment_count": 1273,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 131926,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 123895,
+      "narrow_phase_calls": 8031,
+      "narrow_nonconverged": 8,
+      "aa_contacts": 485,
+      "ab_contacts": 3229,
+      "bb_contacts": 4262,
+      "electrode_contacts": 808,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7217,
+        "edge_count": 8784,
+        "generated_labels": 813651,
+        "accepted_labels": 413,
+        "dominated_prunes": 404,
+        "target_prunes": 540365,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36997,
+      "connectivity_frontier": [
+        [
+          176,
+          4070
+        ],
+        [
+          338,
+          1328
+        ],
+        [
+          361,
+          73
+        ],
+        [
+          450,
+          0
+        ]
+      ],
+      "a_fragment_count": 1068,
+      "b_fragment_count": 6172,
+      "clipped_b_fragment_count": 1337,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 136057,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 128068,
+      "narrow_phase_calls": 7989,
+      "narrow_nonconverged": 1,
+      "aa_contacts": 462,
+      "ab_contacts": 3130,
+      "bb_contacts": 4337,
+      "electrode_contacts": 767,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7242,
+        "edge_count": 8696,
+        "generated_labels": 745394,
+        "accepted_labels": 262,
+        "dominated_prunes": 258,
+        "target_prunes": 353656,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36998,
+      "connectivity_frontier": [
+        [
+          230,
+          5397
+        ],
+        [
+          255,
+          4413
+        ],
+        [
+          264,
+          4403
+        ],
+        [
+          286,
+          3035
+        ],
+        [
+          290,
+          1633
+        ],
+        [
+          397,
+          0
+        ]
+      ],
+      "a_fragment_count": 1074,
+      "b_fragment_count": 6165,
+      "clipped_b_fragment_count": 1313,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 130238,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 122141,
+      "narrow_phase_calls": 8097,
+      "narrow_nonconverged": 3,
+      "aa_contacts": 501,
+      "ab_contacts": 3206,
+      "bb_contacts": 4339,
+      "electrode_contacts": 769,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7241,
+        "edge_count": 8815,
+        "generated_labels": 765589,
+        "accepted_labels": 161,
+        "dominated_prunes": 155,
+        "target_prunes": 215787,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    },
+    {
+      "trial_id": 36999,
+      "connectivity_frontier": [
+        [
+          149,
+          5209
+        ],
+        [
+          252,
+          3924
+        ],
+        [
+          267,
+          3328
+        ],
+        [
+          318,
+          2597
+        ],
+        [
+          375,
+          2163
+        ],
+        [
+          442,
+          1214
+        ],
+        [
+          505,
+          0
+        ]
+      ],
+      "a_fragment_count": 1038,
+      "b_fragment_count": 6169,
+      "clipped_b_fragment_count": 1325,
+      "processed_a_particles": 619,
+      "processed_b_particles": 5483,
+      "candidate_pairs": 134007,
+      "component_skips": 0,
+      "same_source_skips": 0,
+      "broad_phase_rejections": 126033,
+      "narrow_phase_calls": 7974,
+      "narrow_nonconverged": 0,
+      "aa_contacts": 481,
+      "ab_contacts": 3188,
+      "bb_contacts": 4270,
+      "electrode_contacts": 786,
+      "internal_a_edges": 0,
+      "pareto_search": {
+        "node_count": 7209,
+        "edge_count": 8725,
+        "generated_labels": 897017,
+        "accepted_labels": 333,
+        "dominated_prunes": 326,
+        "target_prunes": 369619,
+        "removed_labels": 0,
+        "stale_queue_pops": 0,
+        "peak_queue_size": 0
+      }
+    }
+  ],
+  "runtime_seconds": 1472.5166209000163
+}

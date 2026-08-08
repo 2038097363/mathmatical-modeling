@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "explanatory_figures_audit",
+  "inputs": {
+    "问题/问题1/results/independent_slsqp_validation.csv": "5909AE8F435991D12C17A9DF1ABAF3ADED79E29EBF3A3715EF05DC1F4AE53532",
+    "问题/问题2/results/D_primary_n20000/q2_summary.json": "D11481998BD9CB17354EE5DB38FC8FC0DCC51530A64E4ABDCB0F57F686512F26",
+    "问题/问题2/results/D_primary_n20000/threshold_samples.json": "BC344EDA1D43A8E4347723BF11B61CEF136FF7E464FFC14155E2AA04C572A3C9",
+    "论文/figures/assets/model_workflow_imagen_v1.png": "4863457A990B6428056F3A2A6DF46FB2F87CEEFF5C274A35DEE753DF2AB1EDDF",
+    "论文/figures/prompts/model_workflow_imagen_prompt.md": "D91E0309AA0FB3ABD581797E2BE1F4D60F30E8FE4A2029FF9BBC5720AEEEBA92",
+    "论文/figures/data/q1_group1_scene.json": "320DB7A6E60C617351C7D04E2A1C99FCF570025623679657F69BD2B53F272433",
+    "论文/figures/data/q1_group2_scene.json": "EB191D4B7FC3A5108F10E7220BE8D7800BC83B5EB0BE161AADF3930679C82FC2",
+    "论文/figures/data/q1_group3_scene.json": "2BFC4FDCD082B51243FD5DB4AC8CF15285F5EC76A50F956004C2997334F7AAC9"
+  },
+  "workflow_truth_contract": [
+    "Imagen 仅生成不承担定量读数的二维结构底图，生成文字全部由本地矢量层覆盖",
+    "几何输入只示意有限圆柱、球或球片、独立截断片段和两端电极，不编码尺寸",
+    "本地矢量层明确叠加 1.8 nm 阈值、问题一 0/1/1 结论和四问证据类型",
+    "定量概率、临界括区、成本前沿和三维场景仍由正式计算与 CAD 图件单独证明",
+    "底部验证带只保留构型、独立求解、单调性、随机流和置信界五类证据"
+  ],
+  "workflow_visual_encoding": {
+    "geometry": "finite_cylinders_and_spherical_fragments",
+    "contact_graph": "nodes_edges_electrodes_and_orange_witness_path",
+    "question_outputs": [
+      "q1_binary",
+      "q2_probability_curve",
+      "q3_interval",
+      "q4_cost_frontier"
+    ],
+    "scale_status": "schematic_not_to_scale"
+  },
+  "validation": {
+    "q1_pair_count": 195,
+    "q1_threshold_class_disagreements": 0,
+    "q1_max_distance_difference_nm": 1.0537414738097338e-07,
+    "q2_block_size": 5000,
+    "q2_block_probability_ranges": {
+      "354": [
+        0.0758,
+        0.0824
+      ],
+      "424": [
+        0.215,
+        0.223
+      ],
+      "495": [
+        0.4656,
+        0.476
+      ],
+      "707": [
+        0.9922,
+        0.9932
+      ]
+    }
+  },
+  "outputs": {
+    "论文/figures/generated/model_workflow.pdf": {
+      "sha256": "78489866632D8D85CB9BA32506492EA67BA9B2FD54A55EA16C0C66E0EC0B3E40"
+    },
+    "论文/figures/generated/model_workflow.png": {
+      "sha256": "7EBF6C8C000EA8CD0C7235B5F7BBF798D2D0B8DEBA43E3D1F2F7E6CEB7F11765",
+      "pixels": [
+        2450,
+        1397
+      ]
+    },
+    "论文/figures/generated/q1_groups_3d.pdf": {
+      "sha256": "33D2D2EA6BE5A4186F67B414A837F02B7D47D9CC426C6D0F9594C976161B18E6"
+    },
+    "论文/figures/generated/q1_groups_3d.png": {
+      "sha256": "95E3933F7F410C946FF540C8822E38BAAA55653A1AF68AE09B09B0F5AC6BB09B",
+      "pixels": [
+        3472,
+        1209
+      ]
+    },
+    "论文/figures/generated/validation_diagnostics.pdf": {
+      "sha256": "6C0B921EFD380AA5811CA99517178618DBBEDA5191E7249ED38EFC4377E2A9A4"
+    },
+    "论文/figures/generated/validation_diagnostics.png": {
+      "sha256": "939DE42746784DE2182A758B95C80FD9C158575B83D7AF6637C30C7BFA6EB6E4",
+      "pixels": [
+        3493,
+        1381
+      ]
+    }
+  }
+}

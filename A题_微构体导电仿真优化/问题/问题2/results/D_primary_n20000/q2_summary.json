@@ -1,0 +1,151 @@
+{
+  "result_scope": "formal_fixed_monte_carlo",
+  "question": 2,
+  "threshold_artifact": "C:\\Users\\23258\\Desktop\\华数杯\\A题_微构体导电仿真优化\\问题\\问题2\\results\\D_primary_n20000\\threshold_samples.json",
+  "configuration_fingerprint": "BF9C4B897F4752E0FF87A2C0FE082CE5C5E2943D3447557FC480A6C7ACCB2A63",
+  "configuration": {
+    "schema_version": 1,
+    "algorithm_version": "flat-cylinder-periodic-numba-cached-v4",
+    "max_count": 720,
+    "trial_count": 20000,
+    "boundary_mode": "D",
+    "master_seed": 20260801,
+    "stream_id": 2,
+    "box_length_nm": 10000.0,
+    "cylinder_length_nm": 5000.0,
+    "cylinder_radius_nm": 30.0,
+    "contact_cutoff_nm": 1.8,
+    "cell_size_nm": 625.0,
+    "broad_phase_guard_nm": 1e-08,
+    "gjk_absolute_tolerance_nm": 1e-10,
+    "gjk_relative_tolerance": 1e-13,
+    "gjk_max_iterations": 512
+  },
+  "boundary_semantics": {
+    "mode": "D",
+    "role": "primary",
+    "description": "三轴显式回绕，截断片段均作为独立介质且不添加同源内部边",
+    "implementation_limitations": [
+      "按题设中心线交点切段；各轴半径侧缘越界及斜切面未作完整三维布尔回绕"
+    ],
+    "global_minimum_image_adjacency": false,
+    "flat_cylinder_narrow_phase": true
+  },
+  "fixed_trial_count": 20000,
+  "censored_trials": 90,
+  "probability_records": [
+    {
+      "nominal_target_percent": 0.5,
+      "particle_count": 354,
+      "actual_discrete_volume_percent": 0.500455709716854,
+      "probability": {
+        "count": 354,
+        "successes": 1579,
+        "trials": 20000,
+        "estimate": 0.07895,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.07529310290681228,
+          0.08276861065603343
+        ],
+        "clopper_pearson_interval": [
+          0.07524916301627134,
+          0.08277377084885246
+        ],
+        "wilson_one_sided_bounds": [
+          0.07587025676426395,
+          0.08214364473459804
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.07583399935068617,
+          0.0821568812709959
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.6,
+      "particle_count": 424,
+      "actual_discrete_volume_percent": 0.5994158783049325,
+      "probability": {
+        "count": 424,
+        "successes": 4410,
+        "trials": 20000,
+        "estimate": 0.2205,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.21480824195982762,
+          0.22629910619553484
+        ],
+        "clopper_pearson_interval": [
+          0.2147702115031191,
+          0.22631114456587842
+        ],
+        "wilson_one_sided_bounds": [
+          0.2157160115302026,
+          0.22535959818107143
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.2156832565454018,
+          0.2253768615569657
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.7,
+      "particle_count": 495,
+      "actual_discrete_volume_percent": 0.6997897635871263,
+      "probability": {
+        "count": 495,
+        "successes": 9439,
+        "trials": 20000,
+        "estimate": 0.47195,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.46503744265433666,
+          0.47887333056841075
+        ],
+        "clopper_pearson_interval": [
+          0.46501089379306926,
+          0.47889726300974755
+        ],
+        "wilson_one_sided_bounds": [
+          0.4661479081023111,
+          0.4777596799205913
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.4661220071042843,
+          0.4777840195616558
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 1.0,
+      "particle_count": 707,
+      "actual_discrete_volume_percent": 0.9994977027395926,
+      "probability": {
+        "count": 707,
+        "successes": 19856,
+        "trials": 20000,
+        "estimate": 0.9928,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.991529924157616,
+          0.9938808051054874
+        ],
+        "clopper_pearson_interval": [
+          0.9915287425451265,
+          0.9939246490765395
+        ],
+        "wilson_one_sided_bounds": [
+          0.9917478014047142,
+          0.9937188874478232
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9917364871757196,
+          0.9937548408483945
+        ]
+      }
+    }
+  ],
+  "wall_runtime_seconds": 4.142337500001304
+}

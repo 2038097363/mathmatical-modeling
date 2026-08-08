@@ -1,0 +1,341 @@
+{
+  "workflow_schema_version": 3,
+  "project_name": "2026年第七届华数杯A题：微构体中填充导电介质的仿真优化",
+  "contest": "2026年第七届华数杯大学生数学建模竞赛",
+  "workflow_profile": "engineering-mechanism",
+  "created_at": "2026-08-07T18:30:19+08:00",
+  "random_seed": 20260801,
+  "simulation": {
+    "box_length_nm": 10000.0,
+    "contact_cutoff_nm": 1.8,
+    "target_probability": 0.90,
+    "media": {
+      "A": {
+        "shape": "flat_cylinder",
+        "length_nm": 5000.0,
+        "radius_nm": 30.0,
+        "cost_yuan_per_um3": 1.05
+      },
+      "B": {
+        "shape": "sphere",
+        "radius_nm": 200.0,
+        "cost_yuan_per_um3": 0.05
+      }
+    },
+    "boundary_primary": "D_truncated_fragments_independent",
+    "boundary_sensitivity": [
+      "B_open_x_periodic_yz",
+      "A_periodic_xyz_same_particle"
+    ],
+    "probability_space": {
+      "centers": "independent_uniform_in_base_cube",
+      "a_directions": "phi_uniform_and_cos_theta_uniform",
+      "particle_overlap": "allowed",
+      "volume_fraction": "sum_of_nominal_particle_volumes"
+    },
+    "sample_sizes": {
+      "q2_primary_fixed": 20000,
+      "q2_each_sensitivity_fixed": 5000,
+      "q3_confirmation_fixed": 50000,
+      "q4_screening_fixed": 2000,
+      "q4_confirmation_shared_fixed": 50000
+    },
+    "confidence": {
+      "q2_two_sided": 0.95,
+      "q3_q4_one_sided": 0.95,
+      "critical_exact_recheck": "clopper_pearson"
+    },
+    "stream_ids": {
+      "q2_primary": 2,
+      "q2_boundary_B": 21,
+      "q2_boundary_A": 22,
+      "q3_confirmation": 3,
+      "q4_screening": 4,
+      "q4_confirmation": 5
+    },
+    "seed_derivation": "SeedSequence([master_seed, stream_id, trial_id, quantity_code])"
+  },
+  "compute": {
+    "cpu_workers_default": 16,
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU 8GB",
+    "gpu_policy": "only_for_benchmarked_vectorizable_kernels_without_changing_geometry_semantics"
+  },
+  "knowledge_base_root": "C:\\Users\\23258\\Desktop\\数模软件\\数模知识库",
+  "knowledge_policy": {
+    "use_local": true,
+    "role": "candidate_and_pattern_source",
+    "independent_validation_required": true,
+    "runtime_dependency_allowed": false
+  },
+  "code_style": {
+    "submission_programs": "numbered_chinese_modules",
+    "small_helpers": "minimal",
+    "narrative_language": "zh-CN"
+  },
+  "q1_model": {
+    "source_workbook": "00_赛题与附件/附件.xlsx",
+    "contact_cutoff_nm": 1.8,
+    "medium_a_radius_nm": 30.0,
+    "primary_reporting": [
+      "row_literal+disconnected_fragments"
+    ],
+    "rejected_diagnostics": [
+      "full_cube_periodic+connected_same_particle",
+      "thin_prism_periodic_for_groups_1_2"
+    ],
+    "global_minimum_image_for_independent_particles": false,
+    "processed_dir": "02_数据与参数/processed",
+    "result_dir": "问题/问题1/results"
+  },
+  "paper_main": "论文/main.tex",
+  "paper_content_source": "论文/内容稿.md",
+  "result_registry": "结果注册表.json",
+  "artifact_manifest": "工作流产物清单.json",
+  "feedback_log": "工作流反馈.jsonl",
+  "questions": [
+    {
+      "id": 1,
+      "name": "问题1",
+      "depends_on": [],
+      "script": "问题/问题1/src/solve.py",
+      "runs": [
+        {
+          "name": "正式判定",
+          "args": [
+            "--xlsx",
+            "00_赛题与附件/附件.xlsx",
+            "--processed-dir",
+            "02_数据与参数/processed",
+            "--output-dir",
+            "问题/问题1/results"
+          ]
+        }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "name": "问题2",
+      "depends_on": [
+        1
+      ],
+      "script": "问题/问题2/src/solve.py",
+      "runs": [
+        {
+          "name": "D主结果",
+          "args": [
+            "--boundary-mode",
+            "D",
+            "--max-count",
+            "720",
+            "--trials",
+            "20000",
+            "--seed",
+            "20260801",
+            "--stream-id",
+            "2",
+            "--workers",
+            "8",
+            "--batch-size",
+            "20",
+            "--counts",
+            "354",
+            "424",
+            "495",
+            "707",
+            "--output-dir",
+            "问题/问题2/results/D_primary_n20000",
+            "--resume",
+            "--register-results"
+          ]
+        },
+        {
+          "name": "B边界敏感性",
+          "args": [
+            "--boundary-mode",
+            "B",
+            "--max-count",
+            "720",
+            "--trials",
+            "5000",
+            "--seed",
+            "20260801",
+            "--stream-id",
+            "21",
+            "--workers",
+            "8",
+            "--batch-size",
+            "50",
+            "--counts",
+            "354",
+            "424",
+            "495",
+            "707",
+            "--output-dir",
+            "问题/问题2/results/B_sensitivity_n5000",
+            "--resume"
+          ]
+        },
+        {
+          "name": "A边界敏感性",
+          "args": [
+            "--boundary-mode",
+            "A",
+            "--max-count",
+            "720",
+            "--trials",
+            "5000",
+            "--seed",
+            "20260801",
+            "--stream-id",
+            "22",
+            "--workers",
+            "8",
+            "--batch-size",
+            "50",
+            "--counts",
+            "354",
+            "424",
+            "495",
+            "707",
+            "--output-dir",
+            "问题/问题2/results/A_sensitivity_n5000",
+            "--resume"
+          ]
+        }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "name": "问题3",
+      "depends_on": [
+        2
+      ],
+      "script": "问题/问题3/src/solve.py",
+      "runs": [
+        {
+          "name": "独立确认",
+          "args": [
+            "--threshold-artifact",
+            "问题/问题2/results/D_primary_n20000/threshold_samples.json",
+            "--output-dir",
+            "问题/问题3/results/D_confirmation_n50000",
+            "--confirmation-trials",
+            "50000",
+            "--confirmation-stream-id",
+            "3",
+            "--workers",
+            "8",
+            "--batch-size",
+            "100",
+            "--resume",
+            "--register-results"
+          ]
+        }
+      ],
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "name": "问题4",
+      "depends_on": [
+        2
+      ],
+      "script": "问题/问题4/src/solve.py",
+      "runs": [
+        {
+          "name": "正式筛选",
+          "args": [
+            "--stage",
+            "screen",
+            "--output-dir",
+            "问题/问题4/results/D_screen2000_confirm50000",
+            "--target",
+            "0.90",
+            "--screening-trials",
+            "2000",
+            "--confirmation-trials",
+            "50000",
+            "--screening-candidate-rule",
+            "cp_lower",
+            "--familywise-confidence",
+            "0.95",
+            "--max-na",
+            "720",
+            "--max-nb",
+            "6000",
+            "--step-na",
+            "120",
+            "--step-nb",
+            "1000",
+            "--max-screening-designs",
+            "500",
+            "--seed",
+            "20260801",
+            "--screening-stream-id",
+            "4",
+            "--confirmation-stream-id",
+            "5",
+            "--workers",
+            "16",
+            "--screening-batch-size",
+            "10",
+            "--confirmation-batch-size",
+            "100",
+            "--resume"
+          ]
+        },
+        {
+          "name": "冻结协议",
+          "args": [
+            "--stage",
+            "freeze",
+            "--output-dir",
+            "问题/问题4/results/D_screen2000_confirm50000",
+            "--screening-candidate-rule",
+            "cp_lower",
+            "--familywise-confidence",
+            "0.95",
+            "--seed",
+            "20260801",
+            "--screening-stream-id",
+            "4",
+            "--confirmation-stream-id",
+            "5"
+          ]
+        },
+        {
+          "name": "独立确认",
+          "args": [
+            "--stage",
+            "confirm",
+            "--output-dir",
+            "问题/问题4/results/D_screen2000_confirm50000",
+            "--target",
+            "0.90",
+            "--screening-trials",
+            "2000",
+            "--confirmation-trials",
+            "50000",
+            "--familywise-confidence",
+            "0.95",
+            "--seed",
+            "20260801",
+            "--screening-stream-id",
+            "4",
+            "--confirmation-stream-id",
+            "5",
+            "--workers",
+            "16",
+            "--confirmation-batch-size",
+            "100",
+            "--resume",
+            "--register-results"
+          ]
+        }
+      ],
+      "status": "completed"
+    }
+  ]
+}

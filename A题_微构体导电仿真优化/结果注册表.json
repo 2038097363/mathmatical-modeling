@@ -1,0 +1,305 @@
+{
+  "project": "2026年第七届华数杯A题：微构体中填充导电介质的仿真优化",
+  "results": {
+    "q1_fragment_disconnected_group1_conductive": {
+      "question": 1,
+      "value": false,
+      "formatted": "不导通",
+      "unit": "",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/q1_results.json",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_fragment_disconnected_group2_conductive": {
+      "question": 1,
+      "value": true,
+      "formatted": "导通",
+      "unit": "",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/q1_results.json",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_fragment_disconnected_group2_witness": {
+      "question": 1,
+      "value": "LEFT -> r13 -> r14 -> r26 -> r41 -> RIGHT",
+      "formatted": null,
+      "unit": "",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/witness_path_edges.csv",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_fragment_disconnected_group3_conductive": {
+      "question": 1,
+      "value": true,
+      "formatted": "导通",
+      "unit": "",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/q1_results.json",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_fragment_disconnected_group3_witness": {
+      "question": 1,
+      "value": "LEFT -> r65 -> r266 -> r218 -> r353 -> RIGHT",
+      "formatted": null,
+      "unit": "",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/witness_path_edges.csv",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_numerically_uncertain_edges": {
+      "question": 1,
+      "value": 0,
+      "formatted": null,
+      "unit": "条",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/screening_summary.csv",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_slsqp_threshold_disagreements": {
+      "question": 1,
+      "value": 0,
+      "formatted": null,
+      "unit": "条",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/independent_slsqp_validation.csv",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q1_closest_connected_gap_upper_nm": {
+      "question": 1,
+      "value": 1.7786710872937999,
+      "formatted": "1.7786710873",
+      "unit": "nm",
+      "source_script": "问题/问题1/src/solve.py",
+      "source_artifact": "问题/问题1/results/screening_summary.csv",
+      "validation": "每行及其截断片段按独立介质建模；tests/test_q1_solver.py；GJK距离界与全部窄相SLSQP独立阈值复核",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T22:25:51+08:00"
+    },
+    "q2_probability_n354": {
+      "question": 2,
+      "value": 0.07895,
+      "formatted": "7.895%",
+      "unit": "",
+      "source_script": "问题/问题2/src/solve.py",
+      "source_artifact": "问题/问题2/results/D_primary_n20000/q2_summary.json",
+      "validation": "D 边界固定 20000 个独立试验；共同随机前缀保证粒子数单调；双侧 95% Wilson 与 Clopper-Pearson 区间一致",
+      "latex_macro": "QTwoProbabilityPointFive",
+      "updated_at": "2026-08-07T23:32:01+08:00"
+    },
+    "q2_probability_n424": {
+      "question": 2,
+      "value": 0.2205,
+      "formatted": "22.050%",
+      "unit": "",
+      "source_script": "问题/问题2/src/solve.py",
+      "source_artifact": "问题/问题2/results/D_primary_n20000/q2_summary.json",
+      "validation": "D 边界固定 20000 个独立试验；共同随机前缀保证粒子数单调；双侧 95% Wilson 与 Clopper-Pearson 区间一致",
+      "latex_macro": "QTwoProbabilityPointSix",
+      "updated_at": "2026-08-07T23:32:01+08:00"
+    },
+    "q2_probability_n495": {
+      "question": 2,
+      "value": 0.47195,
+      "formatted": "47.195%",
+      "unit": "",
+      "source_script": "问题/问题2/src/solve.py",
+      "source_artifact": "问题/问题2/results/D_primary_n20000/q2_summary.json",
+      "validation": "D 边界固定 20000 个独立试验；共同随机前缀保证粒子数单调；双侧 95% Wilson 与 Clopper-Pearson 区间一致",
+      "latex_macro": "QTwoProbabilityPointSeven",
+      "updated_at": "2026-08-07T23:32:01+08:00"
+    },
+    "q2_probability_n707": {
+      "question": 2,
+      "value": 0.9928,
+      "formatted": "99.280%",
+      "unit": "",
+      "source_script": "问题/问题2/src/solve.py",
+      "source_artifact": "问题/问题2/results/D_primary_n20000/q2_summary.json",
+      "validation": "D 边界固定 20000 个独立试验；共同随机前缀保证粒子数单调；双侧 95% Wilson 与 Clopper-Pearson 区间一致",
+      "latex_macro": "QTwoProbabilityOne",
+      "updated_at": "2026-08-07T23:32:01+08:00"
+    },
+    "q3_reported_minimum_volume_percent": {
+      "question": 3,
+      "value": 0.87,
+      "formatted": "0.87%",
+      "unit": "",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同",
+      "latex_macro": "QThreeReportedVolume",
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q3_minimum_integer_bracket": {
+      "question": 3,
+      "value": [
+        613,
+        616
+      ],
+      "formatted": "613--616",
+      "unit": "根",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同",
+      "latex_macro": "QThreeMinimumBracket",
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q3_conservative_particle_count": {
+      "question": 3,
+      "value": 616,
+      "formatted": "616",
+      "unit": "根",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同",
+      "latex_macro": "QThreeSafeCount",
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q3_conservative_probability": {
+      "question": 3,
+      "value": 0.90452,
+      "formatted": "90.452%",
+      "unit": "",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同",
+      "latex_macro": "QThreeSafeProbability",
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q3_conservative_cp_lower": {
+      "question": 3,
+      "value": 0.9008213433708698,
+      "formatted": "90.0821%",
+      "unit": "",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同",
+      "latex_macro": "QThreeSafeLower",
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q3_unique_minimum_integer_confirmed": {
+      "question": 3,
+      "value": false,
+      "formatted": "否",
+      "unit": "",
+      "source_script": "问题/问题3/src/solve.py",
+      "source_artifact": "问题/问题3/results/D_confirmation_n50000/q3_summary.json",
+      "validation": "有限样本下仅确认题设两位百分数精度，不宣称唯一最小整数",
+      "latex_macro": null,
+      "updated_at": "2026-08-07T23:32:12+08:00"
+    },
+    "q4_reported_n_a": {
+      "question": 4,
+      "value": 619,
+      "formatted": "619",
+      "unit": "个",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourNA",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_reported_n_b": {
+      "question": 4,
+      "value": 0,
+      "formatted": "0",
+      "unit": "个",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourNB",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_cost_weight": {
+      "question": 4,
+      "value": 350973,
+      "formatted": "350973",
+      "unit": "",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourCostWeight",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_reported_cost_yuan": {
+      "question": 4,
+      "value": 9.188451653403087,
+      "formatted": "9.1885",
+      "unit": "元",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourCost",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_candidate_probability": {
+      "question": 4,
+      "value": 0.91108,
+      "formatted": "91.108%",
+      "unit": "",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourProbability",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_candidate_cp_lower": {
+      "question": 4,
+      "value": 0.9061863570173373,
+      "formatted": "90.619%",
+      "unit": "",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourLower",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_cost_lower_yuan": {
+      "question": 4,
+      "value": 8.505626490145346,
+      "formatted": "8.5056",
+      "unit": "元",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourCostLower",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_cost_upper_yuan": {
+      "question": 4,
+      "value": 9.188451653403087,
+      "formatted": "9.1885",
+      "unit": "元",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限",
+      "latex_macro": "QFourCostUpper",
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    },
+    "q4_global_minimum_cost_certified": {
+      "question": 4,
+      "value": false,
+      "formatted": "否",
+      "unit": "",
+      "source_script": "问题/问题4/src/solve.py",
+      "source_artifact": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "validation": "独立 50000 次共同随机数确认；冻结 620 个单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点用 Clopper-Pearson 上限；仍有严格更便宜极大点未排除",
+      "latex_macro": null,
+      "updated_at": "2026-08-08T14:55:26+08:00"
+    }
+  }
+}

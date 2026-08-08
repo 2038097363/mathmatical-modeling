@@ -1,0 +1,62 @@
+{
+  "schema_version": "2.0",
+  "status": "frozen",
+  "output_dir": "支撑材料内容",
+  "q1_extract": {
+    "source": "问题/问题1/results/q1_results.json",
+    "destination": "结果摘要/q1_main_results.json"
+  },
+  "threshold_samples": [
+    {
+      "source": "问题/问题2/results/D_primary_n20000/threshold_samples.json",
+      "destination": "数据/q2_threshold_samples.npz",
+      "metadata_destination": "数据/q2_threshold_samples.metadata.json"
+    },
+    {
+      "source": "问题/问题3/results/D_confirmation_n50000/confirmation/threshold_samples.json",
+      "destination": "数据/q3_confirmation_threshold_samples.npz",
+      "metadata_destination": "数据/q3_confirmation_threshold_samples.metadata.json"
+    }
+  ],
+  "files": [
+    {"source": "问题/问题2/results/D_primary_n20000/q2_summary.json", "destination": "结果摘要/q2_summary.json", "mode": "sanitized_json"},
+    {"source": "问题/问题3/results/D_confirmation_n50000/q3_summary.json", "destination": "结果摘要/q3_summary.json", "mode": "sanitized_json"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_screening.json", "destination": "结果摘要/q4_screening.json", "mode": "sanitized_json"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_freeze.json", "destination": "结果摘要/q4_confirmation_freeze.json", "mode": "sanitized_json"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation.json", "destination": "结果摘要/q4_confirmation.json", "mode": "sanitized_json"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation.csv", "destination": "结果摘要/q4_confirmation.csv", "mode": "sanitized_csv"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json", "destination": "结果摘要/q4_summary.json", "mode": "sanitized_json"},
+    {"source": "结果注册表.json", "destination": "结果摘要/结果注册表.json", "mode": "sanitized_json"},
+    {"source": "论文/generated/results.tex", "destination": "结果摘要/results.tex", "mode": "text"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_screening_integer_domain_counts.npz", "destination": "数据/q4_screening_integer_domain_counts.npz", "mode": "binary"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_integer_domain_counts.npz", "destination": "数据/q4_confirmation_integer_domain_counts.npz", "mode": "binary"},
+    {"source": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_integer_domain_analysis.json", "destination": "数据/q4_confirmation_integer_domain_analysis.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/generated/q2_q3_probability.png", "destination": "图件/q2_q3_probability.png", "mode": "binary"},
+    {"source": "论文/figures/generated/q2_q3_probability.audit.json", "destination": "图件/q2_q3_probability.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/generated/q4_cost_frontier.png", "destination": "图件/q4_cost_frontier.png", "mode": "binary"},
+    {"source": "论文/figures/generated/q4_cost_frontier.audit.json", "destination": "图件/q4_cost_frontier.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/generated/model_workflow.png", "destination": "图件/model_workflow.png", "mode": "binary"},
+    {"source": "论文/figures/generated/validation_diagnostics.png", "destination": "图件/validation_diagnostics.png", "mode": "binary"},
+    {"source": "论文/figures/generated/explanatory_figures.audit.json", "destination": "图件/explanatory_figures.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/generated/q4_unresolved_boundary_evidence.png", "destination": "图件/q4_unresolved_boundary_evidence.png", "mode": "binary"},
+    {"source": "论文/figures/generated/q4_unresolved_boundary_evidence.audit.json", "destination": "图件/q4_unresolved_boundary_evidence.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/generated/simulation_convergence.png", "destination": "图件/simulation_convergence.png", "mode": "binary"},
+    {"source": "论文/figures/generated/simulation_convergence.audit.json", "destination": "图件/simulation_convergence.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/data/q1_scene_index.json", "destination": "三维模型/q1_scene_index.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/data/q1_group1_scene.json", "destination": "三维模型/q1_group1_scene.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/data/q1_group2_scene.json", "destination": "三维模型/q1_group2_scene.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/data/q1_group3_scene.json", "destination": "三维模型/q1_group3_scene.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/models/q1_group1.FCStd", "destination": "三维模型/q1_group1.FCStd", "mode": "binary"},
+    {"source": "论文/figures/models/q1_group2.FCStd", "destination": "三维模型/q1_group2.FCStd", "mode": "binary"},
+    {"source": "论文/figures/models/q1_group3.FCStd", "destination": "三维模型/q1_group3.FCStd", "mode": "binary"},
+    {"source": "论文/figures/rendered/q1_group1_axonometric.png", "destination": "三维模型/q1_group1_axonometric.png", "mode": "binary"},
+    {"source": "论文/figures/rendered/q1_group2_axonometric.png", "destination": "三维模型/q1_group2_axonometric.png", "mode": "binary"},
+    {"source": "论文/figures/rendered/q1_group3_axonometric.png", "destination": "三维模型/q1_group3_axonometric.png", "mode": "binary"},
+    {"source": "论文/figures/data/q4_final_na000619_nb000000_trial000001_scene.json", "destination": "三维模型/q4_final_scene.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/models/q4_final_na000619_nb000000_trial000001.FCStd", "destination": "三维模型/q4_final.FCStd", "mode": "binary"},
+    {"source": "论文/figures/generated/q4_final_na000619_nb000000_trial000001_assets.audit.json", "destination": "三维模型/q4_final_assets.audit.json", "mode": "sanitized_json"},
+    {"source": "论文/figures/rendered/q4_final_na000619_nb000000_trial000001_axonometric.png", "destination": "三维模型/q4_final_axonometric.png", "mode": "binary"},
+    {"source": "论文/figures/rendered/q4_final_na000619_nb000000_trial000001_top.png", "destination": "三维模型/q4_final_top.png", "mode": "binary"},
+    {"source": "论文/figures/rendered/q4_final_na000619_nb000000_trial000001_witness_focus.png", "destination": "三维模型/q4_final_witness_focus.png", "mode": "binary"}
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "source": {
+    "path": "00_赛题与附件/附件.xlsx",
+    "sha256": "6DC68DD49356AEAB483906A524FF79855B454FCACCD168F81FF3A3AD989C4C51",
+    "read_only": true,
+    "unit": "nm"
+  },
+  "effective_independent_structures": 3,
+  "sheets": [
+    {
+      "name": "组1",
+      "used_range": "A1:F14",
+      "data_range": "A3:F14",
+      "records": 12,
+      "full_length_records": 2,
+      "short_records": 10,
+      "minimum_axis_length_nm": 1019.1173,
+      "minimum_record": "A13:F13",
+      "coordinate_ranges_nm": {"x": [-5000, 5000], "y": [-500, 420.2288], "z": [-500, 500]}
+    },
+    {
+      "name": "组2",
+      "used_range": "A1:F51",
+      "data_range": "A3:F51",
+      "records": 49,
+      "full_length_records": 11,
+      "short_records": 38,
+      "minimum_axis_length_nm": 577.4740,
+      "minimum_record": "A51:F51",
+      "coordinate_ranges_nm": {"x": [-5000, 5000], "y": [-500, 500], "z": [-500, 500]}
+    },
+    {
+      "name": "组3",
+      "used_range": "A1:F537",
+      "data_range": "A3:F537",
+      "records": 535,
+      "full_length_records": 155,
+      "short_records": 380,
+      "minimum_axis_length_nm": 525.6974,
+      "minimum_record": "A536:F536",
+      "coordinate_ranges_nm": {"x": [-5000, 5000], "y": [-5000, 5000], "z": [-5000, 5000]}
+    }
+  ],
+  "quality": {
+    "missing_values": 0,
+    "duplicate_or_reversed_records": 0,
+    "non_finite_values": 0,
+    "out_of_stated_coordinate_bounds": 0,
+    "formulas": 0,
+    "hidden_rows_or_columns": 0,
+    "external_links": 0
+  },
+  "blocking_issues": [
+    "多数记录轴长短于题给5000 nm，疑似边界裁切片段",
+    "组1和组2存在Y/Z=±500构造界面，与题给±5000不一致",
+    "没有原介质ID，周期片段重联未必唯一",
+    "附件只有3个独立微构体，不能估计问题2-4的导通概率"
+  ],
+  "status": "G2_pending_reconstruction_and_boundary_semantics"
+}

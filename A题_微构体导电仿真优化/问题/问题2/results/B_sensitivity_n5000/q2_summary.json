@@ -1,0 +1,152 @@
+{
+  "result_scope": "configured_monte_carlo_not_result_registry",
+  "question": 2,
+  "threshold_artifact": "C:\\Users\\23258\\Desktop\\华数杯\\A题_微构体导电仿真优化\\问题\\问题2\\results\\B_sensitivity_n5000\\threshold_samples.json",
+  "configuration_fingerprint": "30147E249BA45F1FBA31661A6925F85C3A43B656AAC618EE34E53B1A9FD1B6BA",
+  "configuration": {
+    "schema_version": 1,
+    "algorithm_version": "flat-cylinder-periodic-numba-cached-v4",
+    "max_count": 720,
+    "trial_count": 5000,
+    "boundary_mode": "B",
+    "master_seed": 20260801,
+    "stream_id": 21,
+    "box_length_nm": 10000.0,
+    "cylinder_length_nm": 5000.0,
+    "cylinder_radius_nm": 30.0,
+    "contact_cutoff_nm": 1.8,
+    "cell_size_nm": 625.0,
+    "broad_phase_guard_nm": 1e-08,
+    "gjk_absolute_tolerance_nm": 1e-10,
+    "gjk_relative_tolerance": 1e-13,
+    "gjk_max_iterations": 512
+  },
+  "boundary_semantics": {
+    "mode": "B",
+    "role": "boundary_sensitivity",
+    "description": "X 方向裁剪中心线，Y/Z 显式回绕，同源片段保持内部连接",
+    "implementation_limitations": [
+      "X 边界仅裁剪中心线后建立较短平底圆柱，不等于完整三维圆柱与 X slab 的布尔交",
+      "Y/Z 按轴线交点分段；各轴半径侧缘越界及斜切面未作完整三维布尔回绕"
+    ],
+    "global_minimum_image_adjacency": false,
+    "flat_cylinder_narrow_phase": true
+  },
+  "fixed_trial_count": 5000,
+  "censored_trials": 0,
+  "probability_records": [
+    {
+      "nominal_target_percent": 0.5,
+      "particle_count": 354,
+      "actual_discrete_volume_percent": 0.500455709716854,
+      "probability": {
+        "count": 354,
+        "successes": 849,
+        "trials": 5000,
+        "estimate": 0.1698,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.15964745670019553,
+          0.18045953366432027
+        ],
+        "clopper_pearson_interval": [
+          0.15948809542193534,
+          0.18049892230159836
+        ],
+        "wilson_one_sided_bounds": [
+          0.16124532919300877,
+          0.17871182572677707
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.16111030711627855,
+          0.17877596601065646
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.6,
+      "particle_count": 424,
+      "actual_discrete_volume_percent": 0.5994158783049325,
+      "probability": {
+        "count": 424,
+        "successes": 2141,
+        "trials": 5000,
+        "estimate": 0.4282,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.41454487531208095,
+          0.4419653666872294
+        ],
+        "clopper_pearson_interval": [
+          0.41442989021441845,
+          0.44205401131766475
+        ],
+        "wilson_one_sided_bounds": [
+          0.4167315509870257,
+          0.4397461101978339
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.41662284032575264,
+          0.4398391946464873
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.7,
+      "particle_count": 495,
+      "actual_discrete_volume_percent": 0.6997897635871263,
+      "probability": {
+        "count": 495,
+        "successes": 3887,
+        "trials": 5000,
+        "estimate": 0.7774,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.7656590045081856,
+          0.7887150744526968
+        ],
+        "clopper_pearson_interval": [
+          0.7656093200002743,
+          0.7888659423360312
+        ],
+        "wilson_one_sided_bounds": [
+          0.7675747353442844,
+          0.7869252199108682
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.7675046075140832,
+          0.7870552281931709
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 1.0,
+      "particle_count": 707,
+      "actual_discrete_volume_percent": 0.9994977027395926,
+      "probability": {
+        "count": 707,
+        "successes": 4999,
+        "trials": 5000,
+        "estimate": 0.9998,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.9988679109191605,
+          0.9999646942165608
+        ],
+        "clopper_pearson_interval": [
+          0.998886180619666,
+          0.999994936451223
+        ],
+        "wilson_one_sided_bounds": [
+          0.9991040199846464,
+          0.9999553802912198
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9990515822299956,
+          0.9999897413937423
+        ]
+      }
+    }
+  ],
+  "wall_runtime_seconds": 1385.78057860001
+}

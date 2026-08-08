@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "simulation_convergence_figure_audit",
+  "inputs": {
+    "问题/问题2/results/D_primary_n20000/q2_summary.json": "D11481998BD9CB17354EE5DB38FC8FC0DCC51530A64E4ABDCB0F57F686512F26",
+    "问题/问题2/results/D_primary_n20000/threshold_samples.json": "BC344EDA1D43A8E4347723BF11B61CEF136FF7E464FFC14155E2AA04C572A3C9",
+    "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_integer_domain_analysis.json": "B49987A0F33B3E26301A3FDD61B0C56F9A0EA0D4B077226BDEB88F471E0B79EC",
+    "问题/问题4/results/D_screen2000_confirm50000/confirmation/pareto_max_A000619_B005483/mixed_pareto_frontier_samples.json": "469BE2167B263FA7A811BF4572C0517EED8783B7657D7AADA5C24421020D94A7"
+  },
+  "evidence_scope": "fixed_sample_cumulative_diagnostics",
+  "q2_trial_count": 20000,
+  "q2_final_estimates": {
+    "354": 0.07895,
+    "424": 0.2205,
+    "495": 0.47195,
+    "707": 0.9928
+  },
+  "q4_trial_count": 50000,
+  "q4_successes": 45554,
+  "q4_final_estimate": 0.91108,
+  "q4_bonferroni_statement_count": 620,
+  "q4_per_statement_confidence": 0.9999193548387096,
+  "q4_diagnostic_checkpoints": [
+    500,
+    1000,
+    2000,
+    5000,
+    10000,
+    20000,
+    30000,
+    40000,
+    50000
+  ],
+  "q4_diagnostic_cp_lower": [
+    0.821460515907523,
+    0.8574556195697625,
+    0.8763405667547729,
+    0.8957527357814894,
+    0.9016972540225549,
+    0.9032793184608698,
+    0.9059518084438912,
+    0.9055145426021258,
+    0.9061863570173373
+  ],
+  "q4_final_cp_lower": 0.9061863570173373,
+  "interpretation_guard": "intermediate_checkpoints_diagnostic_only_final_n50000_authoritative",
+  "outputs": {
+    "论文/figures/generated/simulation_convergence.pdf": {
+      "sha256": "C5676CE7158C8B23B05415E44EC9FB29F92107B791B4A53F09ADBADB0103E9BE"
+    },
+    "论文/figures/generated/simulation_convergence.png": {
+      "sha256": "999F8A2A8B479614F3F598D530F3B9017195EEB84B22EC816161C65BA0B7692B",
+      "pixels": [
+        2469,
+        1077
+      ]
+    }
+  }
+}

@@ -1,0 +1,2253 @@
+{
+  "metadata": {
+    "generated_at_local": "2026-08-07 22:25:51 +0800",
+    "elapsed_seconds": 9.30470469998545,
+    "python_version": "3.13.5",
+    "numpy_version": "2.1.3",
+    "openpyxl_version": "3.1.5",
+    "constants": {
+      "radius_nm": 30.0,
+      "contact_cutoff_nm": 1.8,
+      "electrode_x_nm": [
+        -5000.0,
+        5000.0
+      ],
+      "gjk_absolute_tolerance_nm": 1e-10,
+      "gjk_relative_tolerance": 1e-13,
+      "capsule_screen_guard_nm": 1e-08
+    },
+    "input_paths": {
+      "workbook": "00_赛题与附件/附件.xlsx",
+      "processed_dir": "02_数据与参数/processed",
+      "reconstruction_source": "02_数据与参数/src/reconstruct_segments.py",
+      "geometry_kernel": "公共代码/geometry_kernel.py"
+    },
+    "input_hashes": {
+      "workbook": "6DC68DD49356AEAB483906A524FF79855B454FCACCD168F81FF3A3AD989C4C51",
+      "row_map": "E6034D1A81B2F0942B74645DCFBB6BA19871D227D59EDF07BE19D2F546416883",
+      "junctions": "B3B2FEBEDC5B51E8D41231D3EAE997CBDD11A0C010115967CF68FA6731C675E1",
+      "reconstruction_source": "2234D6FDCEB0C40D980357964666E6533DF5C642A7657BCF7F54C1045ED1635F",
+      "geometry_kernel": "652CB279E662B083E190885557A942B9F819A789E77D9C538945716C91027E32"
+    },
+    "scenario_definitions": {
+      "A_row_literal": {
+        "组1": "row_literal",
+        "组2": "row_literal",
+        "组3": "row_literal"
+      },
+      "B_full_cube_periodic": {
+        "组1": "full_cube_periodic",
+        "组2": "full_cube_periodic",
+        "组3": "full_cube_periodic"
+      },
+      "C_thin_12_full_3": {
+        "组1": "thin_prism_periodic",
+        "组2": "thin_prism_periodic",
+        "组3": "full_cube_periodic"
+      }
+    },
+    "internal_mode_definitions": {
+      "disconnected_fragments": "不添加周期接头内部边",
+      "connected_same_particle": "仅添加 junctions.csv 中一对一共线已选接头；不补缺失片段"
+    }
+  },
+  "screening": [
+    {
+      "sheet": "组1",
+      "segment_count": 12,
+      "total_pairs": 66,
+      "broad_phase_rejected": 64,
+      "narrow_phase_pairs": 2,
+      "narrow_connected": 2,
+      "narrow_separated": 0,
+      "narrow_uncertain": 0,
+      "gjk_nonconverged_narrow": 0,
+      "slsqp_threshold_disagreements": 0,
+      "slsqp_max_abs_difference_nm": 3.4107901638000697e-13,
+      "max_narrow_bound_width_nm": 2.170009413277917e-10,
+      "min_threshold_decision_margin_nm": 1.7999999997829992,
+      "electrode_contacts": 7,
+      "physical_contact_edges": 2,
+      "max_connected_gap_upper_nm": 2.170009413277917e-10,
+      "min_narrow_separated_gap_lower_nm": null
+    },
+    {
+      "sheet": "组2",
+      "segment_count": 49,
+      "total_pairs": 1176,
+      "broad_phase_rejected": 1149,
+      "narrow_phase_pairs": 27,
+      "narrow_connected": 27,
+      "narrow_separated": 0,
+      "narrow_uncertain": 0,
+      "gjk_nonconverged_narrow": 0,
+      "slsqp_threshold_disagreements": 0,
+      "slsqp_max_abs_difference_nm": 1.0537414738097338e-07,
+      "max_narrow_bound_width_nm": 2.564586093539256e-10,
+      "min_threshold_decision_margin_nm": 1.7999999997435414,
+      "electrode_contacts": 22,
+      "physical_contact_edges": 27,
+      "max_connected_gap_upper_nm": 2.564586093539256e-10,
+      "min_narrow_separated_gap_lower_nm": null
+    },
+    {
+      "sheet": "组3",
+      "segment_count": 535,
+      "total_pairs": 142845,
+      "broad_phase_rejected": 142679,
+      "narrow_phase_pairs": 166,
+      "narrow_connected": 165,
+      "narrow_separated": 1,
+      "narrow_uncertain": 0,
+      "gjk_nonconverged_narrow": 6,
+      "slsqp_threshold_disagreements": 0,
+      "slsqp_max_abs_difference_nm": 2.762856499138877e-09,
+      "max_narrow_bound_width_nm": 6.046283584915102e-09,
+      "min_threshold_decision_margin_nm": 0.021328912706200187,
+      "electrode_contacts": 182,
+      "physical_contact_edges": 165,
+      "max_connected_gap_upper_nm": 1.7786710872937999,
+      "min_narrow_separated_gap_lower_nm": 11.934210538401576
+    }
+  ],
+  "scenario_results": [
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组1",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 12,
+      "particle_count": 12,
+      "residual_particle_count": 10,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": false,
+      "conductive_possible": false,
+      "conclusion": "nonconductive",
+      "witness_row_nodes": null,
+      "witness_particle_path": null,
+      "witness_edges": []
+    },
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组2",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 49,
+      "particle_count": 49,
+      "residual_particle_count": 38,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r13",
+        "r14",
+        "r26",
+        "r41",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_row_literal_P0011",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            13
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0012",
+          "component_status": "unique",
+          "rows": [
+            14
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0024",
+          "component_status": "unique",
+          "rows": [
+            26
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0039",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            41
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r13",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r13",
+          "row_u": "",
+          "row_v": 13,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_row_literal_P0011"
+        },
+        {
+          "edge_id": "组2:PAIR:r13:r14",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r13",
+          "node_v": "r14",
+          "row_u": 13,
+          "row_v": 14,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.985972445629906e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.2789769243681803e-12,
+          "slsqp_abs_difference_nm": 1.2789769243681803e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0011",
+          "particle_v": "组2_row_literal_P0012"
+        },
+        {
+          "edge_id": "组2:PAIR:r14:r26",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r14",
+          "node_v": "r26",
+          "row_u": 14,
+          "row_v": 26,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.4410931306146347e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 5.123796534383003e-14,
+          "slsqp_abs_difference_nm": 5.123796534383003e-14,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0012",
+          "particle_v": "组2_row_literal_P0024"
+        },
+        {
+          "edge_id": "组2:PAIR:r26:r41",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r26",
+          "node_v": "r41",
+          "row_u": 26,
+          "row_v": 41,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.9722499377516499e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.0064104835181445e-11,
+          "slsqp_abs_difference_nm": 1.0064104835181445e-11,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0024",
+          "particle_v": "组2_row_literal_P0039"
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r41",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r41",
+          "node_v": "RIGHT",
+          "row_u": 41,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_row_literal_P0039",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组3",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 535,
+      "particle_count": 535,
+      "residual_particle_count": 380,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r65",
+        "r266",
+        "r218",
+        "r353",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_row_literal_P0063",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            65
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0264",
+          "component_status": "unique",
+          "rows": [
+            266
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0216",
+          "component_status": "unique",
+          "rows": [
+            218
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0351",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            353
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r65",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r65",
+          "row_u": "",
+          "row_v": 65,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_row_literal_P0063"
+        },
+        {
+          "edge_id": "组3:PAIR:r65:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r65",
+          "node_v": "r266",
+          "row_u": 65,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.5748551376950306e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 6.302189627392726e-12,
+          "slsqp_abs_difference_nm": 6.302189627392726e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0063",
+          "particle_v": "组3_row_literal_P0264"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r266",
+          "row_u": 218,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.685150038897927e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.7053025658242404e-13,
+          "slsqp_abs_difference_nm": 1.7053025658242404e-13,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0216",
+          "particle_v": "组3_row_literal_P0264"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r353",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r353",
+          "row_u": 218,
+          "row_v": 353,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.3341933865593414e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 4.151126638648695e-12,
+          "slsqp_abs_difference_nm": 4.151126638648695e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0216",
+          "particle_v": "组3_row_literal_P0351"
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r353",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r353",
+          "node_v": "RIGHT",
+          "row_u": 353,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_row_literal_P0351",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组1",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "connected_same_particle",
+      "row_count": 12,
+      "particle_count": 12,
+      "residual_particle_count": 10,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": false,
+      "conductive_possible": false,
+      "conclusion": "nonconductive",
+      "witness_row_nodes": null,
+      "witness_particle_path": null,
+      "witness_edges": []
+    },
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组2",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "connected_same_particle",
+      "row_count": 49,
+      "particle_count": 49,
+      "residual_particle_count": 38,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r13",
+        "r14",
+        "r26",
+        "r41",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_row_literal_P0011",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            13
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0012",
+          "component_status": "unique",
+          "rows": [
+            14
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0024",
+          "component_status": "unique",
+          "rows": [
+            26
+          ]
+        },
+        {
+          "particle_id": "组2_row_literal_P0039",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            41
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r13",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r13",
+          "row_u": "",
+          "row_v": 13,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_row_literal_P0011"
+        },
+        {
+          "edge_id": "组2:PAIR:r13:r14",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r13",
+          "node_v": "r14",
+          "row_u": 13,
+          "row_v": 14,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.985972445629906e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.2789769243681803e-12,
+          "slsqp_abs_difference_nm": 1.2789769243681803e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0011",
+          "particle_v": "组2_row_literal_P0012"
+        },
+        {
+          "edge_id": "组2:PAIR:r14:r26",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r14",
+          "node_v": "r26",
+          "row_u": 14,
+          "row_v": 26,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.4410931306146347e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 5.123796534383003e-14,
+          "slsqp_abs_difference_nm": 5.123796534383003e-14,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0012",
+          "particle_v": "组2_row_literal_P0024"
+        },
+        {
+          "edge_id": "组2:PAIR:r26:r41",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r26",
+          "node_v": "r41",
+          "row_u": 26,
+          "row_v": 41,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.9722499377516499e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.0064104835181445e-11,
+          "slsqp_abs_difference_nm": 1.0064104835181445e-11,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_row_literal_P0024",
+          "particle_v": "组2_row_literal_P0039"
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r41",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r41",
+          "node_v": "RIGHT",
+          "row_u": 41,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_row_literal_P0039",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "A_row_literal",
+      "sheet": "组3",
+      "reconstruction_scenario": "row_literal",
+      "internal_mode": "connected_same_particle",
+      "row_count": 535,
+      "particle_count": 535,
+      "residual_particle_count": 380,
+      "periodic_junction_count": 0,
+      "internal_edges_enabled": 0,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r65",
+        "r266",
+        "r218",
+        "r353",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_row_literal_P0063",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            65
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0264",
+          "component_status": "unique",
+          "rows": [
+            266
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0216",
+          "component_status": "unique",
+          "rows": [
+            218
+          ]
+        },
+        {
+          "particle_id": "组3_row_literal_P0351",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            353
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r65",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r65",
+          "row_u": "",
+          "row_v": 65,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_row_literal_P0063"
+        },
+        {
+          "edge_id": "组3:PAIR:r65:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r65",
+          "node_v": "r266",
+          "row_u": 65,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.5748551376950306e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 6.302189627392726e-12,
+          "slsqp_abs_difference_nm": 6.302189627392726e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0063",
+          "particle_v": "组3_row_literal_P0264"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r266",
+          "row_u": 218,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.685150038897927e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.7053025658242404e-13,
+          "slsqp_abs_difference_nm": 1.7053025658242404e-13,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0216",
+          "particle_v": "组3_row_literal_P0264"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r353",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r353",
+          "row_u": 218,
+          "row_v": 353,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.3341933865593414e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 4.151126638648695e-12,
+          "slsqp_abs_difference_nm": 4.151126638648695e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_row_literal_P0216",
+          "particle_v": "组3_row_literal_P0351"
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r353",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r353",
+          "node_v": "RIGHT",
+          "row_u": 353,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_row_literal_P0351",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组1",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 12,
+      "particle_count": 9,
+      "residual_particle_count": 5,
+      "periodic_junction_count": 3,
+      "internal_edges_enabled": 0,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": false,
+      "conductive_possible": false,
+      "conclusion": "nonconductive",
+      "witness_row_nodes": null,
+      "witness_particle_path": null,
+      "witness_edges": []
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组2",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 49,
+      "particle_count": 39,
+      "residual_particle_count": 23,
+      "periodic_junction_count": 10,
+      "internal_edges_enabled": 0,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r13",
+        "r14",
+        "r26",
+        "r41",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_full_cube_periodic_P0011",
+          "component_status": "unique",
+          "rows": [
+            13
+          ]
+        },
+        {
+          "particle_id": "组2_full_cube_periodic_P0012",
+          "component_status": "unique",
+          "rows": [
+            14
+          ]
+        },
+        {
+          "particle_id": "组2_full_cube_periodic_P0024",
+          "component_status": "unique",
+          "rows": [
+            26
+          ]
+        },
+        {
+          "particle_id": "组2_full_cube_periodic_P0010",
+          "component_status": "unique",
+          "rows": [
+            41
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r13",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r13",
+          "row_u": "",
+          "row_v": 13,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_full_cube_periodic_P0011"
+        },
+        {
+          "edge_id": "组2:PAIR:r13:r14",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r13",
+          "node_v": "r14",
+          "row_u": 13,
+          "row_v": 14,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.985972445629906e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.2789769243681803e-12,
+          "slsqp_abs_difference_nm": 1.2789769243681803e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_full_cube_periodic_P0011",
+          "particle_v": "组2_full_cube_periodic_P0012"
+        },
+        {
+          "edge_id": "组2:PAIR:r14:r26",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r14",
+          "node_v": "r26",
+          "row_u": 14,
+          "row_v": 26,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.4410931306146347e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 5.123796534383003e-14,
+          "slsqp_abs_difference_nm": 5.123796534383003e-14,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_full_cube_periodic_P0012",
+          "particle_v": "组2_full_cube_periodic_P0024"
+        },
+        {
+          "edge_id": "组2:PAIR:r26:r41",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r26",
+          "node_v": "r41",
+          "row_u": 26,
+          "row_v": 41,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.9722499377516499e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.0064104835181445e-11,
+          "slsqp_abs_difference_nm": 1.0064104835181445e-11,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_full_cube_periodic_P0024",
+          "particle_v": "组2_full_cube_periodic_P0010"
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r41",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r41",
+          "node_v": "RIGHT",
+          "row_u": 41,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_full_cube_periodic_P0010",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组3",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 535,
+      "particle_count": 357,
+      "residual_particle_count": 52,
+      "periodic_junction_count": 178,
+      "internal_edges_enabled": 0,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r65",
+        "r266",
+        "r218",
+        "r353",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0063",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            65
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0223",
+          "component_status": "unique",
+          "rows": [
+            266
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0191",
+          "component_status": "unique",
+          "rows": [
+            218
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0296",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            353
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r65",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r65",
+          "row_u": "",
+          "row_v": 65,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_full_cube_periodic_P0063"
+        },
+        {
+          "edge_id": "组3:PAIR:r65:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r65",
+          "node_v": "r266",
+          "row_u": 65,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.5748551376950306e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 6.302189627392726e-12,
+          "slsqp_abs_difference_nm": 6.302189627392726e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0063",
+          "particle_v": "组3_full_cube_periodic_P0223"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r266",
+          "row_u": 218,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.685150038897927e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.7053025658242404e-13,
+          "slsqp_abs_difference_nm": 1.7053025658242404e-13,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0191",
+          "particle_v": "组3_full_cube_periodic_P0223"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r353",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r353",
+          "row_u": 218,
+          "row_v": 353,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.3341933865593414e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 4.151126638648695e-12,
+          "slsqp_abs_difference_nm": 4.151126638648695e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0191",
+          "particle_v": "组3_full_cube_periodic_P0296"
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r353",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r353",
+          "node_v": "RIGHT",
+          "row_u": 353,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_full_cube_periodic_P0296",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组1",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 12,
+      "particle_count": 9,
+      "residual_particle_count": 5,
+      "periodic_junction_count": 3,
+      "internal_edges_enabled": 3,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r4",
+        "r12",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组1_full_cube_periodic_P0002",
+          "component_status": "unique",
+          "rows": [
+            4,
+            12
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组1:ELECTRODE:LEFT:r4",
+          "sheet": "组1",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r4",
+          "row_u": "",
+          "row_v": 4,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组1_full_cube_periodic_P0002"
+        },
+        {
+          "edge_id": "组1:INTERNAL:full_cube_periodic:j2",
+          "sheet": "组1",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r4",
+          "node_v": "r12",
+          "row_u": 4,
+          "row_v": 12,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组1_full_cube_periodic_P0002",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组1:ELECTRODE:RIGHT:r12",
+          "sheet": "组1",
+          "edge_type": "electrode_contact",
+          "node_u": "r12",
+          "node_v": "RIGHT",
+          "row_u": 12,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组1_full_cube_periodic_P0002",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组2",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 49,
+      "particle_count": 39,
+      "residual_particle_count": 23,
+      "periodic_junction_count": 10,
+      "internal_edges_enabled": 10,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r12",
+        "r41",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_full_cube_periodic_P0010",
+          "component_status": "unique",
+          "rows": [
+            12,
+            41
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r12",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r12",
+          "row_u": "",
+          "row_v": 12,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_full_cube_periodic_P0010"
+        },
+        {
+          "edge_id": "组2:INTERNAL:full_cube_periodic:j9",
+          "sheet": "组2",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r12",
+          "node_v": "r41",
+          "row_u": 12,
+          "row_v": 41,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组2_full_cube_periodic_P0010",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r41",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r41",
+          "node_v": "RIGHT",
+          "row_u": 41,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_full_cube_periodic_P0010",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "B_full_cube_periodic",
+      "sheet": "组3",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 535,
+      "particle_count": 357,
+      "residual_particle_count": 52,
+      "periodic_junction_count": 178,
+      "internal_edges_enabled": 178,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r10",
+        "r452",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0008",
+          "component_status": "unique",
+          "rows": [
+            10,
+            452
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r10",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r10",
+          "row_u": "",
+          "row_v": 10,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_full_cube_periodic_P0008"
+        },
+        {
+          "edge_id": "组3:INTERNAL:full_cube_periodic:j6",
+          "sheet": "组3",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r10",
+          "node_v": "r452",
+          "row_u": 10,
+          "row_v": 452,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组3_full_cube_periodic_P0008",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r452",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r452",
+          "node_v": "RIGHT",
+          "row_u": 452,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_full_cube_periodic_P0008",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组1",
+      "reconstruction_scenario": "thin_prism_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 12,
+      "particle_count": 7,
+      "residual_particle_count": 2,
+      "periodic_junction_count": 5,
+      "internal_edges_enabled": 0,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": false,
+      "conductive_possible": false,
+      "conclusion": "nonconductive",
+      "witness_row_nodes": null,
+      "witness_particle_path": null,
+      "witness_edges": []
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组2",
+      "reconstruction_scenario": "thin_prism_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 49,
+      "particle_count": 28,
+      "residual_particle_count": 4,
+      "periodic_junction_count": 21,
+      "internal_edges_enabled": 0,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r13",
+        "r14",
+        "r26",
+        "r41",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_thin_prism_periodic_P0011",
+          "component_status": "unique",
+          "rows": [
+            13
+          ]
+        },
+        {
+          "particle_id": "组2_thin_prism_periodic_P0012",
+          "component_status": "unique",
+          "rows": [
+            14
+          ]
+        },
+        {
+          "particle_id": "组2_thin_prism_periodic_P0021",
+          "component_status": "unique",
+          "rows": [
+            26
+          ]
+        },
+        {
+          "particle_id": "组2_thin_prism_periodic_P0010",
+          "component_status": "unique",
+          "rows": [
+            41
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r13",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r13",
+          "row_u": "",
+          "row_v": 13,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_thin_prism_periodic_P0011"
+        },
+        {
+          "edge_id": "组2:PAIR:r13:r14",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r13",
+          "node_v": "r14",
+          "row_u": 13,
+          "row_v": 14,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.985972445629906e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.2789769243681803e-12,
+          "slsqp_abs_difference_nm": 1.2789769243681803e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_thin_prism_periodic_P0011",
+          "particle_v": "组2_thin_prism_periodic_P0012"
+        },
+        {
+          "edge_id": "组2:PAIR:r14:r26",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r14",
+          "node_v": "r26",
+          "row_u": 14,
+          "row_v": 26,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.4410931306146347e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 4,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 5.123796534383003e-14,
+          "slsqp_abs_difference_nm": 5.123796534383003e-14,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_thin_prism_periodic_P0012",
+          "particle_v": "组2_thin_prism_periodic_P0021"
+        },
+        {
+          "edge_id": "组2:PAIR:r26:r41",
+          "sheet": "组2",
+          "edge_type": "cylinder_contact",
+          "node_u": "r26",
+          "node_v": "r41",
+          "row_u": 26,
+          "row_v": 41,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.9722499377516499e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.0064104835181445e-11,
+          "slsqp_abs_difference_nm": 1.0064104835181445e-11,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组2_thin_prism_periodic_P0021",
+          "particle_v": "组2_thin_prism_periodic_P0010"
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r41",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r41",
+          "node_v": "RIGHT",
+          "row_u": 41,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_thin_prism_periodic_P0010",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组3",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "disconnected_fragments",
+      "row_count": 535,
+      "particle_count": 357,
+      "residual_particle_count": 52,
+      "periodic_junction_count": 178,
+      "internal_edges_enabled": 0,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r65",
+        "r266",
+        "r218",
+        "r353",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0063",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            65
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0223",
+          "component_status": "unique",
+          "rows": [
+            266
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0191",
+          "component_status": "unique",
+          "rows": [
+            218
+          ]
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0296",
+          "component_status": "cannot_reconstruct",
+          "rows": [
+            353
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r65",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r65",
+          "row_u": "",
+          "row_v": 65,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_full_cube_periodic_P0063"
+        },
+        {
+          "edge_id": "组3:PAIR:r65:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r65",
+          "node_v": "r266",
+          "row_u": 65,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.5748551376950306e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 6.302189627392726e-12,
+          "slsqp_abs_difference_nm": 6.302189627392726e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0063",
+          "particle_v": "组3_full_cube_periodic_P0223"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r266",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r266",
+          "row_u": 218,
+          "row_v": 266,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 1.685150038897927e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 6,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 1.7053025658242404e-13,
+          "slsqp_abs_difference_nm": 1.7053025658242404e-13,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0191",
+          "particle_v": "组3_full_cube_periodic_P0223"
+        },
+        {
+          "edge_id": "组3:PAIR:r218:r353",
+          "sheet": "组3",
+          "edge_type": "cylinder_contact",
+          "node_u": "r218",
+          "node_v": "r353",
+          "row_u": 218,
+          "row_v": 353,
+          "electrode": "",
+          "capsule_lower_bound_nm": 0.0,
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 2.3341933865593414e-10,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "capsule_then_flat_cylinder_gjk",
+          "gjk_iterations": 5,
+          "gjk_converged": true,
+          "slsqp_check_gap_nm": 4.151126638648695e-12,
+          "slsqp_abs_difference_nm": 4.151126638648695e-12,
+          "slsqp_same_threshold_class": true,
+          "particle_u": "组3_full_cube_periodic_P0191",
+          "particle_v": "组3_full_cube_periodic_P0296"
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r353",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r353",
+          "node_v": "RIGHT",
+          "row_u": 353,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_full_cube_periodic_P0296",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组1",
+      "reconstruction_scenario": "thin_prism_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 12,
+      "particle_count": 7,
+      "residual_particle_count": 2,
+      "periodic_junction_count": 5,
+      "internal_edges_enabled": 5,
+      "physical_edges": 9,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r4",
+        "r12",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组1_thin_prism_periodic_P0002",
+          "component_status": "unique",
+          "rows": [
+            4,
+            12
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组1:ELECTRODE:LEFT:r4",
+          "sheet": "组1",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r4",
+          "row_u": "",
+          "row_v": 4,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组1_thin_prism_periodic_P0002"
+        },
+        {
+          "edge_id": "组1:INTERNAL:thin_prism_periodic:j2",
+          "sheet": "组1",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r4",
+          "node_v": "r12",
+          "row_u": 4,
+          "row_v": 12,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组1_thin_prism_periodic_P0002",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组1:ELECTRODE:RIGHT:r12",
+          "sheet": "组1",
+          "edge_type": "electrode_contact",
+          "node_u": "r12",
+          "node_v": "RIGHT",
+          "row_u": 12,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组1_thin_prism_periodic_P0002",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组2",
+      "reconstruction_scenario": "thin_prism_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 49,
+      "particle_count": 28,
+      "residual_particle_count": 4,
+      "periodic_junction_count": 21,
+      "internal_edges_enabled": 21,
+      "physical_edges": 49,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r11",
+        "r50",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组2_thin_prism_periodic_P0009",
+          "component_status": "unique",
+          "rows": [
+            11,
+            50
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组2:ELECTRODE:LEFT:r11",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r11",
+          "row_u": "",
+          "row_v": 11,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组2_thin_prism_periodic_P0009"
+        },
+        {
+          "edge_id": "组2:INTERNAL:thin_prism_periodic:j10",
+          "sheet": "组2",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r11",
+          "node_v": "r50",
+          "row_u": 11,
+          "row_v": 50,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组2_thin_prism_periodic_P0009",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组2:ELECTRODE:RIGHT:r50",
+          "sheet": "组2",
+          "edge_type": "electrode_contact",
+          "node_u": "r50",
+          "node_v": "RIGHT",
+          "row_u": 50,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组2_thin_prism_periodic_P0009",
+          "particle_v": "RIGHT"
+        }
+      ]
+    },
+    {
+      "scenario": "C_thin_12_full_3",
+      "sheet": "组3",
+      "reconstruction_scenario": "full_cube_periodic",
+      "internal_mode": "connected_same_particle",
+      "row_count": 535,
+      "particle_count": 357,
+      "residual_particle_count": 52,
+      "periodic_junction_count": 178,
+      "internal_edges_enabled": 178,
+      "physical_edges": 347,
+      "uncertain_physical_edges": 0,
+      "conductive_definite": true,
+      "conductive_possible": true,
+      "conclusion": "conductive",
+      "witness_row_nodes": [
+        "LEFT",
+        "r10",
+        "r452",
+        "RIGHT"
+      ],
+      "witness_particle_path": [
+        {
+          "node": "LEFT"
+        },
+        {
+          "particle_id": "组3_full_cube_periodic_P0008",
+          "component_status": "unique",
+          "rows": [
+            10,
+            452
+          ]
+        },
+        {
+          "node": "RIGHT"
+        }
+      ],
+      "witness_edges": [
+        {
+          "edge_id": "组3:ELECTRODE:LEFT:r10",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "LEFT",
+          "node_v": "r10",
+          "row_u": "",
+          "row_v": 10,
+          "electrode": "left",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "LEFT",
+          "particle_v": "组3_full_cube_periodic_P0008"
+        },
+        {
+          "edge_id": "组3:INTERNAL:full_cube_periodic:j6",
+          "sheet": "组3",
+          "edge_type": "same_particle_periodic_junction",
+          "node_u": "r10",
+          "node_v": "r452",
+          "row_u": 10,
+          "row_v": 452,
+          "electrode": "",
+          "gap_lower_nm": "",
+          "gap_upper_nm": "",
+          "gap_estimate_nm": "",
+          "classification": "internal_assumption",
+          "threshold_relation": "not_applicable_same_particle",
+          "method": "unique_periodic_endpoint_mapping",
+          "gjk_iterations": "",
+          "gjk_converged": "",
+          "capsule_lower_bound_nm": "",
+          "particle_id": "组3_full_cube_periodic_P0008",
+          "component_status": "unique",
+          "crossing_axes": "X",
+          "shift_x": 1,
+          "shift_y": 0,
+          "shift_z": 0,
+          "mapped_endpoint_residual_nm": 0.0,
+          "enabled": true
+        },
+        {
+          "edge_id": "组3:ELECTRODE:RIGHT:r452",
+          "sheet": "组3",
+          "edge_type": "electrode_contact",
+          "node_u": "r452",
+          "node_v": "RIGHT",
+          "row_u": 452,
+          "row_v": "",
+          "electrode": "right",
+          "gap_lower_nm": 0.0,
+          "gap_upper_nm": 0.0,
+          "gap_estimate_nm": 0.0,
+          "classification": "connected",
+          "threshold_relation": "gap<=1.8",
+          "method": "closed_form_cylinder_plane",
+          "gjk_iterations": 0,
+          "gjk_converged": true,
+          "capsule_lower_bound_nm": "",
+          "particle_u": "组3_full_cube_periodic_P0008",
+          "particle_v": "RIGHT"
+        }
+      ]
+    }
+  ]
+}

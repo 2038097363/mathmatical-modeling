@@ -1,0 +1,18 @@
+# Imagen 提示词：四问证据链底图
+
+用途：论文图 1 的非定量视觉底图。准确中文标签、数值和状态符号由本地绘图程序叠加；定量曲线、三维坐标和接触拓扑仍由正式计算程序生成。
+
+```text
+Use case: scientific-educational
+Asset type: full-width evidence-chain figure for a Chinese mathematical-modeling competition paper
+Primary request: Create a publication-grade, text-free scientific evidence-chain illustration showing how a random three-dimensional conductive microstructure becomes a contact graph and then produces deterministic, probabilistic, critical-threshold, and cost-optimization evidence.
+Scene/backdrop: pure white journal-paper background with generous outer margins; no atmospheric scene.
+Subject and scientific structure: use a precise 2-by-2 journal-figure composition connected by a restrained left-to-right and top-to-bottom evidence flow. Panel 1 shows an isometric transparent cubic micro-volume bounded by two dark graphite electrode planes on opposite faces. Inside it place several separated blue finite flat-ended cylinders and several muted rose spheres or spherical-cap fragments; show one visibly truncated fragment as an independent object, not reconnected. Panel 2 transforms the geometry into a clean contact network: circular nodes, thin gray edges, and one continuous high-contrast orange conducting path linking the two electrode bars. Include one subtle local distance-threshold glyph without any number or text. Panel 3 shows compact result motifs for three questions: three binary-state discs, a smooth S-shaped probability curve with point markers, and a short horizontal interval estimate with end caps. Panel 4 is larger and shows a descending cost frontier: dark-blue filled circles for resolved designs, orange hollow diamonds for unresolved boundary designs, and one green star for the selected confirmed design; also include a tiny stacked proportion bar for resolved versus unresolved cases. Along the bottom place a very thin validation ribbon with five simple pictograms for special-case construction, independent solver check, monotonicity check, independent random stream, and confidence-bound check.
+Style/medium: polished vector-like scientific infographic with subtle dimensional shading only on the microstructure; exact geometry feeling; editorial quality comparable to a top engineering journal graphical abstract; not a software dashboard.
+Composition/framing: wide landscape, approximately 16:9; balanced 2-by-2 panels with panel 4 slightly larger; use direct visual hierarchy, short orthogonal arrows, and generous whitespace. Keep clean empty label zones near each panel so accurate Chinese labels can be overlaid later.
+Lighting/mood: neutral soft studio lighting, quiet technical confidence.
+Color palette: navy blue #2457A7 for geometry and main process, teal #0B7A75 for confirmed conduction, orange #C46618 for thresholds and unresolved cases, dark charcoal #2F343B, very pale gray-blue #F7F9FC. No purple, no rainbow palette.
+Materials/textures: matte scientific-render materials, crisp flat-ended cylinders, translucent cube boundary, solid electrode slabs, clean network lines.
+Constraints: NO WORDS, NO LETTERS, NO NUMBERS, NO LEGEND TEXT, NO TITLE, NO WATERMARK. Do not invent extra particles, arrows, panels, axes, or icons beyond the requested evidence chain. Keep all symbols large enough to remain legible when printed at 16 cm width. Use color plus shape differences so the result survives grayscale printing.
+Avoid: decorative gradient backgrounds, glossy 3D dashboard cards, heavy shadows, rounded app-style cards, dense microtext, neon colors, dark background, clip-art look, perspective distortion, ambiguous edge crossings, continuous rainbow color maps.
+```

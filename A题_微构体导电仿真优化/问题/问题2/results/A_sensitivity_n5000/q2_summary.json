@@ -1,0 +1,151 @@
+{
+  "result_scope": "configured_monte_carlo_not_result_registry",
+  "question": 2,
+  "threshold_artifact": "C:\\Users\\23258\\Desktop\\华数杯\\A题_微构体导电仿真优化\\问题\\问题2\\results\\A_sensitivity_n5000\\threshold_samples.json",
+  "configuration_fingerprint": "64F24D71FB3E91B32846C28C05E6DAD71F07F91D6ACFAA10DD4BDBF6EE5CC60B",
+  "configuration": {
+    "schema_version": 1,
+    "algorithm_version": "flat-cylinder-periodic-numba-cached-v4",
+    "max_count": 720,
+    "trial_count": 5000,
+    "boundary_mode": "A",
+    "master_seed": 20260801,
+    "stream_id": 22,
+    "box_length_nm": 10000.0,
+    "cylinder_length_nm": 5000.0,
+    "cylinder_radius_nm": 30.0,
+    "contact_cutoff_nm": 1.8,
+    "cell_size_nm": 625.0,
+    "broad_phase_guard_nm": 1e-08,
+    "gjk_absolute_tolerance_nm": 1e-10,
+    "gjk_relative_tolerance": 1e-13,
+    "gjk_max_iterations": 512
+  },
+  "boundary_semantics": {
+    "mode": "A",
+    "role": "sensitivity_only",
+    "description": "三轴显式回绕，同源片段保持内部连接",
+    "implementation_limitations": [
+      "按题设中心线交点切段；各轴半径侧缘越界及斜切面未作完整三维布尔回绕"
+    ],
+    "global_minimum_image_adjacency": false,
+    "flat_cylinder_narrow_phase": true
+  },
+  "fixed_trial_count": 5000,
+  "censored_trials": 0,
+  "probability_records": [
+    {
+      "nominal_target_percent": 0.5,
+      "particle_count": 354,
+      "actual_discrete_volume_percent": 0.500455709716854,
+      "probability": {
+        "count": 354,
+        "successes": 5000,
+        "trials": 5000,
+        "estimate": 1.0,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.9992322980549431,
+          1.0
+        ],
+        "clopper_pearson_interval": [
+          0.9992624961988918,
+          1.0
+        ],
+        "wilson_one_sided_bounds": [
+          0.999459183949446,
+          1.0
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9994010329976851,
+          1.0
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.6,
+      "particle_count": 424,
+      "actual_discrete_volume_percent": 0.5994158783049325,
+      "probability": {
+        "count": 424,
+        "successes": 5000,
+        "trials": 5000,
+        "estimate": 1.0,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.9992322980549431,
+          1.0
+        ],
+        "clopper_pearson_interval": [
+          0.9992624961988918,
+          1.0
+        ],
+        "wilson_one_sided_bounds": [
+          0.999459183949446,
+          1.0
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9994010329976851,
+          1.0
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 0.7,
+      "particle_count": 495,
+      "actual_discrete_volume_percent": 0.6997897635871263,
+      "probability": {
+        "count": 495,
+        "successes": 5000,
+        "trials": 5000,
+        "estimate": 1.0,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.9992322980549431,
+          1.0
+        ],
+        "clopper_pearson_interval": [
+          0.9992624961988918,
+          1.0
+        ],
+        "wilson_one_sided_bounds": [
+          0.999459183949446,
+          1.0
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9994010329976851,
+          1.0
+        ]
+      }
+    },
+    {
+      "nominal_target_percent": 1.0,
+      "particle_count": 707,
+      "actual_discrete_volume_percent": 0.9994977027395926,
+      "probability": {
+        "count": 707,
+        "successes": 5000,
+        "trials": 5000,
+        "estimate": 1.0,
+        "confidence": 0.95,
+        "wilson_interval": [
+          0.9992322980549431,
+          1.0
+        ],
+        "clopper_pearson_interval": [
+          0.9992624961988918,
+          1.0
+        ],
+        "wilson_one_sided_bounds": [
+          0.999459183949446,
+          1.0
+        ],
+        "clopper_pearson_one_sided_bounds": [
+          0.9994010329976851,
+          1.0
+        ]
+      }
+    }
+  ],
+  "wall_runtime_seconds": 190.09052639998845
+}

@@ -1,0 +1,118 @@
+\documentclass[UTF8,zihao=-4,fontset=windows,a4paper]{ctexart}
+
+\usepackage{amsmath,amssymb,bm,mathtools}
+\usepackage{booktabs,array,tabularx,longtable,multirow}
+\usepackage{graphicx,float,caption,subcaption,placeins}
+\usepackage{geometry,xcolor,hyperref,fancyhdr}
+\usepackage{enumitem,xurl}
+\usepackage{fvextra}
+\usepackage{needspace}
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headheight=0pt,headsep=0pt,footskip=0.75cm}
+\graphicspath{{./}}
+\setmainfont{Times New Roman}
+\setmonofont{Consolas}
+\setCJKmainfont{SimSun}[BoldFont=SimHei]
+\setCJKsansfont{SimHei}[AutoFakeBold=2]
+\setCJKmonofont{FangSong}[AutoFakeBold=2]
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.0}\selectfont
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{5pt}
+\setlist{nosep,leftmargin=2.3em}
+\setcounter{secnumdepth}{0}
+
+\ctexset{
+  section={format=\centering\heiti\zihao{4},beforeskip=0.9em,afterskip=0.55em},
+  subsection={format=\raggedright\heiti\zihao{-4},beforeskip=0.65em,afterskip=0.35em},
+  subsubsection={format=\raggedright\songti\bfseries\zihao{-4},beforeskip=0.45em,afterskip=0.25em}
+}
+
+\captionsetup{font=small,labelsep=quad,skip=4pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{9pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 1pt minus 1pt}
+\renewcommand{\topfraction}{0.92}
+\renewcommand{\bottomfraction}{0.82}
+\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.78}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+
+\definecolor{mainblue}{RGB}{25,91,132}
+\definecolor{safe}{RGB}{0,122,112}
+\definecolor{danger}{RGB}{203,66,53}
+\hypersetup{
+  hidelinks,
+  pdfauthor={},
+  pdftitle={基于随机几何接触图与精确置信界的微构体导电优化},
+  pdfsubject={},
+  pdfkeywords={}
+}
+\urlstyle{same}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\CoverTopCell}[1]{\parbox[c][0.55cm][c]{\linewidth}{\centering\songti\zihao{5} #1}}
+\newcommand{\CoverBottomCell}[1]{\parbox[c][1.34cm][c]{\linewidth}{\centering\songti\zihao{5} #1}}
+\newcommand{\TemplateMatterHeading}[1]{%
+  \par\addvspace{0.8em}%
+  {\noindent\songti\bfseries\zihao{-4} #1\par}%
+  \vspace{0.35em}%
+}
+\renewenvironment{abstract}{\par}{\par}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\InputIfFileExists{build_meta.tex}{}{%
+  \PackageError{paper}{Missing build_meta.tex}{Run python paper/src/build_latex.py first}}
+
+\begin{document}
+\pagenumbering{arabic}
+\thispagestyle{fancy}
+
+\noindent
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.167\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{0.15\textwidth}|}
+\hline
+\CoverTopCell{所属类别} & \multirow{2}{=}{\centering\heiti\zihao{4}\bfseries 2026 年“华数杯”大学生数学建模竞赛} & \CoverTopCell{参赛编号} \\
+\cline{1-1}\cline{3-3}
+\CoverBottomCell{\PaperGroup} & & \CoverBottomCell{\PaperCompetitionId} \\
+\hline
+\end{tabularx}
+
+\PaperBuildNotice
+
+\vspace{0.45cm}
+\begin{center}
+  {\heiti\fontsize{15pt}{18pt}\selectfont\bfseries 基于随机几何接触图与精确置信界的微构体导电优化\par}
+  \vspace{0.65cm}
+  {\heiti\zihao{4}\bfseries 摘\quad{}要\par}
+\end{center}
+
+\vspace{0.25cm}
+\begin{abstract}
+增加导电填料能够提高介质相互接近的机会，却也会直接推高材料成本；真正决定微构体能否导通的，是随机分散的介质能否在有限空间内连成跨越两电极的完整接触链。介质形状、边界截断和随机波动都会改变这条链的形成，仅凭名义填充量或少量构型难以作出可靠设计。针对题给圆柱/球形介质填充问题，本文将截断后的每个片段视为独立凸体，以 $1.8\,\mathrm{nm}$ 间距建立三维随机几何接触图，并以 GJK 距离上下界、并查集、路径见证和精确二项置信界构成从几何判定、概率估计到成本优化的统一可复核模型。
+
+\textbf{针对问题一，}三组附件微构体的结论依次为\textbf{不导通、导通、导通}；$144087$ 个粒子对中仅 $195$ 对进入凸体窄相判定，且与独立约束优化校验的阈值分类完全一致。
+
+\textbf{针对问题二，}使用固定随机流的共同粒子前缀和 $20000$ 次 Monte Carlo 试验，得到 $0.50\%$、$0.60\%$、$0.70\%$ 和 $1.00\%$ 填充量下的导通概率分别为 $\mathbf{7.895\%}$、$\mathbf{22.050\%}$、$\mathbf{47.195\%}$ 和 $\mathbf{99.280\%}$，Wilson 区间与分块复算表明贯通跃迁位置稳定。
+
+\textbf{针对问题三，}将整数填充量视为概率约束优化，对探索后冻结的候选用 $50000$ 个独立样本构造 Bonferroni--Clopper--Pearson 联合精确界。在联合 $95\%$ 置信和题定 $0.01$ 个百分点精度下，最低填充量为 $\mathbf{0.87\%}$；唯一最小粒子数尚未区分，其联合置信区间为 $\mathbf{613\le N_A^\star\le616}$。
+
+\PaperQFourAbstract
+
+模型可信度按三个层级检验：几何层以 $195$ 个窄相候选的 SLSQP 独立复算、距离界和逐边见证核验接触判定，阈值分类分歧为 0；随机层以互不重叠样本块、Wilson 与 Clopper--Pearson 区间对照及固定种子复现检验模拟稳定性；优化层将探索流与确认流分离，并分别对问题三的 18 个、问题四的 620 个单侧陈述控制族错误率。三层检验分别约束几何误判、抽样波动与多重筛选偏差，使关键结论均可追溯到确定的代码、随机流和机器结果。综合四问，本文在题定随机机制和截断片段独立口径下给出了从确定性导通、概率跃迁到成本选择的闭环答案；现有证据最终形成保守可行成本上界、成本证据区间和待确认边界集，并给出后续追加样本的明确对象与顺序。
+\end{abstract}
+
+\noindent\textbf{关键词：}随机几何图；连通渗流；GJK 距离；Monte Carlo 仿真；Clopper--Pearson 精确界；概率约束优化
+
+\clearpage
+\input{content.tex}
+
+\end{document}

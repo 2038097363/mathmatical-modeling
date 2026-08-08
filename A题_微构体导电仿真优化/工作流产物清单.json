@@ -1,0 +1,178 @@
+{
+  "manifest_schema_version": 1,
+  "policy": {
+    "mode": "adaptive",
+    "allow_rename": true,
+    "allow_merge": true,
+    "allow_split": true,
+    "allow_format_change": true,
+    "note": "保留信息能力，不固定文件名、列名、格式或文件数量。"
+  },
+  "artifacts": [
+    {
+      "id": "rules_delivery",
+      "purpose": "保存官方原件、哈希、格式规则和提交物检查清单",
+      "required_gate": "G0",
+      "applicability": "applicable",
+      "paths": [
+        "00_赛题与附件/原始文件清单.md",
+        "00_赛题与附件/提交与格式检查清单.md",
+        "00_赛题与附件/题面事实与歧义.md",
+        "00_赛题与附件/格式审计证据.md"
+      ]
+    },
+    {
+      "id": "ai_usage",
+      "purpose": "按竞赛章程记录 AI 工具、用途、关键交互、采纳和人工复核",
+      "required_gate": "G0",
+      "applicability": "applicable",
+      "paths": [
+        "AI工具使用记录.md"
+      ]
+    },
+    {
+      "id": "problem_map",
+      "purpose": "明确各问输入、数学任务、输出、依赖、证据需求和验证路线",
+      "required_gate": "G1",
+      "applicability": "applicable",
+      "paths": [
+        "研究路线与问题依赖.md",
+        "问题/问题*/问题分析.md"
+      ]
+    },
+    {
+      "id": "literature_evidence",
+      "purpose": "记录真正采用或排除的机制、参数、方法和验证资料",
+      "required_gate": "G2",
+      "applicability": "applicable",
+      "reason": "本题边界、连续渗流与统计区间需要一手文献证据，S001-S023 已完成并采用。",
+      "paths": [
+        "01_资料检索/检索与证据记录.md"
+      ]
+    },
+    {
+      "id": "data_parameter_audit",
+      "purpose": "审计题给/外部数据、常数和参数，或说明无需数据",
+      "required_gate": "G2",
+      "applicability": "applicable",
+      "paths": [
+        "02_数据与参数/数据与参数审计.md",
+        "02_数据与参数/附件审计.json",
+        "02_数据与参数/src/reconstruct_segments.py",
+        "02_数据与参数/processed/reconstruction_results.json",
+        "02_数据与参数/processed/reconstruction_report.md",
+        "02_数据与参数/processed/row_identity_map.csv",
+        "02_数据与参数/processed/junctions.csv"
+      ]
+    },
+    {
+      "id": "formulation",
+      "purpose": "给出系统边界、变量、假设、关系式、边界条件和检查",
+      "required_gate": "G3",
+      "applicability": "applicable",
+      "paths": [
+        "03_机理与推导/系统边界与机理链.md",
+        "问题/问题*/数学推导.md"
+      ]
+    },
+    {
+      "id": "model_decision",
+      "purpose": "记录基线、候选升级条件、公平比较协议、验证证据和最终选择边界",
+      "required_gate": "G3",
+      "applicability": "applicable",
+      "paths": [
+        "03_机理与推导/模型选择记录.md"
+      ]
+    },
+    {
+      "id": "implementation_trace",
+      "purpose": "连接变量、参数、方程、假设、代码、输入输出与测试",
+      "required_gate": "G4",
+      "applicability": "applicable",
+      "paths": [
+        "03_机理与推导/变量参数与实现映射.md",
+        "问题/问题*/计算模型与实现.md",
+        "公共代码/geometry_kernel.py",
+        "公共代码/fast_geometry.py",
+        "公共代码/microstructure_sim.py",
+        "公共代码/mixed_microstructure_sim.py",
+        "问题/问题1/src/solve.py",
+        "问题/问题2/src/solve.py",
+        "问题/问题3/src/solve.py",
+        "问题/问题4/src/solve.py"
+      ]
+    },
+    {
+      "id": "validation",
+      "purpose": "为论文关键结论建立独立、题型适配的验证及接受标准",
+      "required_gate": "G5",
+      "applicability": "applicable",
+      "paths": [
+        "04_验证与拓展/验证计划.md",
+        "问题/问题*/验证与拓展.md",
+        "tests/test_geometry_kernel.py",
+        "tests/test_reconstruction.py",
+        "tests/test_q1_solver.py",
+        "问题/问题1/results/independent_slsqp_validation.csv",
+        "问题/问题1/results/witness_path_edges.csv"
+      ]
+    },
+    {
+      "id": "claim_evidence",
+      "purpose": "连接关键结论、证据、接受标准、适用边界与局限",
+      "required_gate": "G5",
+      "applicability": "applicable",
+      "paths": [
+        "结论与证据记录.md"
+      ]
+    },
+    {
+      "id": "result_registry",
+      "purpose": "冻结论文关键数值及其来源",
+      "required_gate": "G6",
+      "applicability": "applicable",
+      "paths": [
+        "结果注册表.json"
+      ]
+    },
+    {
+      "id": "figure_trace",
+      "purpose": "记录每图的证据任务、生成方式、来源、结论和五类审核结果",
+      "required_gate": "G6",
+      "applicability": "applicable",
+      "reason": "用户明确要求三维建模与绘图；Q1 FreeCAD 模型/渲染及后续概率与成本图均需追踪。",
+      "paths": [
+        "图表设计与来源.md",
+        "论文/图表审核记录.md"
+      ]
+    },
+    {
+      "id": "paper",
+      "purpose": "形成规则一致、内容完整且逐页审核过的论文",
+      "required_gate": "G7",
+      "applicability": "applicable",
+      "reason": "用户明确指定 LaTeX/XeLaTeX PDF 为权威论文；官方 DOCX 模板只用于格式参数和版式对照。",
+      "paths": [
+        "论文/内容稿.md",
+        "论文/main.tex",
+        "论文/src/build_latex.py",
+        "论文/generated/results.tex",
+        "论文/A题论文_当前审阅稿_LaTeX.pdf",
+        "论文/A题论文_正文便阅稿_LaTeX.pdf",
+        "论文/论文检查清单.md"
+      ]
+    },
+    {
+      "id": "delivery",
+      "purpose": "提供完整可复现代码和白名单支撑材料",
+      "required_gate": "G8",
+      "applicability": "applicable",
+      "paths": [
+        "支撑材料配置.json",
+        "提交源码/source-manifest.json",
+        "支撑材料内容/SHA256SUMS.txt",
+        "A*附件.zip"
+      ]
+    }
+  ]
+}

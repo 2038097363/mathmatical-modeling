@@ -1,0 +1,904 @@
+\hypertarget{ux4e00ux95eeux9898ux91cdux8ff0}{%
+\section{一、问题重述}\label{ux4e00ux95eeux9898ux91cdux8ff0}}
+
+本文研究随机分布的导电介质能否在有限微构体内部形成一条连接两侧电极的连续通路。计算域为 边长 \(10000\ \mathrm{nm}\) 的立方体，两相对的 \(x\) 向端面为带电面，其余空间由绝缘溶剂占据。 介质 A 是轴长 \(5000\ \mathrm{nm}\)、底面半径 \(30\ \mathrm{nm}\) 的直圆柱，介质 B 是半径 \(200\ \mathrm{nm}\) 的球。任意两个导电实体，或导电实体与带电面之间的集合最短距离不超过 \(1.8\ \mathrm{nm}\)，即认为二者电学接触。介质允许相交、贯穿和重叠；实体越出计算域时， 只将实际越界部分按题设边界规则映回基础立方体，并将所得截断片段分别视为独立介质。
+
+在这一统一几何与接触定义下，需要完成以下四项任务：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  由附件给出的轴线端点重建三组有限圆柱，逐组判断左右电极是否导通，并给出可核查的贯通路径；
+\item
+  仅填充介质 A 时，在 \(0.50\%,0.60\%,0.70\%,1.00\%\) 四个名义体积分数下估计导通概率；
+\item
+  在真实导通概率不低于 \(90\%\) 的约束下，确定全 A 微构体的最低填充量；
+\item
+  同时填充 A、B 时，在相同概率约束下寻求成本尽可能低的整数配比，并说明有限样本能够支持的结论边界。
+\end{enumerate}
+
+四问的输入形式虽分别为确定坐标、随机填充量和整数设计变量，但输出都取决于同一个二值事件： 接触网络中左右电极是否位于同一连通分量。因此，先建立可信的三维接触图，再在确定性、概率 估计和概率约束优化三个层次上调用该图模型，是全文的主线。
+
+\hypertarget{ux4e8cux95eeux9898ux5206ux6790}{%
+\section{二、问题分析}\label{ux4e8cux95eeux9898ux5206ux6790}}
+
+四问共同的数学核心是把``空间实体的接近或相交''转换为``图上的电极贯通''。若直接对每一对 实体求高精度三维距离，计算量会随粒子数平方增长；若把长圆柱简化成轴线或胶囊，又可能在 \(1.8\ \mathrm{nm}\) 的小阈值附近产生错误接触。因此模型必须同时回答三个问题：如何不漏掉 可能接触的实体对，如何可靠地区分阈值两侧，以及如何从局部接触推出全局贯通。
+
+本文采用``安全宽相筛选---凸体窄相判定---图连通搜索''的统一路线。宽相只排除必不接触的粒子 对，不作最终接触结论；窄相保持有限平底圆柱的真实凸几何，并返回距离上下界；所有确定接触 边进入无向图后，再由并查集判断左右电极是否连通。各问的数学对象、输出和验证重点如下。
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{四个问题的数学任务与证据路线}\tabularnewline
+\toprule
+问题 & 数学任务 & 关键证据 \\
+\midrule
+\endfirsthead
+\toprule
+问题 & 数学任务 & 关键证据 \\
+\midrule
+\endhead
+一 & 确定几何与图连通 & 距离界、路径和独立复核 \\
+二 & 伯努利期望估计 & 共同前缀、分块和概率区间 \\
+三 & 一维整数概率约束 & 独立样本与联合单侧检验 \\
+四 & 二维整数成本优化 & 非支配前沿与完整域审计 \\
+\bottomrule
+\end{longtable}
+
+\textbf{针对问题一}，附件每行已经给出一个有限片段的轴线端点。由端点可唯一得到片段中心、方向 和实际轴长，因而本问不需要统计拟合，而是确定性地枚举潜在接触边。有限平底圆柱沿轴向的端面 与胶囊的半球端部不同，尤其在端面对端构型中，胶囊距离最多会低估两个半径。故本文只把胶囊 当作安全排除下界，最终以支持映射和 GJK 距离界判定接触{[}1{]}；对导通组再恢复一条由附件行号 组成的电极间路径，使``导通''不只是一个黑箱布尔值。
+
+\textbf{针对问题二}，需要先明确随机试验。本文令不同介质的中心在立方体内独立均匀分布，A 的 轴向服从球面各向同性分布，并允许粒子重叠。随机杆的贯通尺度受长径比和方向分布影响{[}2{]}； 有限盒的跨电极事件还取决于本文边界定义。随机球模型必须明确球心点过程与接触、重叠成簇 规则{[}3{]}。因此已有无限体系的临界数值不能直接代入本题。本文直接生成有限盒内的随机几何图， 把每个微构体是否导通记为伯努利变量。借鉴 Newman--Ziff 逐个激活节点并增量维护连通簇的思想{[}4{]}，同一试验只生成一次最大粒子前缀， 记录首次导通粒子数，即可同时回答四个填充量，并从算法结构上保证概率随粒子数不下降。
+
+\textbf{针对问题三}，决策变量是整数 \(N_A\)，约束却是未知真实概率 \(p_A(N_A)\ge0.90\)。经验比例 首次超过 \(90\%\) 只能定位临界区，不能证明最小性。因此探索数据仅用于冻结有限候选集，正式 确认使用独立、预先固定规模的样本；Wilson 区间用于描述比例不确定性{[}5{]}，相邻整数的最终 分类则采用 Clopper--Pearson 单侧精确限{[}6{]}和 Bonferroni 联合校正{[}7{]}。固定样本量还避免把 普通固定时点区间误作任意停止仍有效的置信序列{[}8{]}。
+
+\textbf{针对问题四}，决策变量扩展为非负整数对 \((N_A,N_B)\)。每条左右路径所需的最大 A 序号和 最大 B 序号形成一个二维激活标签；保留其中不被其他标签同时压低的非支配前沿，便可在一次 最大构图后回答整个成本有界整数域。成本比进一步化为整数权重，以避免浮点排序误差。最终 证据区分``候选统计可行''和``所有更便宜设计均被排除''两个层次，不把前者自动写成全局最优。
+
+图 \ref{fig:model-workflow} 汇总了四问共用的计算对象与相互校验关系。它不是额外的概念示意， 而是程序执行顺序的压缩表达：几何实体先经过同一距离核生成接触图，问题一直接读取确定性 连通，问题二至四再分别叠加概率估计、一维临界判断和二维成本约束。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.96\textwidth]{figures/generated/model_workflow.pdf}
+  \caption{从三维几何到概率约束优化的统一证据链。四个分问共享同一几何与图模型，但分别采用与任务相匹配的确定性、概率和优化验证；图由正式程序按项目流程生成。}
+  \label{fig:model-workflow}
+\end{figure}
+
+\hypertarget{ux4e09ux6a21ux578bux5047ux8bbeux4e0eux7b26ux53f7ux8bf4ux660e}{%
+\section{三、模型假设与符号说明}\label{ux4e09ux6a21ux578bux5047ux8bbeux4e0eux7b26ux53f7ux8bf4ux660e}}
+
+\hypertarget{ux6a21ux578bux5047ux8bbe}{%
+\subsection{3.1 模型假设}\label{ux6a21ux578bux5047ux8bbe}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  以立方体中心为坐标原点，左右电极分别为 \(x=-L/2\) 与 \(x=L/2\) 两个端面；绝缘溶剂不 形成图节点，其他四个盒面不作为电极。
+\item
+  不同介质相互独立。实体越界后，仅将实际越界部分映回基础立方体；每个截断片段均作为 独立介质节点，不因来自同一原实体而额外增加内部连接边。
+\item
+  问题二至四中，各介质中心独立服从 \(\Omega\) 上的均匀分布。介质 A 的方位角均匀， \(\cos\theta\) 在 \([-1,1]\) 上均匀，即其轴向在单位球面上各向同性。
+\item
+  介质允许相交、贯穿和重叠，不进行硬核排斥采样；体积分数按所有原始粒子的名义体积之和 计算，不扣除重叠体积，也不因边界截断重新计量。
+\item
+  导通仅表示存在一条由距离阈值接触构成的左右通路。题目没有给出电阻率、接触电阻、电压 或隧穿衰减关系，故不建立电流场方程，也不比较不同通路的等效电阻。
+\item
+  两实体间距离等于 \(1.8\ \mathrm{nm}\) 时归入接触；数值计算必须由距离上下界明确落在阈值 同一侧，区间跨越阈值时继续收紧精度，不能用区间中点猜测。
+\item
+  A 的随机仿真按圆柱中心线与盒面交点切段，并将各段表示为有限平底圆柱。该表示没有重建 半径侧缘越界和斜切面形成的完整布尔交边界，因此概率结论限于这一明确、可复现的几何近似。
+\end{enumerate}
+
+\hypertarget{ux4e3bux8981ux7b26ux53f7}{%
+\subsection{3.2 主要符号}\label{ux4e3bux8981ux7b26ux53f7}}
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{主要符号及定义}\tabularnewline
+\toprule
+符号 & 含义 & 单位 \\
+\midrule
+\endfirsthead
+\toprule
+符号 & 含义 & 单位 \\
+\midrule
+\endhead
+\(\Omega=[-L/2,L/2]^3\) & 微构体计算域，\(L=10000\) & \(\mathrm{nm}\) \\
+\(E_L,E_R\) & 左右带电面 \(x=\mp L/2\) & - \\
+\(p_i^-,p_i^+,c_i,u_i,\ell_i\) & 第 \(i\) 个圆柱的轴端点、中心、单位方向和轴长 & \(\mathrm{nm}\)，- \\
+\(C_i\) & 由第 \(i\) 个片段形成的有限平底圆柱集合 & - \\
+\(r_A,\ell_A\) & A 的半径与轴长，分别为 \(30,5000\) & \(\mathrm{nm}\) \\
+\(r_B\) & B 的半径，\(r_B=200\) & \(\mathrm{nm}\) \\
+\(\delta\) & 接触阈值，\(\delta=1.8\) & \(\mathrm{nm}\) \\
+\(N_A,N_B\) & 两类介质的粒子数 & 个 \\
+\(d_{ij}\) & 两个有限实体的集合最短距离 & \(\mathrm{nm}\) \\
+\(G=(V,E)\) & 介质片段与电极构成的无向接触图 & - \\
+\(Y_s\) & 第 \(s\) 个微构体的导通指标 & - \\
+\(p,\widehat p\) & 真实导通概率与蒙特卡洛估计 & - \\
+\(T_s\) & 第 \(s\) 个全 A 序列的首次导通粒子数 & 个 \\
+\(n,k_N\) & 固定试验数与前缀 \(N\) 下的导通次数 & 次 \\
+\(z_{0.975}\) & 标准正态分布的 \(97.5\%\) 分位数 & - \\
+\(C,W\) & 总成本与精确整数成本权重 & 元，- \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{ux56dbux968fux673aux51e0ux4f55ux63a5ux89e6ux56feux6a21ux578b}{%
+\section{四、随机几何接触图模型}\label{ux56dbux968fux673aux51e0ux4f55ux63a5ux89e6ux56feux6a21ux578b}}
+
+\hypertarget{ux6709ux9650ux5706ux67f1ux4e0eux7535ux6781ux8dddux79bb}{%
+\subsection{4.1 有限圆柱与电极距离}\label{ux6709ux9650ux5706ux67f1ux4e0eux7535ux6781ux8dddux79bb}}
+
+附件第 \(i\) 行给出轴线端点 \(p_i^-,p_i^+\)。由此重建片段的实际轴长、中心和方向：
+
+\[
+\ell_i=\|p_i^+-p_i^-\|,\qquad
+c_i=\frac{p_i^-+p_i^+}{2},\qquad
+u_i=\frac{p_i^+-p_i^-}{\ell_i},
+\]
+
+则该行对应的有限平底圆柱为
+
+\[
+C_i=\left\{c_i+t u_i+v:\ |t|\le \frac{\ell_i}{2},\ v\cdot u_i=0,
+\ \|v\|\le r_A\right\}.
+\]
+
+这里的端面是与 \(u_i\) 垂直的圆盘，因而不能把 \(C_i\) 直接替换为以轴段为骨架、两端为半球的 胶囊体。为在不离散曲面的情况下计算凸体距离，引入\textbf{支持映射}：给定方向 \(q\)，返回凸体在 该方向投影最远的点。有限圆柱的支持点可写为
+
+\[
+s_{C_i}(q)=c_i+\frac{\ell_i}{2}\operatorname{sgn}(q\cdot u_i)u_i
++r_A\frac{q-(q\cdot u_i)u_i}{\|q-(q\cdot u_i)u_i\|},
+\]
+
+当 \(q\) 在圆盘平面内的分量为零时，最后一项取零。两个凸体的最短距离等于其 Minkowski 差集 \(C_i-C_j\) 到原点的距离。GJK（Gilbert--Johnson--Keerthi）算法只调用两个实体的支持映射， 用至多四个点组成的单纯形逐步逼近差集上离原点最近的位置{[}1{]}，因此避免了三角网格精度对 \(1.8\ \mathrm{nm}\) 判定的影响。设当前单纯形内离原点最近点为 \(p\)，沿 \(-p\) 方向取得的新支持 点为 \(s\)，支持超平面给出
+
+\[
+\max\!\left(0,\frac{p\cdot s}{\|p\|}\right)\le d(C_i,C_j)\le \|p\|.
+\]
+
+右端来自当前可行点，左端来自支持平面。若上界 \(U\le\delta\)，则必定接触；若下界 \(L_b>\delta\)，则必定分离；只有 \(L_b\le\delta<U\) 时才继续迭代和收紧容差。
+
+GJK 属于计算量较高的\textbf{窄相}，即对少量候选对作最终几何判定。进入窄相前先执行\textbf{宽相}： 轴对齐包围盒或空间网格只找邻近候选；对候选轴段计算胶囊间隙
+
+\[
+d_{ij}^{\mathrm{cap}}=\max\{0,d([p_i^-,p_i^+],[p_j^-,p_j^+])-2r_A\}.
+\]
+
+由于平底圆柱包含于相应胶囊体，必有 \(d_{ij}^{\mathrm{cap}}\le d(C_i,C_j)\)。所以仅当 \(d_{ij}^{\mathrm{cap}}>\delta\) 时可安全排除；胶囊接触不能反推平底圆柱接触。这一``宽相不漏、 窄相定性''的分工同时兼顾效率和阈值可靠性。
+
+圆柱在 \(x\) 轴上的投影半宽为
+
+\[
+a_i=\frac{\ell_i}{2}|u_{ix}|+r_A\sqrt{1-u_{ix}^2},
+\]
+
+故其 \(x\) 投影为 \([c_{ix}-a_i,c_{ix}+a_i]\)。令电极坐标为 \(x_e\)，圆柱到电极的间隙为
+
+\[
+d(C_i,E_e)=\max\{0,|c_{ix}-x_e|-a_i\}.
+\]
+
+边界片段均位于基础盒内，因此这一投影距离也就是到相应有限端面的距离，可直接判断电极边， 无须为虚拟电极调用 GJK。
+
+\hypertarget{ux8fb9ux754cux7247ux6bb5ux4e0eux63a5ux89e6ux56fe}{%
+\subsection{4.2 边界片段与接触图}\label{ux8fb9ux754cux7247ux6bb5ux4e0eux63a5ux89e6ux56fe}}
+
+对任一越界实体，以中心线与盒面的交点分段；保留盒内段，将实际越界段沿对应坐标方向平移 一个盒长后映回 \(\Omega\)。若同时跨越多个坐标面，则按各坐标分段和映射。映回后的每个片段 独立成为图节点，片段间使用基础域内的直接欧氏距离；未发生实际越界的两个独立介质不使用 最小镜像距离补边。
+
+设介质节点集合为 \(V_M\)，接触图定义为
+
+\[
+G=(V,E),\qquad V=V_M\cup\{E_L,E_R\},
+\]
+
+\[
+E=\{(i,j):d_{ij}\le\delta\}\cup
+\{(i,E_e):d(C_i,E_e)\le\delta\}.
+\]
+
+因此微构体导通当且仅当
+
+\[
+\operatorname{find}(E_L)=\operatorname{find}(E_R).
+\]
+
+这里的 \(\operatorname{find}\) 来自\textbf{并查集}：每个节点初始自成集合，发现接触边时合并两个 集合；路径压缩和按集合大小合并使一次查找或合并的均摊代价近似常数。并查集只回答``是否 连通''，不保存一条可读路径，所以在需要见证时，再在同一确定边集上作广度优先搜索（BFS）， 由前驱指针反向恢复 \(E_L\) 到 \(E_R\) 的最短边数路径。
+
+\begin{longtable}[]{@{}rl@{}}
+\caption{确定性接触图的判定伪代码}\tabularnewline
+\toprule
+步骤 & 确定性接触图判定伪代码 \\
+\midrule
+\endfirsthead
+\toprule
+步骤 & 确定性接触图判定伪代码 \\
+\midrule
+\endhead
+输入 & 有限实体集合、左右电极和阈值 \(\delta\) \\
+1 & 为每个实体计算包围盒、胶囊下界和电极投影，建立电极接触边 \\
+2 & 枚举宽相候选；若安全下界大于 \(\delta\)，跳过该对 \\
+3 & 对剩余候选调用 GJK；仅在距离上界不超过 \(\delta\) 时加入接触边 \\
+4 & 每加入一条边即在并查集中合并两端节点 \\
+5 & 比较 \(E_L,E_R\) 的根；若相同，则在确定边集上用 BFS 恢复见证路径 \\
+输出 & 导通布尔值、接触边审计和可选的电极间见证路径 \\
+\bottomrule
+\end{longtable}
+
+若共有 \(M\) 个片段，直接全对宽相的最坏复杂度为 \(O(M^2)\)；设仅 \(K\) 对进入 GJK、每对最多 迭代 \(I\) 次，则窄相为 \(O(KI)\)。并查集处理全部节点和边为 \(O((M+|E|)\alpha(M))\)，其中 \(\alpha\) 是增长极慢的反 Ackermann 函数；BFS 为 \(O(M+|E|)\)。随机大样本中再用空间哈希缩小 \(K\)，但不改变最坏情形阶数。
+
+\hypertarget{ux968fux673aux751fux6210ux4e0eux5171ux540cux524dux7f00}{%
+\subsection{4.3 随机生成与共同前缀}\label{ux968fux673aux751fux6210ux4e0eux5171ux540cux524dux7f00}}
+
+对第 \(s\) 次试验独立生成中心 \(c_i\sim U(\Omega)\)。介质 A 的各向同性方向取
+
+\[
+\varphi\sim U[0,2\pi),\quad \mu=\cos\theta\sim U[-1,1],\quad
+u=(\sqrt{1-\mu^2}\cos\varphi,\sqrt{1-\mu^2}\sin\varphi,\mu).
+\]
+
+均匀抽取 \(\theta\) 本身会在两极聚集，均匀抽取 \(\mu=\cos\theta\) 才能使单位球面面积元上的 概率密度恒定。所有随机量由固定根种子、独立流编号、试验编号和变量类别共同派生；因而每个 trial 的随机输入只由其稳定编号决定，与进程调度、分片大小和续跑顺序无关。
+
+对同一 trial，先生成最大粒子数的有序序列，再令前 \(N\) 个原始粒子构成规模为 \(N\) 的微构体。 新增粒子可能产生新片段、新电极边和新粒子间边，但不会删除旧图中的节点或边，故导通事件关于 \(N\) 单调不减。定义
+
+\[
+Y_s(N)=\mathbf 1\{E_L\leftrightarrow E_R\text{ in }G_s(N)\},\qquad
+T_s=\inf\{N:Y_s(N)=1\}.
+\]
+
+则 \(Y_s(N)=\mathbf 1\{T_s\le N\}\)。所谓\textbf{共同随机前缀}，就是同一 trial 的多个填充量共用 同一条粒子序列，而不是分别生成四个互不相关的微构体。这样既减少重复几何计算，又保证样本级 \(Y_s(354)\le Y_s(424)\le Y_s(495)\le Y_s(707)\)。固定 \(n\) 个独立试验后，
+
+\[
+k_N=\sum_{s=1}^n\mathbf 1\{T_s\le N\},\qquad
+\widehat p_A(N)=\frac{k_N}{n}.
+\]
+
+\begin{longtable}[]{@{}rl@{}}
+\caption{共同随机前缀蒙特卡洛伪代码}\tabularnewline
+\toprule
+步骤 & 全 A 共同前缀模拟伪代码 \\
+\midrule
+\endfirsthead
+\toprule
+步骤 & 全 A 共同前缀模拟伪代码 \\
+\midrule
+\endhead
+输入 & 最大粒子数 \(N_{\max}\)、固定试验数 \(n\)、根种子和流编号 \\
+1 & 对 trial \(s\) 生成 \(N_{\max}\) 个独立中心和各向同性方向 \\
+2 & 依原粒子序号生成并激活其全部边界片段，查询空间网格中的已激活候选 \\
+3 & 依次完成宽相、GJK 窄相和并查集合并 \\
+4 & 首次出现 \(E_L,E_R\) 同根时记录 \(T_s\) 并结束本 trial \\
+5 & 若激活至 \(N_{\max}\) 仍未导通，记录右删失值 \(N_{\max}+1\) \\
+6 & 对每个查询前缀 \(N\) 统计 \(T_s\le N\) 的个数并计算概率区间 \\
+输出 & 按 trial 排序的 \(T_s\)、各查询前缀的成功数、概率和区间 \\
+\bottomrule
+\end{longtable}
+
+该方法只构建一次 \(N_{\max}\) 前缀；若四个填充量分别独立运行，则需要重复生成和检查四套 几何图。设第 \(s\) 个 trial 激活到 \(T_s\) 前共查询 \(K_s\) 个空间候选、调用 GJK 的迭代总数为 \(J_s\)，则主要计算量为 \(O(K_s+J_s)\)，并查集增量为近线性；存储量由当前片段、空间桶和接触 分量决定。该复杂度表达不假定空间哈希在最坏情况下仍为常数查询。
+
+\hypertarget{ux4f2fux52aaux5229ux6982ux7387ux4e0e-wilson-ux533aux95f4}{%
+\subsection{4.4 伯努利概率与 Wilson 区间}\label{ux4f2fux52aaux5229ux6982ux7387ux4e0e-wilson-ux533aux95f4}}
+
+对固定 \(N\)，\(Y_s(N)\) 是参数为 \(p_A(N)\) 的独立同分布伯努利变量，\(k_N\) 服从二项分布 \(\operatorname{Bin}(n,p_A(N))\)。点估计 \(\widehat p=k_N/n\) 只描述观测比例，仍需区间表达有限 样本不确定性。问题二采用双侧 \(95\%\) Wilson 得分区间{[}5{]}。令 \(z=z_{0.975}\)，区间中心与半宽为
+
+\[
+c_W=\frac{\widehat p+z^2/(2n)}{1+z^2/n},\qquad
+h_W=\frac{z}{1+z^2/n}
+\sqrt{\frac{\widehat p(1-\widehat p)}{n}+\frac{z^2}{4n^2}},
+\]
+
+于是 \([p_L,p_U]=[c_W-h_W,c_W+h_W]\)。它通过得分方程同时修正区间中心和宽度，在概率接近 0 或 1 时也不会简单退化为以 \(\widehat p\) 为中心的对称正态区间。本文的区间均在预先固定的 \(n\) 上计算；四个前缀在同一 trial 内相关，但每个固定 \(N\) 的 \(n\) 个 trial 仍彼此独立，故可 分别给出边际区间。问题三、四涉及概率约束的单侧判定，另采用冻结协议下的 Clopper--Pearson 精确限{[}6{]}，不与问题二的描述性双侧 Wilson 区间混用。
+
+\hypertarget{ux4e94ux5404ux95eeux9898ux7684ux6c42ux89e3}{%
+\section{五、各问题的求解}\label{ux4e94ux5404ux95eeux9898ux7684ux6c42ux89e3}}
+
+\hypertarget{ux95eeux9898ux4e00ux9644ux4ef6ux5faeux6784ux4f53ux7684ux786eux5b9aux6027ux5224ux5b9a}{%
+\subsection{5.1 问题一：附件微构体的确定性判定}\label{ux95eeux9898ux4e00ux9644ux4ef6ux5faeux6784ux4f53ux7684ux786eux5b9aux6027ux5224ux5b9a}}
+
+\hypertarget{ux5b9eux4f53ux91cdux5efaux4e0eux6c42ux89e3ux6d41ux7a0b}{%
+\subsubsection{5.1.1 实体重建与求解流程}\label{ux5b9eux4f53ux91cdux5efaux4e0eux6c42ux89e3ux6d41ux7a0b}}
+
+附件每条有效记录含六个坐标，先按第 4.1 节公式重建一根实际轴长为 \(\ell_i\) 的平底圆柱，并 以原工作表行号记为 \(r_i\)。三组分别得到 \(12,49,535\) 个独立片段。计算依次执行：坐标与轴长 检查；圆柱到左右电极的闭式投影；全部行对的胶囊宽相；候选对的平底圆柱 GJK 窄相；确定边集 上的并查集判定；以及导通组的 BFS 见证恢复。整个流程只读取附件端点，不对短片段作长度外推。
+
+在最大的一组中，全对枚举仍只有 \(\binom{535}{2}=142845\) 对，因而采用确定性全枚举比启发式 邻域搜索更容易审计。三组宽相与窄相统计如下。
+
+\begin{longtable}[]{@{}lrrrrrrr@{}}
+\caption{问题一的宽相筛选与窄相判定统计}\tabularnewline
+\toprule
+分组 & 片段数 & 全部行对 & 宽相排除 & GJK 窄相 & 确定接触 & 确定分离 & 电极接触边 \\
+\midrule
+\endfirsthead
+\toprule
+分组 & 片段数 & 全部行对 & 宽相排除 & GJK 窄相 & 确定接触 & 确定分离 & 电极接触边 \\
+\midrule
+\endhead
+组 1 & 12 & 66 & 64 & 2 & 2 & 0 & 7 \\
+组 2 & 49 & 1176 & 1149 & 27 & 27 & 0 & 22 \\
+组 3 & 535 & 142845 & 142679 & 166 & 165 & 1 & 182 \\
+\bottomrule
+\end{longtable}
+
+三组共枚举 \(144087\) 个粒子对，其中 \(143892\) 对由安全宽相排除，仅 \(195\) 对进入 GJK，说明 胶囊下界在不改变结论的前提下显著缩小了高精度计算范围。唯一经窄相判为分离的候选位于组 3， 其距离下界为 \(11.9342105384\ \mathrm{nm}\)；其余 \(194\) 个候选均为确定接触。
+
+\hypertarget{ux5bfcux901aux7ed3ux8bbaux4e0eux8defux5f84ux89c1ux8bc1}{%
+\subsubsection{5.1.2 导通结论与路径见证}\label{ux5bfcux901aux7ed3ux8bbaux4e0eux8defux5f84ux89c1ux8bc1}}
+
+把全部确定接触边与电极边写入同一个无向图后，组 1 的左右电极属于不同连通分量，组 2、 组 3 的左右电极属于同一连通分量。结果及 BFS 恢复的最短边数见证为
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{附件三组微构体的确定性导通判定}\tabularnewline
+\toprule
+分组 & 导通结论 & 电极到电极见证路径 \\
+\midrule
+\endfirsthead
+\toprule
+分组 & 导通结论 & 电极到电极见证路径 \\
+\midrule
+\endhead
+组 1 & 不导通 & 无 \\
+组 2 & 导通 & \(E_L\to r13\to r14\to r26\to r41\to E_R\) \\
+组 3 & 导通 & \(E_L\to r65\to r266\to r218\to r353\to E_R\) \\
+\bottomrule
+\end{longtable}
+
+两条见证都由一个电极接触、三条圆柱接触和另一个电极接触组成。路径中的 \(r_i\) 是附件原始 行号，因而任一结果都可回到六维端点数据逐边复算。组 1 的``不导通''则由完整确定边集给出： 全部未进入 GJK 的行对已有严格大于阈值的安全下界，进入 GJK 的行对均已定类，因此不存在因 宽相漏边或阈值未决而造成的假阴性。
+
+\hypertarget{ux9608ux503cux7a33ux5b9aux6027ux4e0eux72ecux7acbux590dux6838}{%
+\subsubsection{5.1.3 阈值稳定性与独立复核}\label{ux9608ux503cux7a33ux5b9aux6027ux4e0eux72ecux7acbux590dux6838}}
+
+全部 \(195\) 个窄相距离区间均未跨越 \(1.8\ \mathrm{nm}\)。最接近阈值的确定接触边是组 3 的 \(r208-r305\)，其 GJK 距离界为 \([1.7786710845,1.7786710873]\ \mathrm{nm}\)，距离阈值仍有至少 \(0.0213289\ \mathrm{nm}\) 的裕量。为避免同一算法内部自证，又把每对圆柱写成六变量凸约束 最短距离问题，用 SLSQP 数值优化独立复算；两种方法的阈值分类分歧为 0，最大距离估计差为 \(1.054\times10^{-7}\ \mathrm{nm}\)。该复核不替代 GJK 的上下界证书，但表明结论不依赖单一 距离实现。
+
+三组空间结构及导通组的电极间见证路径如图 \ref{fig:q1-groups} 所示。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/rendered/q1_group1_axonometric.png}
+    \caption{组 1：未形成左右贯通簇}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/rendered/q1_group2_axonometric.png}
+    \caption{组 2：存在电极间见证路径}
+  \end{subfigure}
+
+  \vspace{0.45em}
+  \begin{subfigure}[t]{0.72\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/rendered/q1_group3_axonometric.png}
+    \caption{组 3：高密度介质中的贯通路径}
+  \end{subfigure}
+  \caption{附件三组微构体的 FreeCAD 三维轴测图。深灰面为左右电极，浅灰圆柱为其余介质，橙色圆柱为机器提取的见证片段；轴测投影中的线段交叉不等于三维接触。图像由 AI 辅助程序生成并经几何数量与通路逐项复核。}
+  \label{fig:q1-groups}
+\end{figure}
+
+\hypertarget{ux95eeux9898ux4e8cux56dbux4e2a-a-ux586bux5145ux91cfux7684ux5bfcux901aux6982ux7387}{%
+\subsection{5.2 问题二：四个 A 填充量的导通概率}\label{ux95eeux9898ux4e8cux56dbux4e2a-a-ux586bux5145ux91cfux7684ux5bfcux901aux6982ux7387}}
+
+\hypertarget{ux7c92ux5b50ux6570ux6362ux7b97ux4e0eux8bd5ux9a8cux8bbeux7f6e}{%
+\subsubsection{5.2.1 粒子数换算与试验设置}\label{ux7c92ux5b50ux6570ux6362ux7b97ux4e0eux8bd5ux9a8cux8bbeux7f6e}}
+
+A 的单粒子名义体积和微构体体积为
+
+\[
+V_A=\pi r_A^2\ell_A=4.5\times10^6\pi\ \mathrm{nm^3},\qquad
+V_\Omega=10^{12}\ \mathrm{nm^3}.
+\]
+
+对目标名义体积分数 \(\phi\)，粒子数取
+
+\[
+N_A=\operatorname{round}\!\left(\frac{\phi V_\Omega}{V_A}\right),\qquad
+\phi_{\mathrm{actual}}(N_A)=100\%\times\frac{N_AV_A}{V_\Omega}.
+\]
+
+按题意四舍五入后，\(0.50\%,0.60\%,0.70\%,1.00\%\) 分别对应 \(N_A=354,424,495,707\)。整数化后的实际体积分数略有偏差，所以正文同时报告目标值与离散 实际值，概率计算始终使用整数粒子数而不是四舍五入后的百分数。
+
+正式模拟预先固定 \(n=20000\) 个独立 trial，根种子为 \(20260801\)、流编号为 2；每个 trial 一次生成至 \(N_{\max}=720\) 的有序 A 粒子序列。四个查询点共享同一组首次导通样本 \(T_s\)， 但不同 trial 的中心和方向相互独立。达到 720 根仍不导通的 90 个 trial 记为右删失值 721； 对本问任一 \(N\le707\)，事件 \(T_s\le N\) 的计数仍是完全确定的，不受右删失影响。
+
+\hypertarget{ux6982ux7387ux4f30ux8ba1ux7ed3ux679c}{%
+\subsubsection{5.2.2 概率估计结果}\label{ux6982ux7387ux4f30ux8ba1ux7ed3ux679c}}
+
+由 \(k_N=\#\{s:T_s\le N\}\) 直接计数，并按第 4.4 节计算双侧 \(95\%\) Wilson 区间，得到：
+
+\begin{longtable}[]{@{}rrrrrr@{}}
+\caption{四个题给 A 填充量的导通概率估计}\tabularnewline
+\toprule
+题给体积分数 & 粒子数 & 离散实际体积分数 & 导通次数 & 概率估计 & \(95\%\) Wilson 区间 \\
+\midrule
+\endfirsthead
+\toprule
+题给体积分数 & 粒子数 & 离散实际体积分数 & 导通次数 & 概率估计 & \(95\%\) Wilson 区间 \\
+\midrule
+\endhead
+\(0.50\%\) & 354 & \(0.500456\%\) & 1579 & \(7.895\%\) & \([7.529\%,8.277\%]\) \\
+\(0.60\%\) & 424 & \(0.599416\%\) & 4410 & \(22.050\%\) & \([21.481\%,22.630\%]\) \\
+\(0.70\%\) & 495 & \(0.699790\%\) & 9439 & \(47.195\%\) & \([46.504\%,47.887\%]\) \\
+\(1.00\%\) & 707 & \(0.999498\%\) & 19856 & \(99.280\%\) & \([99.153\%,99.388\%]\) \\
+\bottomrule
+\end{longtable}
+
+四个点的经验概率依次为 \(7.895\%,22.050\%,47.195\%,99.280\%\)。从 \(0.50\%\) 到 \(0.70\%\)，导通概率快速上升；到 \(1.00\%\) 时已有 \(19856/20000\) 个微构体导通，表现出接近 平台的有限尺寸贯通过渡。这里的``S 形''只用于描述四点呈现的过渡轮廓，概率值均来自直接 计数，没有用拟合曲线代替蒙特卡洛证据。共同前缀还保证每个 trial 内四个导通指标单调不减， 不会出现由四次独立模拟噪声造成的概率次序颠倒。
+
+\hypertarget{ux6536ux655bux6027ux4e0eux5206ux5757ux9a8cux8bc1}{%
+\subsubsection{5.2.3 收敛性与分块验证}\label{ux6536ux655bux6027ux4e0eux5206ux5757ux9a8cux8bc1}}
+
+为检查结果是否由某一段随机流偶然主导，按 trial 编号把 \(20000\) 条记录等分成四个互不重叠的 \(5000\) 样本块，并在每个块内从原始 \(T_s\) 重新计数：
+
+\begin{longtable}[]{@{}rrrrr@{}}
+\caption{问题二四个互不重叠样本块的概率重算}\tabularnewline
+\toprule
+trial 块 & \(N=354\) & \(N=424\) & \(N=495\) & \(N=707\) \\
+\midrule
+\endfirsthead
+\toprule
+trial 块 & \(N=354\) & \(N=424\) & \(N=495\) & \(N=707\) \\
+\midrule
+\endhead
+1 & \(7.720\%\) & \(21.500\%\) & \(46.560\%\) & \(99.280\%\) \\
+2 & \(8.240\%\) & \(22.300\%\) & \(47.600\%\) & \(99.320\%\) \\
+3 & \(8.040\%\) & \(22.140\%\) & \(47.580\%\) & \(99.220\%\) \\
+4 & \(7.580\%\) & \(22.260\%\) & \(47.040\%\) & \(99.300\%\) \\
+\bottomrule
+\end{longtable}
+
+四个填充量的分块范围依次为 \([7.58\%,8.24\%]\)、\([21.50\%,22.30\%]\)、 \([46.56\%,47.60\%]\) 和 \([99.22\%,99.32\%]\)，每个块估计均落在相应的全样本 Wilson 区间内。原始记录还逐项满足 \(T_s\) 的合法范围及前缀单调性；在相同成功数下重算的 Clopper--Pearson 双侧区间与 Wilson 区间给出一致的四点判断。由此，跃迁区位置、概率次序和 \(1.00\%\) 处的高导通结论均不依赖单个局部样本块或区间公式的选择。
+
+概率曲线和问题三的临界整数联合置信判定见图 \ref{fig:q2-q3-curve}。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.94\textwidth]{figures/generated/q2_q3_probability.pdf}
+  \caption{全 A 介质导通概率曲线及问题三临界区间。颜色、点形和区间线共同区分可行、不可行与尚不能区分的整数点；图像由 AI 辅助程序从冻结结果生成，所有标注值已回查结果文件。}
+  \label{fig:q2-q3-curve}
+\end{figure}
+
+\hypertarget{ux95eeux9898ux4e09ux5168-a-ux7684ux6700ux4f4eux586bux5145ux91cf}{%
+\subsection{5.3 问题三：全 A 的最低填充量}\label{ux95eeux9898ux4e09ux5168-a-ux7684ux6700ux4f4eux586bux5145ux91cf}}
+
+\hypertarget{ux4eceux7ecfux9a8cux4e34ux754cux70b9ux5230ux6982ux7387ux7ea6ux675f}{%
+\subsubsection{5.3.1 从经验临界点到概率约束}\label{ux4eceux7ecfux9a8cux4e34ux754cux70b9ux5230ux6982ux7387ux7ea6ux675f}}
+
+对一条预先生成的无限 A 介质序列，前 \(N\) 根构成填充量为 \(N\) 的设计。增加介质只会向接触图 加入节点和边，不会删除已有通路，因而真实导通概率 \(p_A(N)\) 关于 \(N\) 单调不减。问题三的 理想整数目标为
+
+\[
+N_A^\star=\min\{N\in\mathbb Z_{\ge0}:p_A(N)\ge0.90\}.
+\]
+
+这里的困难不在于从一次曲线中找``首次超过 \(90\%\)''的点，而在于 \(p_A(N)\) 是未知概率。 样本比例略高于 \(90\%\) 时，真实概率仍可能低于 \(90\%\)；反之亦然。因此本文把问题二的 \(20000\) 次试验只作为探索数据，用来定位跃迁区。读取探索结果后，将相邻的 9 个整数 \(609,\ldots,617\) 连同样本数、随机流和判定规则一次性冻结；正式判断改用另一条独立随机流的 \(50000\) 次试验。这样，候选选择过程不会反复查看最终样本并把偶然偏高的点当成答案。
+
+同一条确认流内，9 个候选使用共同粒子前缀。这里``共同''只表示同一试验内不同 \(N\) 共享前 \(N\) 根介质，因此能够逐构型比较并严格保持 \(Y_s(N)\le Y_s(N+1)\)；不同试验 \(s\) 之间仍相互 独立，探索流与确认流也相互独立。
+
+\hypertarget{ux7cbeux786eux5355ux4fa7ux754cux4e0eux8054ux5408ux7f6eux4fe1ux63a7ux5236}{%
+\subsubsection{5.3.2 精确单侧界与联合置信控制}\label{ux7cbeux786eux5355ux4fa7ux754cux4e0eux8054ux5408ux7f6eux4fe1ux63a7ux5236}}
+
+对固定的 \(N\)，令 \(K_N=\sum_{s=1}^{n}Y_s(N)\)。在模型给定的随机机制下， \(K_N\sim\operatorname{Bin}(n,p_A(N))\)。Clopper--Pearson 方法通过反解二项分布尾概率得到 置信限{[}6{]}；若 \(B^{-1}(q;a,b)\) 表示 Beta 分布的 \(q\) 分位数，则
+
+\[
+p_L^{CP}=B^{-1}(\alpha_i;K_N,n-K_N+1),\qquad
+p_U^{CP}=B^{-1}(1-\alpha_i;K_N+1,n-K_N).
+\]
+
+``精确''是指它不依赖大样本正态近似，并保证有限样本覆盖率不低于名义值；代价是区间通常略 保守。为判断最小整数，每个候选都可能用到一个下限和一个上限，共有 \(2m=18\) 个预先指定的 单侧陈述。本文取
+
+\[
+\alpha_i=\frac{0.05}{18}=0.002777\ldots.
+\]
+
+记第 \(j\) 个置信陈述失效的事件为 \(E_j\)。由 Bonferroni 不等式{[}7{]}，
+
+\[
+\Pr\!\left(\bigcup_{j=1}^{18}E_j\right)
+\le \sum_{j=1}^{18}\Pr(E_j)\le18\alpha_i=0.05.
+\]
+
+所以全部 18 个单侧界同时成立的概率至少为 \(95\%\)。这一结论不要求相邻候选的统计量相互 独立，正适合共同前缀造成的强相关结构。判定逻辑为：若某个 \(N\) 的下限 \(p_L^{CP}(N)\ge0.90\)，则把 \(N\) 归为统计可行；若上限 \(p_U^{CP}(N)<0.90\)，则归为统计 不可行；区间跨越 \(0.90\) 时只记为尚不能区分。只有同时得到
+
+\[
+p_L^{CP}(N)\ge0.90,\qquad p_U^{CP}(N-1)<0.90,
+\]
+
+才能确认唯一最小整数为 \(N\)。
+
+\hypertarget{ux786eux8ba4ux7ed3ux679cux4e0eux9898ux5b9aux7cbeux5ea6}{%
+\subsubsection{5.3.3 确认结果与题定精度}\label{ux786eux8ba4ux7ed3ux679cux4e0eux9898ux5b9aux7cbeux5ea6}}
+
+正式确认结果中，临界区的五个代表点见表 \ref{tab:q3-confirmation}。所有成功数均由同一组 \(50000\) 个 trial 的前缀阈值一次汇总得到，表中上下限已经按 18 个陈述作联合校正。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{问题三临界整数的独立确认结果}
+  \label{tab:q3-confirmation}
+  \begin{tabular}{cccccc}
+    \toprule
+    $N_A$ & 成功数 & 经验概率 & CP 单侧下限 & CP 单侧上限 & 联合判定 \\
+    \midrule
+    612 & 44764 & $89.528\%$ & $89.1430\%$ & $89.9044\%$ & 不可行 \\
+    613 & 44871 & $89.742\%$ & $89.3604\%$ & $90.1149\%$ & 未决 \\
+    614 & 44986 & $89.972\%$ & $89.5941\%$ & $90.3411\%$ & 未决 \\
+    615 & 45099 & $90.198\%$ & $89.8239\%$ & $90.5633\%$ & 未决 \\
+    616 & 45226 & $90.452\%$ & $90.0821\%$ & $90.8130\%$ & 可行 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+612 根的单侧上限低于 \(90\%\)，由概率单调性可知所有 \(N_A\le612\) 均不满足约束；616 根的 单侧下限高于 \(90\%\)，说明它是一个经联合置信控制确认的可行上界。613 至 615 根的区间跨过 \(90\%\)，现有样本不足以逐一确定。因此在联合置信度至少为 \(95\%\) 的事件上，
+
+\[
+613\le N_A^\star\le616.
+\]
+
+由 \(V_A=0.0045\pi\ \mathrm{\mu m^3}\) 与 \(V_\Omega=1000\ \mathrm{\mu m^3}\)，整数区间换算为
+
+\[
+0.8666083335\%\le
+100\%\frac{N_A^\star V_A}{V_\Omega}
+\le0.8708494836\%.
+\]
+
+区间两端按题目要求保留百分号后两位都等于 \(\mathbf{0.87\%}\)。故问题三能够确认的是 \textbf{题定精度下的最低填充量 \(0.87\%\)}，并非唯一整数已经确定。若实际制备需要一个现阶段已有 统计证据支持的整数方案，可取 616 根；其导通估计为 \(90.452\%\)、校正后单侧下限为 \(90.0821\%\)，按问题四的价格口径成本为 \(9.1439195775\) 元。
+
+\hypertarget{ux95eeux9898ux56dbab-ux6df7ux5408ux586bux5145ux7684ux6210ux672cux4f18ux5316ux4e0eux7edfux8ba1ux786eux8ba4}{%
+\subsection{5.4 问题四：A/B 混合填充的成本优化与统计确认}\label{ux95eeux9898ux56dbab-ux6df7ux5408ux586bux5145ux7684ux6210ux672cux4f18ux5316ux4e0eux7edfux8ba1ux786eux8ba4}}
+
+\hypertarget{ux6210ux672cux6574ux6570ux5316ux4e0eux4e24ux7c7bux4ecbux8d28ux7684ux7adeux4e89ux5173ux7cfb}{%
+\subsubsection{5.4.1 成本整数化与两类介质的竞争关系}\label{ux6210ux672cux6574ux6570ux5316ux4e0eux4e24ux7c7bux4ecbux8d28ux7684ux7adeux4e89ux5173ux7cfb}}
+
+两类单粒子的体积和成本分别为
+
+\[
+V_A=0.0045\pi\ \mathrm{\mu m^3},\quad
+V_B=\frac{0.032\pi}{3}\ \mathrm{\mu m^3},
+\]
+
+\[
+c_A=\frac{189\pi}{40000}\ \text{元},\qquad
+c_B=\frac{\pi}{1875}\ \text{元}.
+\]
+
+因此原问题可写为
+
+\[
+\min_{N_A,N_B\in\mathbb Z_{\ge0}} C=c_AN_A+c_BN_B,
+\qquad \text{s.t.}\quad p(N_A,N_B)\ge0.90.
+\]
+
+由于 \(c_A/c_B=567/64\)，定义整数成本权重
+
+\[
+W(N_A,N_B)=567N_A+64N_B,\qquad C=\frac{\pi}{120000}W.
+\]
+
+由于 \(W\) 为整数，两个设计的成本大小可无舍入误差地比较。两类介质还形成一个有意义的 几何--经济权衡：
+
+\[
+\frac{c_A}{V_A}=1.05\ \text{元}/\mu\mathrm m^3,\qquad
+\frac{c_B}{V_B}=0.05\ \text{元}/\mu\mathrm m^3,\qquad
+\frac{l_A}{2r_A}=83.33.
+\]
+
+B 的单位名义体积价格更低，但 A 是高长径比圆柱，较少粒子就可能通过长距离接触形成贯通簇； B 是球体，需要用更多局部接触逐步跨越样品。故不能仅按单位体积成本判断混合方案，必须把 几何连通概率与价格同时纳入整数优化。
+
+对 B 的越界处理采用球与相邻周期胞的真实交集。球心为 \(c\)、半径为 \(r_B\)、胞索引为 \(k\in\{-1,0,1\}^3\) 时，映回基础域的球片为
+
+\[
+K_k=\bigl(\operatorname{Ball}(c,r_B)\cap(\Omega+kL)\bigr)-kL
+=\operatorname{Ball}(c-kL,r_B)\cap\Omega.
+\]
+
+每个非空 \(K_k\) 独立成为凸体节点。完整球对采用闭式距离，涉及球片的接触由球盒交集支持映射 和 GJK 判定。
+
+\hypertarget{ux4e8cux7ef4-minimax-ux8defux5f84ux9608ux503c}{%
+\subsubsection{5.4.2 二维 minimax 路径阈值}\label{ux4e8cux7ef4-minimax-ux8defux5f84ux9608ux503c}}
+
+若对每个 \((N_A,N_B)\) 都重新生成几何并做一次连通搜索，二维整数域的计算量难以承受。本文 对第 \(s\) 次试验只构建一次最大设计的静态图 \(G_s^{\max}\)。A 源 \(i\) 的全部截断片段赋激活阈值 \(\tau(v)=(i,0)\)，B 源 \(j\) 的片段赋 \(\tau(v)=(0,j)\)，两个电极的阈值均为 \((0,0)\)。节点在 \(\tau_A(v)\le N_A\) 且 \(\tau_B(v)\le N_B\) 时才被激活。
+
+对任一左右电极路径 \(P\) 定义
+
+\[
+\ell(P)=\left(\max_{v\in P}\tau_A(v),\max_{v\in P}\tau_B(v)\right).
+\]
+
+路径标签不是边长之和，而是激活整条路径至少需要的 A、B 前缀数：例如 \(\ell(P)=(580,350)\) 表示该路径上编号最大的 A 源为 580、B 源为 350，所以任何 \((N_A,N_B)\succeq(580,350)\) 的设计都能激活它。定义分量偏序
+
+\[
+(a_1,b_1)\preceq(a_2,b_2)
+\iff a_1\le a_2\ \text{且}\ b_1\le b_2.
+\]
+
+若一条路径的标签被另一条路径分量支配，它在任何设计下都不会更早激活，可以删除。实现时从 左电极传播标签；标签 \(\lambda\) 经过节点 \(v\) 后更新为 \(\lambda'=\max(\lambda,\tau(v))\)，其中最大值按两个分量分别取。每个节点只保留不被支配的 标签集合，直至队列为空。右电极上的非支配标签组成二维 minimax 前沿 \(\mathcal F_s\)。它是 ``最小化路径上最大激活编号''的多目标瓶颈路径算法，而不是通常把边权相加的最短路算法。
+
+于是任意设计的导通指标可直接查询：
+
+\[
+Y_s(N_A,N_B)=1
+\iff \exists(a,b)\in\mathcal F_s:\ a\le N_A,\ b\le N_B.
+\]
+
+一张前沿因此替代了大量重复构图，同时自然保证 \(Y_s(N_A,N_B)\) 对两个粒子数分别单调不减。
+
+\hypertarget{ux4e25ux683cux66f4ux4fbfux5b9cux57dfux7684ux6781ux5927ux70b9ux538bux7f29}{%
+\subsubsection{5.4.3 严格更便宜域的极大点压缩}\label{ux4e25ux683cux66f4ux4fbfux5b9cux57dfux7684ux6781ux5927ux70b9ux538bux7f29}}
+
+设探索后冻结的候选成本权重为 \(W^\star\)。全部严格更便宜设计构成向下封闭集合
+
+\[
+\mathcal D_{<}=\{(a,b)\in\mathbb Z_{\ge0}^2:567a+64b\le W^\star-1\}.
+\]
+
+对于固定的 \(a\)，该集合允许的最大 B 数为 \(b_{\max}(a)=\lfloor(W^\star-1-567a)/64\rfloor\)，故其分量极大集为
+
+\[
+\mathcal M(W^\star)=\left\{\left(a,
+\left\lfloor\frac{W^\star-1-567a}{64}\right\rfloor\right):
+0\le a\le\left\lfloor\frac{W^\star-1}{567}\right\rfloor\right\}.
+\]
+
+本题冻结候选为 \((619,0)\)，故 \(W^\star=350973\)。严格更便宜域共有 \(1700331\) 个整数设计， 而 \(\mathcal M(W^\star)\) 只有 \(619\) 个点，即 \(a=0,\ldots,618\) 各对应一个最大 \(b\)。任一 \((a,b)\in\mathcal D_{<}\) 都满足 \(b\le b_{\max}(a)\)，因而被相应极大点分量支配。又因为导通 概率随 \(N_A,N_B\) 单调不减，只要某个极大点的概率上限仍低于 \(0.90\)，它所支配的所有内部点 便可一并排除。这样把约 170 万个设计的最小性检查压缩为 619 个边界陈述，没有把内部点漏掉。
+
+\hypertarget{ux63a2ux7d22ux51bbux7ed3ux4e0eux72ecux7acbux786eux8ba4ux534fux8bae}{%
+\subsubsection{5.4.4 探索、冻结与独立确认协议}\label{ux63a2ux7d22ux51bbux7ed3ux4e0eux72ecux7acbux786eux8ba4ux534fux8bae}}
+
+完整求解分为两个随机阶段。
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{探索阶段。}使用固定的 \(2000\) 个试验和随机流 4，在 \(721\times6001\) 的计数矩阵内查询 完整成本有界整数域。按预先规定的规则，只在探索单侧 \(95\%\) Clopper--Pearson 下限不低于 \(0.90\) 的设计中寻找最小整数成本，并冻结候选 \((619,0)\)。探索数据只用于选点，不用于最终 概率声明。
+\item
+  \textbf{冻结阶段。}在读取确认流前固定候选、619 个严格更便宜极大点、样本量、随机种子、 stream ID 和区间公式。候选需要一个单侧下限，每个极大点需要一个单侧上限，故预注册陈述 总数为 \(1+619=620\)。
+\item
+  \textbf{确认阶段。}使用与探索不同的随机流 5 完成固定 \(50000\) 次试验。每次试验构建最大 \((619,5483)\) 静态图，并由同一张二维路径前沿同时查询候选与全部极大点。单项显著性水平为
+\end{enumerate}
+
+\[
+\alpha_i=\frac{0.05}{620}=8.064516\times10^{-5},
+\]
+
+从而全部 620 个单侧陈述的联合置信度至少为 \(95\%\)。确认阶段使用``共同随机数''是指同一 trial 的 620 个设计共享一套几何构型，便于逐设计配对并保持二维单调；它不等于重复使用探索数据， 也不破坏不同 trial 的独立性。Bonferroni 控制本身也不要求 620 个统计量彼此独立。
+
+在 \(50000\) 个独立确认样本中，代表性设计 \((N_A,N_B)=(619,0)\) 导通 \(45554\) 次，经验导通概率为 \(91.108\%\)； 其 Bonferroni 校正后的单侧 Clopper--Pearson 下限为 \(90.6186\%\)、上限为 \(91.5812\%\)，成本为 \(9.1884516534\) 元。在 Q4 预注册的 620 个陈述家族内，573 个严格更低成本极大设计已被排除，仍有 46 个未被同时排除，对应成本证据区间为 \([8.5056264901,9.1884516534]\) 元。另一个独立随机流已确认更便宜的全 A 设计 \((616,0)\) 统计可行，其成本为 \(9.1439195775\) 元。两个随机流对应不同的预注册置信家族，不能把两项点态可行证据拼接成全局最优性证明。 同一整数成本权重对应 10 个配比；本文只报告已确认统计可行的方案， 不作组成唯一性或全局最优性声明。 正式统计结果见表 \ref{tab:q4-confirmation}，成本有界整数域的探索与独立确认判定见 图 \ref{fig:q4-cost-frontier}。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{问题四正式独立确认结果（各行按对应预注册协议计算精确限）}
+  \label{tab:q4-confirmation}
+  \begin{tabularx}{\textwidth}{c>{\raggedright\arraybackslash}Xccccc}
+    \toprule
+    配比 & 证据角色 & 成功数 & 经验概率 & 协议内 CP 下限 & 协议内 CP 上限 & 成本（元） \\
+    \midrule
+    $(619,0)$ & Q4 预注册家族内的统计可行证据 & $45554/50000$ & $91.108\%$ & $90.6186\%$ & $91.5812\%$ & $9.1884516534$ \\
+    $(616,0)$ & 问题三独立流的交叉可行证据 & $45226/50000$ & $90.452\%$ & $90.0821\%$ & $90.813\%$ & $9.1439195775$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+表 \ref{tab:q4-confirmation} 中，候选 \((619,0)\) 在 \(50000\) 次确认中导通 45554 次，经验概率 为 \(91.108\%\)。经过比普通点态 \(95\%\) 区间更严格的 620 项校正后，其单侧精确下限仍为 \(90.6186357\%>90\%\)，所以能够确认\textbf{该候选统计可行}。这里的下限回答``它是否达到概率 约束''，但并不回答``它是否最便宜''。
+
+对 619 个严格更便宜极大点，已有 573 个的校正后单侧上限低于 \(90\%\)，故这些点及其所支配 区域被排除；其余 46 个上限仍跨越 \(90\%\)，只能标为``未排除''。``未排除''表示现有样本不能 证明其不可行，不等于这些设计已经可行。第一个未排除层从 \(N_A=573\) 出现，因此所有权重 \(W<567\times573=324891\) 的设计均已被排除；候选给出可行成本上界。由此得到冻结 Q4 家族内的 成本证据区间
+
+\[
+\frac{\pi}{120000}\times324891
+\le C^\star\le
+\frac{\pi}{120000}\times350973,
+\]
+
+即
+
+\[
+\boxed{8.5056264901\ \text{元}\le C^\star\le9.1884516534\ \text{元}}.
+\]
+
+区间尚未收缩为一点，故\textbf{不能宣称全局最低成本}。问题三的另一条独立确认流还给出更便宜的 全 A 方案 \((616,0)\)：其成本为 \(9.1439195775\) 元，联合校正后单侧下限为 \(90.0821\%\)，已经 达到可行判据。这项交叉证据与 Q4 的 46 个未排除极大点相容，并直接说明不能把 \((619,0)\) 写成最低成本方案。
+
+此外，整数方程 \(567N_A+64N_B=350973\) 有 10 个非负解，可写为
+
+\[
+(N_A,N_B)=(619-64t,567t),\qquad t=0,1,\ldots,9.
+\]
+
+这些配比成本完全相同，但本次独立确认只证明冻结候选 \((619,0)\) 可行，不能据此断言同成本 组成唯一或其余 9 个配比可行。图 \ref{fig:q4-cost-frontier} 右图中，未排除点集中在 A 含量 较高的边界段，反映高长径比圆柱的连通效率在临界成本附近仍起主导作用；这是一项模型内结果， 不外推为所有材料体系的一般规律。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/generated/q4_cost_frontier.pdf}
+  \caption{问题四成本有界整数域中的可行成本与更便宜设计排除证据。左图以探索样本展示经验导通概率和等成本线，右图以独立确认样本区分已排除与尚未排除的严格更低成本极大设计；颜色、轮廓和点形共同编码，结论按单侧 Clopper--Pearson 同时置信界判定。}
+  \label{fig:q4-cost-frontier}
+\end{figure}
+
+问题四确认流内已确认统计可行方案的全局 FreeCAD 结构见图 \ref{fig:q4-global-3d}，局部贯通 见证及其有序接触图见图 \ref{fig:q4-witness-3d}。三维实体来自确认流中最小 trial ID 的导通 实例；橙色见证片段能够按接触边次序从左电极到达右电极。FreeCAD 在这里承担几何重建与可视 核验任务，不替代 Monte Carlo 概率估计，也不承担全局最低成本证明。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_axonometric.png}
+  \caption{问题四确认流内已确认统计可行方案 $(619,0)$ 的 FreeCAD 全局轴测图。深灰面为左右电极，浅灰实体为 A 介质截断片段，橙色实体为机器提取的贯通见证；该图只展示方案的空间结构，不将其表述为全局最低成本。}
+  \label{fig:q4-global-3d}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_witness_focus.pdf}
+  \caption{问题四确认流内已确认统计可行方案的局部三维贯通见证与有序接触图。橙色粗实线实体为见证片段，青色虚线为接触图边，不表示连续空间电流轨迹；右侧有序接触图逐边给出电极与介质的连接次序。图像来自确认流中首个导通样本（\texttt{trial\_id=1}），已核对 $619$ 个 A 源、0 个 B 源、$1100$ 个截断片段、$12$ 个见证节点、$11$ 条接触图边，且同源内部边为 0；该场景不承担全局最低成本证明。}
+  \label{fig:q4-witness-3d}
+\end{figure}
+\FloatBarrier
+
+\hypertarget{ux516dux6a21ux578bux68c0ux9a8cux4e0eux7ed3ux679cux8ba8ux8bba}{%
+\section{六、模型检验与结果讨论}\label{ux516dux6a21ux578bux68c0ux9a8cux4e0eux7ed3ux679cux8ba8ux8bba}}
+
+\hypertarget{ux51e0ux4f55ux6838ux4e0eux56feux7b97ux6cd5ux68c0ux9a8c}{%
+\subsection{6.1 几何核与图算法检验}\label{ux51e0ux4f55ux6838ux4e0eux56feux7b97ux6cd5ux68c0ux9a8c}}
+
+\textbf{距离核的特殊构型检验。}平底圆柱距离测试覆盖平行侧面、垂直相交、端面对端、实体贯穿、 电极接触以及 \(1.8\pm\varepsilon\ \mathrm{nm}\) 阈值邻域。每个 GJK 结果保留距离上下界：上界 不超过阈值才连边，下界超过阈值才分离，界跨阈值则收紧容差重算而不强行归类。球片支持映射 通过球内、单面、棱和角截断特例；完整球--球、圆柱--球使用闭式距离，避免不必要的迭代误差。
+
+\textbf{独立数值复核。}问题一全部 195 个窄相候选又被改写为六变量凸约束最小距离问题，并用 SLSQP 独立求解。SLSQP 是``序列二次规划''：每一步用一个二次子问题近似原约束优化，再更新 搜索点。它与基于支持映射的 GJK 算法在原理和实现上不同，因此适合作为阈值分类复核。两种 方法的分类分歧为 0，最大距离估计差为 \(1.054\times10^{-7}\ \mathrm{nm}\)，见图 \ref{fig:validation-diagnostics}(a)。
+
+Q4 确认最大图共记录 \(399988248\) 次窄相调用，其中 \(118176\) 次没有触发 GJK 的宽度收敛标志， 占 \(0.029545\%\)；这些调用的距离上下界仍全部落在阈值同一侧，所以可作确定分类。若上下界 跨越阈值，程序会抛出异常并终止该 trial，不会把数值未决对静默写成接触或分离。
+
+\textbf{图算法的精确性检验。}并查集结果在手工可解的小图上与广度优先搜索一致；二维 minimax 标签前沿又与小图完整整数网格的逐点暴力连通结果一致。Q4 的 \(2000\) 次探索计数矩阵沿 \(N_A\)、\(N_B\) 两个方向的单调性违例数均为 0，说明路径阈值、标签支配与矩阵回填三处实现相互 一致。
+
+\hypertarget{ux968fux673aux6a21ux62dfux4e0eux7edfux8ba1ux68c0ux9a8c}{%
+\subsection{6.2 随机模拟与统计检验}\label{ux968fux673aux6a21ux62dfux4e0eux7edfux8ba1ux68c0ux9a8c}}
+
+\textbf{随机生成与可复现性。}各向同性方向要求 \(\mathbb E[u_x]=\mathbb E[u_y]=\mathbb E[u_z]=0\) 且 \(\mathbb E[u_x^2]=\mathbb E[u_y^2]=\mathbb E[u_z^2]=1/3\)；生成器的一阶、二阶经验矩通过 相应检验。trial 的随机数由``根种子、stream ID、trial ID''唯一决定，相同配置下串行、 多进程和断点续跑得到完全相同的序列。这使并行计算只改变完成顺序，不改变任何微构体。
+
+\textbf{样本量与区间解释。}对 \(p\approx0.9\)、\(n=50000\)，未经多重校正的比例标准误量级为
+
+\[
+\sqrt{\frac{p(1-p)}{n}}\approx0.00134,
+\]
+
+即约 \(0.134\) 个百分点。Q3 因 18 项联合校正，其 616 根方案的精确下限比经验值低约 \(0.370\) 个百分点；Q4 因 620 项校正，\((619,0)\) 的下限比经验值低约 \(0.489\) 个百分点。 这解释了为什么 50000 次试验足以确认两个保守可行方案，却仍有相当一部分更便宜边界点无法 排除。增加样本会缩窄区间，但若根据中途结果决定是否继续，普通固定时点区间不再保持原覆盖 含义{[}8{]}；因此本次正式结果始终使用预先固定的样本数。
+
+图 \ref{fig:simulation-convergence} 从原始 trial 序列直接重算累计统计量。问题二四条概率轨迹 在样本早期波动后分别稳定在题给四个终点附近；问题四的累计经验概率也逐渐稳定，而 620 项 校正的单侧下限直到预注册终点才进入正式结论。图中的中间 Clopper--Pearson 检查点只用于 展示样本增加时区间如何收缩，不提供序贯覆盖保证，也不改变 \(n=50000\) 的固定样本判据。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/generated/simulation_convergence.pdf}
+  \caption{固定随机流下的累计稳定过程。(a) 问题二四个题给填充量的累计导通概率；(b) 问题四候选 $(619,0)$ 的累计经验概率及 620 项校正单侧 Clopper--Pearson 下限。中间检查点仅作诊断，正式判断只使用预注册终点。}
+  \label{fig:simulation-convergence}
+\end{figure}
+
+\textbf{共同随机数与独立确认。}问题二在一次 trial 内共享 A 粒子前缀，问题四共享最大静态图， 这类共同随机数把设计间比较转化为同一构型上的配对比较，并从代码结构上保证单调性。与之 不同，问题三、四的探索和确认使用不同 stream ID，防止筛选偏差；问题三确认流与问题四确认 流也相互独立。换言之，设计之间有意相关，trial 之间保持独立，选择数据与最终证据相互分离。
+
+\textbf{分块稳定性。}将问题二的 \(20000\) 个固定样本按 trial 编号等分为四个互不重叠的 \(5000\) 样本块，四个填充量的分块概率范围分别为 \([7.58\%,8.24\%]\)、 \([21.50\%,22.30\%]\)、\([46.56\%,47.60\%]\) 和 \([99.22\%,99.32\%]\)，均围绕全样本估计 小幅波动，见图 \ref{fig:validation-diagnostics}(b)。这说明四个题给点的概率次序与贯通跃迁的 总体位置不是由某一个局部样本块造成。Wilson 与 Clopper--Pearson 区间在问题二的四点结论上 也一致；前者便于展示，后者用于 Q3/Q4 的最终精确判据。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/generated/validation_diagnostics.pdf}
+  \caption{几何判定与随机模拟的独立诊断。(a) 195 个窄相候选中 GJK 与 SLSQP 的距离差及阈值分类复核；(b) 问题二四个互斥样本块相对总估计的偏差。两图均由正式结果文件直接生成。}
+  \label{fig:validation-diagnostics}
+\end{figure}
+
+\hypertarget{ux8de8ux95eeux9898ux4e00ux81f4ux6027ux4e0eux8bc1ux636eux5c42ux7ea7}{%
+\subsection{6.3 跨问题一致性与证据层级}\label{ux8de8ux95eeux9898ux4e00ux81f4ux6027ux4e0eux8bc1ux636eux5c42ux7ea7}}
+
+问题三与问题四采用相同的 D 边界语义、A 几何和 \(1.8\ \mathrm{nm}\) 接触阈值，但使用相互独立 的确认流。Q3 的 \((616,0)\) 在 50000 次中导通 45226 次，经 18 项 Bonferroni 校正后下限为 \(90.0821\%\)；Q4 的 \((619,0)\) 导通 45554 次，经更严格的 620 项校正后下限为 \(90.6186\%\)。 两个结果都通过各自预注册的可行性门槛，且更高粒子数的经验概率更高，定性上符合概率单调性。
+
+跨问题核对还揭示了结论强度的边界。Q4 中 \((619,0)\) 的可行性是``点态下限证据''；573 个 更便宜极大点的排除是``区域上限证据''；46 个未排除点则是``信息不足''，三者不能混为一谈。 Q3 对更便宜的 \((616,0)\) 给出独立可行证据后，任何把 619 根称为``全局最优''的说法都会与 现有证据冲突。本文因此只报告冻结候选、可行成本参照与成本证据区间，不把模型搜索状态包装成 已经完成的全局最优性证明。
+
+图 \ref{fig:q4-unresolved-boundary} 把这一证据层级展开：左图以校正后单侧上限将 619 个严格 更便宜极大点分成 573 个已排除点与 46 个未决点；右图给出 \([8.5056264901,9.1884516534]\) 元的成本证据区间，并在局部放大图中逐一保留 46 个下一轮计算对象。未决标记只表示当前上限 尚未降到 \(90\%\) 以下，不能解释为设计已经满足导通概率约束。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/generated/q4_unresolved_boundary_evidence.pdf}
+  \caption{问题四严格更便宜域的联合证据与后续计算对象。(a) 573 个已排除极大点、46 个未决极大点及已确认候选的单侧精确界；(b) Q4 家族内的成本证据区间与 46 个未决点局部放大。阴影和菱形均不表示可行，只表示尚不能排除。}
+  \label{fig:q4-unresolved-boundary}
+\end{figure}
+
+从工程决策角度看，若必须在现有证据下选取一个较低成本且已确认达到 \(90\%\) 的方案， \((616,0)\) 比 \((619,0)\) 少 3 根 A、节省 \(0.0445320759\) 元；但它仍不是已证明的全局最低方案。 要缩小 Q4 区间，应把后续计算集中在 46 个未排除极大点及其邻域，并重新预注册更大的固定 样本量或采用对可选停止有效的置信序列，而不能继续查看当前数据后沿用原固定样本区间。
+
+\hypertarget{ux9002ux7528ux8303ux56f4ux4e0eux7ed3ux679cux8fb9ux754c}{%
+\subsection{6.4 适用范围与结果边界}\label{ux9002ux7528ux8303ux56f4ux4e0eux7ed3ux679cux8fb9ux754c}}
+
+本文数值结论严格针对题给尺寸、\(1.8\ \mathrm{nm}\) 接触阈值、独立均匀中心、A 的球面各向 同性方向、允许粒子重叠、名义体积口径以及截断片段相互独立的 D 边界模型。模型只判断是否 存在至少一条左右贯通路径，不计算接触电阻、隧穿电流、路径并联效应或宏观电导率；``导通概率 不低于 \(90\%\)''不等价于给出了实际电导值。
+
+B 越界球片由球与胞盒的真实凸交集表示；A 越界片段则按中心线与边界的交点切成平底圆柱， 没有重建有限半径侧缘越界形成的完整布尔切面和斜切面。该近似主要影响边界附近的少量接触， 是当前几何证据中最重要的局限。若更换介质尺寸、引入排斥或团聚、改变取向分布、修改边界 处理或接触阈值，必须重新生成随机构型并完成概率确认，不能直接搬用本文百分数和成本区间。
+
+\hypertarget{ux4e03ux6a21ux578bux8bc4ux4ef7ux4e0eux7ed3ux8bba}{%
+\section{七、模型评价与结论}\label{ux4e03ux6a21ux578bux8bc4ux4ef7ux4e0eux7ed3ux8bba}}
+
+\hypertarget{ux6a21ux578bux4f18ux70b9}{%
+\subsection{7.1 模型优点}\label{ux6a21ux578bux4f18ux70b9}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{几何判定具有可核验边界。}模型保留有限平底圆柱、球和球片的凸几何，宽相只作安全 排除，窄相使用距离上下界作最终分类；见证路径、SLSQP 独立复核与 FreeCAD 实体使``导通'' 能回到具体几何对象，而不是只剩一个布尔输出。
+\item
+  \textbf{一套接触图贯穿四问。}确定性附件、随机概率、一维临界填充和二维混合成本没有使用彼此 不一致的替代模型。共同前缀和二维路径阈值复用最大图，把重复计算转化为增量查询，同时从 算法结构上保证粒子数单调性。
+\item
+  \textbf{统计结论与优化结论分层。}探索数据负责定位或选点，独立固定样本负责确认； Clopper--Pearson 精确界处理有限样本，Bonferroni 处理多点选择。Q4 进一步用更便宜域极大 点覆盖全体内部设计，明确区分``可行候选''``被排除设计''``未排除设计''和``全局最优''。
+\item
+  \textbf{结果可复现。}随机流由配置和 trial ID 决定，分片可合并审计；关键概率、置信限、成本、 图件和三维模型均由正式程序与机器结果生成，正文数值可以逐项回查。
+\end{enumerate}
+
+\hypertarget{ux5c40ux9650ux4e0eux6539ux8fdbux65b9ux5411}{%
+\subsection{7.2 局限与改进方向}\label{ux5c40ux9650ux4e0eux6539ux8fdbux65b9ux5411}}
+
+首先，A 的越界几何仍是中心线切段近似。后续可用解析半空间裁剪或 CAD 布尔交精确重建有限 半径圆柱的边界片，并对临界粒子数和 46 个 Q4 未决点做同随机数敏感性复算。其次，独立均匀 中心、各向同性方向和允许重叠是本题随机模型的一部分；真实制备中的取向、团聚与排斥会改变 贯通阈值，需要实验图像或工艺数据重新标定点过程。
+
+再次，二值接触图只能回答``有没有通路''。若目标改为电导率，应把几何间距、接触面积和界面 电阻转化为边电导，再求解 Kirchhoff 网络，并用实验或多物理场计算验证参数。FreeCAD 图件仅 验证空间结构，不构成电学有限元或实验验证。最后，Q4 的 620 项联合控制较保守，仍有 46 个 更便宜极大点未决；增加预注册样本、对未决边界进行分阶段置信预算，或采用严格的时序置信方法 可以提高排除能力，但不能追溯性地改变本次已冻结协议。
+
+\hypertarget{ux7ed3ux8bba}{%
+\subsection{7.3 结论}\label{ux7ed3ux8bba}}
+
+问题一的三个附件微构体依次为\textbf{不导通、导通、导通}，两个导通组均给出了从左电极到右电极 的逐边见证。问题二在 20000 次固定试验下，\(0.50\%\)、\(0.60\%\)、\(0.70\%\)、\(1.00\%\) 四个 名义体积分数对应的导通概率依次为 \textbf{\(7.895\%\)、\(22.050\%\)、\(47.195\%\)、\(99.280\%\)}。
+
+问题三的独立确认把最小整数括在 \(613\le N_A^\star\le616\)；区间两端换算并保留百分号后两位 均为 \textbf{\(0.87\%\)}，故题定精度下的最低填充量得到确认。616 根是现有联合置信证据支持的 保守可行方案，其成本为 \(9.1439195775\) 元，但 613 至 615 根仍未区分。
+
+问题四的独立流确认配比 \((N_A,N_B)=(619,0)\) 统计可行，成本为 \(9.1884516534\) 元。在 Q4 预注册的 620 个陈述家族内，573 个严格更低成本极大设计已被排除，仍有 46 个未被同时排除，对应成本证据区间为 \([8.5056264901,9.1884516534]\) 元。问题三的独立流同时确认更便宜的 \((616,0)\) 可行、成本为 \(9.1439195775\) 元。综合两组证据，当前不宣称全局最低成本。
+
+\TemplateMatterHeading{AI 工具使用声明}
+
+本参赛队在竞赛过程中使用了 OpenAI Codex{[}9{]}，主要用于资料检索、程序实现检查、代码调试、 图表生成和语言整理，详细使用情况见附录 A。核心模型、数学推导、参数口径、数值结果和结论 均由参赛队复核。
+
+\TemplateMatterHeading{参考文献}
+\begingroup
+\zihao{5}
+
+{[}1{]} GILBERT E G, JOHNSON D W, KEERTHI S S. A fast procedure for computing the distance between complex objects in three-dimensional space{[}J{]}. IEEE Journal on Robotics and Automation, 1988, 4(2): 193-203. DOI:10.1109/56.2083.
+
+{[}2{]} BALBERG I, ANDERSON C H, ALEXANDER S, et al.~Excluded volume and its relation to the onset of percolation{[}J{]}. Physical Review B, 1984, 30(7): 3933-3943. DOI:10.1103/PhysRevB.30.3933.
+
+{[}3{]} LORENZ C D, ZIFF R M. Precise determination of the critical percolation threshold for the three-dimensional ``Swiss cheese'' model using a growth algorithm{[}J{]}. The Journal of Chemical Physics, 2001, 114(8): 3659-3661. DOI:10.1063/1.1338506.
+
+{[}4{]} NEWMAN M E J, ZIFF R M. Fast Monte Carlo algorithm for site or bond percolation{[}J{]}. Physical Review E, 2001, 64(1): 016706. DOI:10.1103/PhysRevE.64.016706.
+
+{[}5{]} WILSON E B. Probable inference, the law of succession, and statistical inference{[}J{]}. Journal of the American Statistical Association, 1927, 22(158): 209-212. DOI:10.1080/01621459.1927.10502953.
+
+{[}6{]} CLOPPER C J, PEARSON E S. The use of confidence or fiducial limits illustrated in the case of the binomial{[}J{]}. Biometrika, 1934, 26(4): 404-413. DOI:10.1093/biomet/26.4.404.
+
+{[}7{]} DUNN O J. Multiple comparisons among means{[}J{]}. Journal of the American Statistical Association, 1961, 56(293): 52-64. DOI:10.1080/01621459.1961.10482090.
+
+{[}8{]} HOWARD S R, RAMDAS A, MCAULIFFE J, et al.~Time-uniform, nonparametric, nonasymptotic confidence sequences{[}J{]}. The Annals of Statistics, 2021, 49(2): 1055-1080. DOI:10.1214/20-AOS1991.
+
+{[}9{]} OpenAI Codex, GPT-5 系列（GPT-5 公开版本日期：2025-08-07；本界面未显示精确模型 快照；本机 Codex CLI 0.144.1）, OpenAI, 2026-08-07 至 2026-08-08.
+
+\endgroup
+\clearpage
+\TemplateMatterHeading{附录}
+
+\hypertarget{ux9644ux5f55-aai-ux5de5ux5177ux4f7fux7528ux8be6ux60c5}{%
+\subsection{附录 A：AI 工具使用详情}\label{ux9644ux5f55-aai-ux5de5ux5177ux4f7fux7528ux8be6ux60c5}}
+
+使用工具为 OpenAI Codex，开发机构为 OpenAI；本机可核验的 Codex CLI 版本为 0.144.1， 交互界面表明模型属于 GPT-5 系列，但未显示精确模型快照。使用日期为 2026-08-07 至 2026-08-08。官方 OpenAI 模型目录将 GPT-5-Codex 定义为面向 Codex 智能体编程 优化的 GPT-5 版本；本文只按实际界面可核验信息披露，不推测未显示的模型标识。
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.25}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.25}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.25}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.25}}@{}}
+\toprule
+使用环节 & 关键 Prompt 摘要 & 回复摘要 & 采纳内容与人工核验 \\
+\midrule
+\endhead
+规则与模板 & 阅读赛题、格式规范和官方 Word 模板，列出硬性提交要求 & 给出页边距、首页、页码、页数、匿名与文件命名检查项 & 逐页对照原 PDF 和模板对象，保留官方模板哈希 \\
+建模与推导 & 按题意建立有限实体接触、图连通和概率约束模型 & 给出凸体距离、共同随机前缀、整数成本和联合置信路线 & 参赛队重推公式，并以特殊构型、量纲和单调性检查 \\
+程序与仿真 & 实现可复现的几何核、Monte Carlo、断点续跑和结果注册 & 生成或修改 Python 程序、单元测试和运行命令 & 固定随机种子，运行全部测试，抽查原始 trial 与汇总哈希 \\
+图表与三维建模 & 依据冻结结果生成统计图和 FreeCAD 三维模型 & 辅助生成绘图、CAD 构建和渲染脚本 & 图中数据逐项回查结果文件，三维对象数、源 trial 和像素非空性自动审计 \\
+论文整理 & 将已冻结证据组织为摘要、正文、参考文献和附录 & 辅助压缩文字、统一符号并构建 LaTeX & 参赛队核对全部数值与结论；按官方 Word 模板核验版式并逐页检查 LaTeX PDF 后定稿 \\
+\bottomrule
+\end{longtable}
+
+AI 输出不作为数值证据。论文中的概率、置信限、成本和三维场景均来自可执行程序与机器可读 结果；全部文献均回到原始论文或官方页面核验。AI 辅助生成的程序和图件在附录、源程序说明 及图注中标识，参赛队负责最终正确性。
+
+\hypertarget{ux9644ux5f55-bux8f6fux4ef6ux73afux5883ux4e0eux590dux73b0ux547dux4ee4}{%
+\subsection{附录 B：软件、环境与复现命令}\label{ux9644ux5f55-bux8f6fux4ef6ux73afux5883ux4e0eux590dux73b0ux547dux4ee4}}
+
+计算环境为 Windows 11、Python 3.13、NumPy、SciPy、Numba、Matplotlib 和 pytest；三维模型 使用 FreeCAD 1.1.1；论文由 XeLaTeX/latexmk 编译，并按官方 Word 模板核验版式，再用 Poppler 逐页栅格化检查。 根随机种子固定为 \texttt{20260801}，各问题使用独立 stream ID。主要命令如下，均在支撑材料顶层 目录运行：
+
+\begin{itemize}
+  \item \texttt{python -B -m pytest -q -p no:cacheprovider}
+  \item \texttt{python run\_pipeline.py --from-step 1 --to-step 4 --dry-run}
+  \item \texttt{python run\_pipeline.py --from-step 1 --to-step 4}
+\end{itemize}
+
+项目级流水线从 \texttt{项目配置.json} 读取各问正式运行组，依次执行问题一，问题二的 D 主结果与 A/B 边界敏感性，问题三独立确认，以及问题四的筛选、冻结和确认。随机种子、stream ID、 样本量、分批大小和输出目录的完整参数列表同时保存在支撑材料的复现说明中。
+
+正式结果目录保存配置指纹、合并样本、汇总 JSON/CSV 和 SHA-256；长时运行的 Q4 另保留连续 trial 分片供独立审计。\texttt{-\/-resume} 会校验并复用现有分片，不改变既有随机样本；仅保留合并样本 的已完成任务在重新运行时会从固定种子复算分片。图表和 FreeCAD 模型由 \texttt{论文/figures/src} 下对应脚本从冻结结果重新生成。
+
+\hypertarget{ux9644ux5f55-cux4e3bux8981ux7a0bux5e8f}{%
+\subsection{附录 C：主要程序}\label{ux9644ux5f55-cux4e3bux8981ux7a0bux5e8f}}
+
+\input{source_appendix.tex}

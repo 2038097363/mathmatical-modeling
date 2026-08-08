@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "kind": "q4_confirmation_integer_domain_analysis",
+  "generated_at": "2026-08-08T14:57:52+08:00",
+  "audit_status": "passed",
+  "question": 4,
+  "result_status": "lowest_statistically_feasible_cost",
+  "conclusion_label_zh": "最低统计可行成本（尚未排除全部更便宜方案）",
+  "publication_guard": "描述性经验最低点由同一 50000 次确认样本事后查询，只能描述完整域样本；候选可行性与全局最低成本资格仅按冻结的 620 个 Bonferroni 单侧 CP 陈述判定。",
+  "boundary_contract": {
+    "mode": "D",
+    "periodic_axes": "X/Y/Z explicit fragment relocation; no minimum image",
+    "same_source_rule": "relocated fragments are independent; same-source fragment pairs are excluded",
+    "A_geometry": "reuse D-mode centerline cuts and mapped flat-cylinder fragments",
+    "B_geometry": "exact ball-cell intersections mapped to the base box",
+    "limitation": "A uses centerline cuts: radius-side overflow and oblique Boolean cut faces are not reconstructed. B spherical fragments use exact convex intersections."
+  },
+  "configuration": {
+    "fingerprint": "A89B7544E6D0696E62C7ABC8E34E3DA1718E5DA541D57E1FDB9CF7EC00696F77",
+    "trial_count": 50000,
+    "master_seed": 20260801,
+    "stream_id": 5,
+    "maximum_static_graph_design": [
+      619,
+      5483
+    ],
+    "integer_domain_shape": [
+      620,
+      5484
+    ],
+    "familywise_confidence": 0.95,
+    "bonferroni_statement_count": 620,
+    "per_statement_confidence": 0.9999193548387096
+  },
+  "source_integrity": {
+    "passed": true,
+    "files": {
+      "问题/问题4/src/solve.py": {
+        "sha256": "A8D30E2D8292335B3658611940FE9E40FB3CE02C8BC68F24120616B69937BB18",
+        "matches_startup_hash": true
+      },
+      "公共代码/mixed_microstructure_sim.py": {
+        "sha256": "E43BDF50232AC61B2C8BF8E6609DF80E412B13FB340CB4DB94E6FA4EAD545D9F",
+        "matches_startup_hash": true
+      },
+      "公共代码/microstructure_sim.py": {
+        "sha256": "222EF9B1B73B429BC5E35E2E95AFF1261F17A2F695F59429BE5DED4278D40B9C",
+        "matches_startup_hash": true
+      },
+      "公共代码/geometry_kernel.py": {
+        "sha256": "652CB279E662B083E190885557A942B9F819A789E77D9C538945716C91027E32",
+        "matches_startup_hash": true
+      },
+      "公共代码/pareto_connectivity.py": {
+        "sha256": "E6E3C40BE06241241D5717BB42D1E0AB10292D3FCB4BB7B7745F01D1486635DE",
+        "matches_startup_hash": true
+      }
+    }
+  },
+  "shard_audit": {
+    "passed": true,
+    "shard_count": 500,
+    "batch_size": 100,
+    "trial_count": 50000,
+    "trial_range": [
+      0,
+      49999
+    ],
+    "missing_trial_count": 0,
+    "duplicate_trial_count": 0,
+    "configuration_fingerprint": "A89B7544E6D0696E62C7ABC8E34E3DA1718E5DA541D57E1FDB9CF7EC00696F77",
+    "manifest_sha256": "CD720CFD976C2FBFAC631260E17A728A79FEC6A3F550A42A8BC6C3AEA33F4B11",
+    "first_shard": "shard_000000_000099.json",
+    "first_shard_sha256": "42394EB3AC8EFFFB295FDEEA604B3EF3C16BA2F43FC6FE464B8C55A46D7A4F85",
+    "last_shard": "shard_049900_049999.json",
+    "last_shard_sha256": "2293D416069BA8FA2F4F6826C4D840717D0F1BA4CD96ADD4B64AA7015603ADAB",
+    "shard_runtime_seconds": 789824.7460673997,
+    "narrow_nonconverged_total": 118176,
+    "internal_a_edges_total": 0
+  },
+  "merged_artifact_audit": {
+    "passed": true,
+    "path": "问题/问题4/results/D_screen2000_confirm50000/confirmation/pareto_max_A000619_B005483/mixed_pareto_frontier_samples.json",
+    "sha256": "469BE2167B263FA7A811BF4572C0517EED8783B7657D7AADA5C24421020D94A7",
+    "record_count": 50000,
+    "trial_range": [
+      0,
+      49999
+    ],
+    "record_sequence_sha256": "9DED742C993BB8F8ED00BCD318058DD5510C20B68667D1138EF9F189277AC225",
+    "records_equal_all_shards": true,
+    "diagnostic_totals_recomputed": true,
+    "shard_runtime_seconds": 789824.7460673997
+  },
+  "integer_domain_audit": {
+    "passed": true,
+    "counts_path": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_integer_domain_counts.npz",
+    "counts_sha256": "20D08A5781E10FF0CEB1446A729BAF2607CA5CE57895CA79B5711DC87ECFDFDE",
+    "dtype": "int32",
+    "shape": [
+      620,
+      5484
+    ],
+    "minimum_count": 0,
+    "maximum_count": 50000,
+    "n_a_direction_violations": 0,
+    "n_b_direction_violations": 0,
+    "direct_cell_audit": {
+      "passed": true,
+      "checked_cell_count": 63,
+      "seed": 20260808,
+      "method": "逐试验检查是否存在分量不大于查询设计的 Pareto 点"
+    }
+  },
+  "frozen_record_reconciliation": {
+    "passed": true,
+    "frozen_design_count": 620,
+    "confirmation_record_count": 620,
+    "csv_record_count": 620,
+    "matrix_mismatch_count": 0,
+    "confirmation_json": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation.json",
+    "confirmation_json_sha256": "ED7C7BFAEF2779F8CEFF5E33DC4845752B3B3134936F75BAE053B0FE90DEEABD",
+    "confirmation_csv": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation.csv",
+    "confirmation_csv_sha256": "7B5A1232E349B53EE46BB71658B636E82A5FC2CD56BF8AB5F6E5A0E7D22EB303"
+  },
+  "statistical_results": {
+    "target_probability": 0.9,
+    "candidate": {
+      "n_a": 619,
+      "n_b": 0,
+      "successes": 45554,
+      "trials": 50000,
+      "estimate": 0.91108,
+      "cost_weight": 350973,
+      "cost_yuan": 9.188451653403087,
+      "clopper_pearson_one_sided_lower": 0.9061863570173373,
+      "clopper_pearson_one_sided_upper": 0.9158116422756992,
+      "proof_status": "candidate_statistically_feasible",
+      "evidence_role": "预注册候选的独立同时置信结论"
+    },
+    "descriptive_empirical_minimum": {
+      "n_a": 612,
+      "n_b": 12,
+      "successes": 45000,
+      "trials": 50000,
+      "estimate": 0.9,
+      "cost_weight": 347772,
+      "cost_yuan": 9.104649669368579,
+      "required_successes": 45000,
+      "evidence_role": "同一确认样本上的完整整数域描述性经验最低点，非预注册可行性证明"
+    },
+    "q3_reference_design_in_confirmation_stream": {
+      "n_a": 616,
+      "n_b": 0,
+      "successes": 45251,
+      "trials": 50000,
+      "estimate": 0.90502,
+      "cost_weight": 349272,
+      "cost_yuan": 9.143919577538451,
+      "evidence_role": "跨问题数值一致性参照，不替代 Q3 的独立冻结区间"
+    },
+    "candidate_statistically_feasible": true,
+    "all_strictly_cheaper_maximal_designs_excluded": false,
+    "excluded_frontier_count": 573,
+    "not_excluded_frontier_count": 46,
+    "cost_uncertainty_interval": {
+      "lower_cost_weight": 324891,
+      "upper_cost_weight": 350973,
+      "lower_cost_yuan": 8.505626490145346,
+      "upper_cost_yuan": 9.188451653403087,
+      "minimum_not_excluded_design": [
+        573,
+        0
+      ]
+    }
+  },
+  "input_files": {
+    "freeze": {
+      "path": "问题/问题4/results/D_screen2000_confirm50000/q4_confirmation_freeze.json",
+      "sha256": "BA11DBD276E29EE3A001F7FB822A331DD32772DFD8A39747E2099484AD5EC904"
+    },
+    "final_summary": {
+      "path": "问题/问题4/results/D_screen2000_confirm50000/q4_summary.json",
+      "sha256": "0743A9D92423AAED897FED5350C8946B07B7CF8131B74E64A956D3FAEEEB8B54"
+    },
+    "merged_pareto_frontier": {
+      "path": "问题/问题4/results/D_screen2000_confirm50000/confirmation/pareto_max_A000619_B005483/mixed_pareto_frontier_samples.json",
+      "sha256": "469BE2167B263FA7A811BF4572C0517EED8783B7657D7AADA5C24421020D94A7"
+    }
+  }
+}
