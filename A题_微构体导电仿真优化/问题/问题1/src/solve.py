@@ -67,7 +67,6 @@ SCENARIOS = {
 INTERNAL_MODES = ("disconnected_fragments", "connected_same_particle")
 
 
-# 附件行按原尺寸有限平底圆柱建模，短段不延长或补齐。
 @dataclass(frozen=True)
 class Segment:
     sheet: str
@@ -204,7 +203,6 @@ def _electrode_edge(sheet: str, side: str, segment: Segment, gap_nm: float) -> d
     }
 
 
-# 六变量凸约束优化独立复核 GJK 的窄相阈值分类。
 def _orthonormal_plane(axis: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     seed = np.array([1.0, 0.0, 0.0])
     if abs(float(np.dot(seed, axis))) > 0.8:
@@ -300,7 +298,6 @@ def slsqp_cylinder_distance(first: Cylinder, second: Cylinder) -> float:
     return distance_scale * float(np.sqrt(max(best.fun, 0.0)))
 
 
-# 胶囊宽相只作排除，候选均由平底圆柱 GJK 距离界判定。
 def _pair_record(sheet: str, first: Segment, second: Segment) -> dict[str, Any]:
     capsule_gap = capsule_cylinder_distance(first.cylinder, second.cylinder)
     base = {
@@ -538,7 +535,6 @@ def annotate_physical_edge(edge: dict[str, Any], lookup: dict[int, dict[str, Any
     return result
 
 
-# 并查集判定贯通，路径搜索仅恢复逐边见证。
 def connected_by_union_find(edges: Iterable[dict[str, Any]]) -> bool:
     union_find = GraphUnionFind()
     union_find.find("LEFT")

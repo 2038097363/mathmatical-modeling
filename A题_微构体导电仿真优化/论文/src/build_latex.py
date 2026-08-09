@@ -24,7 +24,7 @@ BUILD_META_TEX = PAPER_DIR / "build_meta.tex"
 Q4_RESULT_ROOT = (
     PROJECT_DIR / "问题" / "问题4" / "results" / "D_screen2000_confirm50000"
 )
-DEFAULT_Q4_SUMMARY = Q4_RESULT_ROOT / "q4_summary.json"
+DEFAULT_Q4_SUMMARY = Q4_RESULT_ROOT / "q4_positive_domain_summary.json"
 DEFAULT_Q4_ANALYSIS = Q4_RESULT_ROOT / "q4_confirmation_integer_domain_analysis.json"
 DEFAULT_Q3_SUMMARY = (
     PROJECT_DIR / "问题" / "问题3" / "results" / "D_confirmation_n50000" / "q3_summary.json"
@@ -273,7 +273,7 @@ def validate_identity(mode: str, group: str | None, competition_id: str | None) 
     return group, competition_id
 
 
-def validate_final_evidence(
+def validate_legacy_final_evidence(
     summary_path: Path,
     analysis_path: Path,
     q3_summary_path: Path,
@@ -510,6 +510,122 @@ def validate_final_evidence(
     }
 
 
+def validate_final_evidence(
+    summary_path: Path,
+    analysis_path: Path,
+    q3_summary_path: Path,
+    frontier_pdf: Path,
+    frontier_png: Path,
+    frontier_audit_path: Path,
+    *,
+    project_root: Path = PROJECT_DIR,
+) -> dict[str, Any]:
+    project_root = project_root.expanduser().resolve()
+    summary_path = require_inside(summary_path, project_root, "Q4 正整数域摘要")
+    analysis_path = require_inside(analysis_path, project_root, "Q4 完整矩阵审计")
+    q3_summary_path = require_inside(q3_summary_path, project_root, "Q3 独立确认摘要")
+    frontier_pdf = require_inside(frontier_pdf, project_root, "Q4 正整数域图 PDF")
+    frontier_png = require_inside(frontier_png, project_root, "Q4 正整数域图 PNG")
+    frontier_audit_path = require_inside(frontier_audit_path, project_root, "Q4 图件审计")
+
+    summary = read_json_object(summary_path, "Q4 正整数域摘要")
+    if summary.get("kind") != "q4_positive_domain_summary":
+        raise ValueError("Q4 摘要不是正整数域冻结结果")
+    if summary.get("result_status") != "positive_domain_empirical_minimum_with_conservative_recommendation":
+        raise ValueError("Q4 正整数域结论状态无效")
+    domain = summary.get("domain")
+    if not isinstance(domain, dict) or domain.get("constraint") != "N_A >= 1 and N_B >= 1":
+        raise ValueError("Q4 未执行 N_A,N_B 均为正整数的题面约束")
+    empirical = summary.get("empirical_minimum")
+    recommendation = summary.get("conservative_recommendation")
+    if not isinstance(empirical, dict) or not isinstance(recommendation, dict):
+        raise ValueError("Q4 缺少经验最低或保守推荐记录")
+    if (int(empirical["n_a"]), int(empirical["n_b"])) != (612, 12):
+        raise ValueError("Q4 经验最低设计与冻结值不一致")
+    if (int(recommendation["n_a"]), int(recommendation["n_b"])) != (616, 1):
+        raise ValueError("Q4 保守推荐设计与冻结值不一致")
+    if int(empirical["successes"]) != 45000 or int(recommendation["successes"]) != 45256:
+        raise ValueError("Q4 关键成功次数与冻结矩阵不一致")
+    if float(recommendation["cp_one_sided_family_lower"]) < 0.90:
+        raise ValueError("Q4 保守推荐未通过联合置信下界")
+
+    sources = summary.get("source_files")
+    if not isinstance(sources, dict):
+        raise ValueError("Q4 摘要缺少源文件证据")
+    resolved_sources: dict[str, Path] = {}
+    for key, label in (
+        ("success_counts", "Q4 成功次数矩阵"),
+        ("q3_summary", "Q3 单调性证书"),
+        ("confirmation_artifact", "Q4 Pareto 前沿样本"),
+    ):
+        item = sources.get(key)
+        if not isinstance(item, dict):
+            raise ValueError(f"Q4 摘要缺少{label}")
+        path = resolve_evidence_path(item.get("path"), summary_path, project_root, label)
+        if sha256(path) != str(item.get("sha256", "")).upper():
+            raise ValueError(f"{label}哈希不一致")
+        resolved_sources[key] = path
+
+    analysis = read_json_object(analysis_path, "Q4 完整矩阵审计")
+    integer_audit = analysis.get("integer_domain_audit")
+    if (
+        analysis.get("kind") != "q4_confirmation_integer_domain_analysis"
+        or analysis.get("audit_status") != "passed"
+        or not isinstance(integer_audit, dict)
+        or integer_audit.get("passed") is not True
+        or list(integer_audit.get("shape", [])) != [620, 5484]
+        or str(integer_audit.get("counts_sha256", "")).upper()
+        != str(sources["success_counts"]["sha256"]).upper()
+    ):
+        raise ValueError("Q4 正整数域所用成功次数矩阵未通过既有完整审计")
+
+    q3_summary = read_json_object(q3_summary_path, "Q3 独立确认摘要")
+    q3_rows = q3_summary.get("candidate_records")
+    q3_matches = [
+        row
+        for row in q3_rows or []
+        if isinstance(row, dict) and int(row.get("particle_count", -1)) == 616
+    ]
+    if (
+        q3_summary.get("reported_volume_fraction_formatted") != "0.87%"
+        and q3_summary.get("decision", {}).get("reported_volume_fraction_formatted") != "0.87%"
+    ):
+        raise ValueError("Q3 题定精度结论不再是 0.87%")
+    if len(q3_matches) != 1 or q3_matches[0].get("classification_by_bonferroni_cp") != "statistically_feasible":
+        raise ValueError("Q3 未提供 616 根 A 的独立联合置信证书")
+
+    for path in (frontier_pdf, frontier_png, frontier_audit_path):
+        if not path.is_file() or path.stat().st_size == 0:
+            raise FileNotFoundError(path)
+    figure_audit = read_json_object(frontier_audit_path, "Q4 图件审计")
+    if (
+        figure_audit.get("kind") != "q4_positive_domain_figure_audit"
+        or figure_audit.get("status") != "passed"
+        or str(figure_audit.get("summary_sha256", "")).upper() != sha256(summary_path)
+        or str(figure_audit.get("pdf_sha256", "")).upper() != sha256(frontier_pdf)
+        or str(figure_audit.get("png_sha256", "")).upper() != sha256(frontier_png)
+    ):
+        raise ValueError("Q4 正整数域图件未通过证据绑定审计")
+
+    return {
+        "summary_path": summary_path,
+        "summary_sha256": sha256(summary_path),
+        "summary": summary,
+        "analysis_path": analysis_path,
+        "analysis_sha256": sha256(analysis_path),
+        "analysis": analysis,
+        "q3_summary_path": q3_summary_path,
+        "q3_summary": q3_summary,
+        "q3_reference": q3_matches[0],
+        "frontier_pdf": frontier_pdf,
+        "frontier_png": frontier_png,
+        "frontier_audit_path": frontier_audit_path,
+        "frontier_audit": figure_audit,
+        "empirical": empirical,
+        "recommendation": recommendation,
+    }
+
+
 def percent_text(value: Any, digits: int = 4) -> str:
     return f"{100.0 * float(value):.{digits}f}".rstrip("0").rstrip(".") + r"\%"
 
@@ -518,7 +634,7 @@ def decimal_text(value: Any, digits: int = 10) -> str:
     return f"{float(value):.{digits}f}".rstrip("0").rstrip(".")
 
 
-def build_final_q4_blocks(evidence: dict[str, Any]) -> dict[str, str]:
+def build_legacy_final_q4_blocks(evidence: dict[str, Any]) -> dict[str, str]:
     summary = evidence["summary"]
     freeze = evidence["freeze"]
     candidate = evidence["candidate"]
@@ -680,19 +796,151 @@ ${cp_upper}$，成本为 ${cost}$ 元。{decision_text}
     }
 
 
+def build_final_q4_blocks(evidence: dict[str, Any]) -> dict[str, str]:
+    summary = evidence["summary"]
+    empirical = evidence["empirical"]
+    recommendation = evidence["recommendation"]
+    nearby = {
+        (int(row["n_a"]), int(row["n_b"])): row
+        for row in summary.get("nearby_designs", [])
+        if isinstance(row, dict)
+    }
+    required = ((613, 1), (614, 1), (615, 1))
+    if any(key not in nearby for key in required):
+        raise ValueError("Q4 正整数域摘要缺少相邻 B=1 设计")
+
+    empirical_cost = decimal_text(empirical["cost_yuan"], 10)
+    recommendation_cost = decimal_text(recommendation["cost_yuan"], 10)
+    recommendation_probability = percent_text(recommendation["estimate"], 3)
+    recommendation_lower = percent_text(
+        recommendation["cp_one_sided_family_lower"], 4
+    )
+    q3_lower = percent_text(
+        summary["q3_monotonic_certificate"]["clopper_pearson_one_sided_lower"], 4
+    )
+    premium = decimal_text(recommendation["cost_premium_yuan"], 4)
+    premium_percent = decimal_text(recommendation["cost_premium_percent"], 3)
+
+    table_rows = []
+    for design, role in (
+        ((612, 12), "正整数域经验最低"),
+        ((613, 1), "低成本邻点"),
+        ((614, 1), "经验可行邻点"),
+        ((615, 1), "点态下界可行邻点"),
+        ((616, 1), "联合置信最终推荐"),
+    ):
+        row = (
+            empirical
+            if design == (612, 12)
+            else recommendation
+            if design == (616, 1)
+            else nearby[design]
+        )
+        lower = (
+            row["cp_one_sided_family_lower"]
+            if design[1] == 1
+            else row["cp_one_sided_95_lower"]
+        )
+        lower_label = "分支联合" if design[1] == 1 else "点态"
+        table_rows.append(
+            f"    $({design[0]},{design[1]})$ & {role} & "
+            f"${int(row['successes'])}/50000$ & ${percent_text(row['estimate'], 3)}$ & "
+            f"${percent_text(lower, 4)}$（{lower_label}） & ${decimal_text(row['cost_yuan'], 4)}$ \\\\"
+        )
+
+    result = rf"""
+完整正整数域枚举得到固定样本经验最低点
+
+$$
+\boxed{{(N_A,N_B)=(612,12)}},\qquad
+\widehat p=\frac{{45000}}{{50000}}=90.000\%,\qquad
+C={empirical_cost}\ \text{{元}}.
+$$
+
+所有权重更小的 1663439 个正整数设计在同一固定样本上均未达到 $90\%$。不过该点恰好落在
+经验阈值上，点态单侧 $95\%$ Clopper--Pearson 下界为
+${percent_text(empirical['cp_one_sided_95_lower'], 4)}$，没有留下统计裕度。
+
+在 $N_B=1$ 的 619 点预定义分支上，首个通过联合置信门槛的设计为
+
+$$
+\boxed{{(N_A,N_B)=(616,1)}},\qquad
+\widehat p={recommendation_probability},\qquad
+p_L={recommendation_lower}>90\%,\qquad
+C={recommendation_cost}\ \text{{元}}.
+$$
+
+它比经验最低方案只增加 {premium} 元，即 {premium_percent}\%。同时，问题三的独立随机流已经
+给出 616 根 A 的联合校正下界 ${q3_lower}$；加入一个 B 不会删除原有节点或接触边，因此
+$p(616,1)\ge p_A(616)$。综合成本和置信裕度，本文将 **$(616,1)$ 作为最终推荐配比**。
+
+```{{=latex}}
+\begin{{table}}[htbp]
+  \centering
+  \small
+  \caption{{问题四正整数域关键设计的固定样本统计与成本}}
+  \label{{tab:q4-confirmation}}
+  \begin{{tabularx}}{{\textwidth}}{{cXcccc}}
+    \toprule
+    配比 $(N_A,N_B)$ & 证据角色 & 成功数 & 经验概率 & 单侧 CP 下界 & 成本（元） \\
+    \midrule
+{chr(10).join(table_rows)}
+    \bottomrule
+  \end{{tabularx}}
+\end{{table}}
+```
+"""
+
+    frontier = r"""
+```{=latex}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{figures/generated/q4_cost_frontier.pdf}
+  \caption{问题四正整数域的成本--导通证据。(a) 临界区经验概率地形与 90\% 等值线；(b) 各 $N_A$ 对应的首个经验可行 $N_B$ 及整数成本前沿；(c) $N_B=1$ 分支的经验概率与 619 项联合校正单侧下界。星号为经验最低 $(612,12)$，菱形为最终推荐 $(616,1)$。}
+  \label{fig:q4-cost-frontier}
+\end{figure}
+```
+"""
+
+    conclusion = rf"""
+问题四在 $N_A,N_B\ge1$ 的题定域内完成成本有界枚举。固定 $50000$ 次样本的经验最低方案为
+**$(612,12)$**，成本 **{decimal_text(empirical['cost_yuan'], 4)} 元**；其经验概率恰为 $90\%$。
+考虑联合置信裕度后，最终推荐 **$(616,1)$**，经验导通概率 **{recommendation_probability}**、
+619 项校正单侧下界 **{recommendation_lower}**、成本 **{decimal_text(recommendation['cost_yuan'], 4)} 元**。
+该推荐仅比经验最低方案增加 **{premium_percent}\%** 成本，并由问题三的独立确认结果通过图单调性
+提供交叉证书。
+"""
+
+    abstract = rf"""
+\textbf{{针对问题四，}}将“同时填充”落实为 $N_A,N_B\ge1$，以二维 minimax 路径前沿一次查询
+完整成本有界整数域。固定 $50000$ 次样本的经验最低配比为
+\textbf{{$(612,12)$}}，成本 \textbf{{{decimal_text(empirical['cost_yuan'], 4)} 元}}；为避免阈值点
+缺少统计裕度，再对 $N_B=1$ 分支实施 619 项联合置信控制，最终推荐
+\textbf{{$(616,1)$}}，经验导通率 \textbf{{{recommendation_probability}}}、校正下界
+\textbf{{{recommendation_lower}}}、成本 \textbf{{{decimal_text(recommendation['cost_yuan'], 4)} 元}}，
+相对经验最低方案仅增加 {premium_percent}\%。
+"""
+    return {
+        "abstract": abstract.strip(),
+        "result": result.strip(),
+        "frontier": frontier.strip(),
+        "conclusion": conclusion.strip(),
+    }
+
+
 FIGURE_Q4_3D = r"""
 ```{=latex}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.72\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_axonometric.png}
-  \caption{问题四确认流内已确认统计可行方案 $(619,0)$ 的 FreeCAD 全局轴测图。深灰面为左右电极，浅灰实体为 A 介质截断片段，橙色实体为程序恢复的贯通见证；该图只展示方案的空间结构。}
+  \includegraphics[width=0.72\textwidth]{figures/rendered/q4_final_na000616_nb000001_trial000001_axonometric.png}
+  \caption{最终推荐配比 $(616,1)$ 的 FreeCAD 全局轴测图。线框为左右电极，浅灰实体为 A，蓝色实体为 B，橙色实体为程序恢复的贯通见证；完整实体保存在可编辑 FCStd 模型中。}
   \label{fig:q4-global-3d}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.98\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_witness_focus.pdf}
-  \caption{问题四确认流内统计可行方案的局部三维贯通见证与有序接触链。橙色实体为见证片段，青色虚线为接触图边，不表示连续空间电流轨迹；链条按 $L\to1\to\cdots\to10\to R$ 给出 11 条经几何核验的接触边，同源内部边为 0。}
+  \includegraphics[width=0.98\textwidth]{figures/rendered/q4_final_na000616_nb000001_trial000001_witness_focus.pdf}
+  \caption{最终推荐配比的局部三维贯通见证与有序接触图。橙色实体为见证片段，青色虚线为已核验接触边，不表示连续空间电流轨迹。}
   \label{fig:q4-witness-3d}
 \end{figure}
 \FloatBarrier

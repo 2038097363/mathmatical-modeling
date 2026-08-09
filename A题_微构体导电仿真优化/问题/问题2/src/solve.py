@@ -136,7 +136,6 @@ def register_formal_results(result: dict, summary_path: Path) -> None:
     export_latex()
 
 
-# 四个填充量共享同一批首次导通样本。
 def run(args: argparse.Namespace) -> dict:
     config = SimulationConfig(
         max_count=args.max_count,

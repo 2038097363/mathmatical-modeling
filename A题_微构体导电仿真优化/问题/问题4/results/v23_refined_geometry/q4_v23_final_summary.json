@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "frozen_at": "2026-08-09T15:27:56+08:00",
+  "adoption": {
+    "question_3": "retain_current_project_result",
+    "question_4": "adopt_v23_refined_geometry_two_criterion_result",
+    "geometry_scope": "Q4 actual-cylinder clipping refinement; Q3 registry is unchanged"
+  },
+  "primary_point_estimate_solution": {
+    "N_A": 612,
+    "N_B": 2,
+    "cost_yuan": 9.0878945158,
+    "successes": 135007,
+    "trials": 150000,
+    "probability": 0.9000466666666667,
+    "Wilson95_low": 0.8985185400646002,
+    "Wilson95_high": 0.9015543036228492,
+    "CP_one_sided95_lower": 0.8987637812739432,
+    "point_feasible": true,
+    "lower_bound_feasible": false
+  },
+  "confidence_conservative_solution": {
+    "N_A": 613,
+    "N_B": 1,
+    "cost_yuan": 9.101063025,
+    "direct_mixed_successes": null,
+    "direct_mixed_trials": null,
+    "inherited_A_only_successes": 135242,
+    "inherited_A_only_trials": 150000,
+    "inherited_probability_floor": 0.9016133333333334,
+    "inherited_CP_one_sided95_lower": 0.9003393482431642,
+    "evidence_type": "monotonic inheritance from v23 A-only N_A=613; adding B removes no existing path",
+    "confidence_scope": "nominal one-sided 95% CP for the selected v23 A-only candidate"
+  },
+  "strictly_cheaper_critical_branch": {
+    "candidate_count": 7,
+    "N_A_range": [
+      605,
+      611
+    ],
+    "maximum_probability": {
+      "N_A": 611,
+      "N_B": 10,
+      "cost_yuan": 9.086454619300001,
+      "cost_gap_to_incumbent": 0.0014398964999990937,
+      "successes": 134914,
+      "trials": 150000,
+      "probability": 0.8994266666666667,
+      "Wilson95_low": 0.8978943803943576,
+      "Wilson95_high": 0.9009384950483382,
+      "CP_one_sided95_lower": 0.8981402858112065,
+      "point_feasible": false,
+      "lower_bound_feasible": false,
+      "PAVA_probability": 0.8994266666666667,
+      "PAVA_adjustment": 0.0
+    },
+    "all_point_estimates_below_0_90": true,
+    "PAVA_maximum_absolute_adjustment": 2.0000000000020002e-05
+  },
+  "integrity": {
+    "imported_file_count": 92,
+    "q4_data_file_count": 81,
+    "conservative_evidence_file_count": 4,
+    "source_file_count": 3,
+    "manifest": "问题/问题4/results/v23_refined_geometry/v23_import_manifest.csv",
+    "key_source_sha256": {
+      "问题/问题4/results/v23_refined_geometry/q4_v230_local_grid_A612_B1_8_pooled150000_summary.json": "6671A5E04F1544504F7D739AABC66476182132730335C4C33C6BB0F07BDE1F81",
+      "问题/问题4/results/v23_refined_geometry/q4_v230_branch_below_A612B2_A605_611_pooled150000_audit.json": "F56820A1FC18D42086685E38C5911F3D3FF1D7127A4817BA2C45525EF49E93EB",
+      "问题/问题4/results/v23_refined_geometry/v23_conservative_evidence/pooled_D_v230_150000_prefix.csv": "CD38F28FDFCC11C64D65D5025D81EC44D40892382640DB2C8890113B5FE4DC1F",
+      "问题/问题4/results/v23_refined_geometry/PACKAGE_RECEIPT.json": "23692D8CB17E6D61EBFA4208DB4689C24A776F758B60ACF45F4603F52B144258"
+    }
+  }
+}

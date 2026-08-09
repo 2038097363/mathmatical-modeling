@@ -322,16 +322,16 @@ def build_workflow_figure():
         ax.text(x, 509, label, ha="center", va="center", fontsize=9.6, weight="bold", color="#263238", zorder=11)
 
     legend_items = [
-        (758, 350, "o", "#2457A7", "已排除"),
-        (758, 379, "D", "#C46618", "未决"),
-        (758, 406, "*", "#0B7A75", "确认候选"),
+        (758, 350, "o", "#2457A7", "正整数域枚举"),
+        (758, 379, "*", "#E9A400", "经验最低"),
+        (758, 406, "D", "#008A78", "联合置信推荐"),
     ]
     for x, y, marker, color, label in legend_items:
-        ax.scatter([x], [y], s=65 if marker != "*" else 95, marker=marker, facecolors="none" if marker == "D" else color, edgecolors=color, linewidth=1.2, zorder=11)
+        ax.scatter([x], [y], s=65 if marker != "*" else 95, marker=marker, facecolors=color, edgecolors="white", linewidth=0.8, zorder=11)
         ax.text(x + 20, y, label, ha="left", va="center", fontsize=9.7, color="#263238", zorder=11)
-    ax.text(630, 457, "573 已排除\n46 尚不能排除", ha="center", va="center", fontsize=8.8, weight="bold", color="#35424A", linespacing=1.35, zorder=11)
+    ax.text(630, 457, "(612,12) 经验最低\n(616,1) 最终推荐", ha="center", va="center", fontsize=8.3, weight="bold", color="#35424A", linespacing=1.35, zorder=11)
     ax.text(545, 418, "证据状态", rotation=90, ha="center", va="center", fontsize=9.5, weight="bold", color="#263238", zorder=11)
-    ax.text(825, 511, "成本前沿（结构示意）", ha="center", va="center", fontsize=9.7, weight="bold", color="#263238", zorder=11)
+    ax.text(825, 511, "成本前沿与联合置信界", ha="center", va="center", fontsize=9.7, weight="bold", color="#263238", zorder=11)
 
     validation_labels = ["构型检验", "独立求解", "单调性", "独立随机流", "置信界"]
     validation_markers = ["o", "s", "^", "D", "P"]
@@ -346,7 +346,8 @@ def build_workflow_figure():
 def build_q1_3d_figure():
     configure_fonts()
     scenes = [json.loads(path.read_text(encoding="utf-8-sig")) for path in Q1_SCENE_PATHS]
-    figure = plt.figure(figsize=(10.8, 3.65), constrained_layout=True)
+    figure = plt.figure(figsize=(10.8, 3.55))
+    figure.subplots_adjust(left=0.015, right=0.985, bottom=0.10, top=0.90, wspace=0.02)
     titles = ["组 1：不导通", "组 2：见证路径 4 个片段", "组 3：见证路径 4 个片段"]
     for panel_index, (scene, title) in enumerate(zip(scenes, titles, strict=True), start=1):
         ax = figure.add_subplot(1, 3, panel_index, projection="3d")
@@ -407,22 +408,16 @@ def build_q1_3d_figure():
         ax.set_box_aspect((1.65, 1.0, 1.0))
         ax.set_proj_type("ortho")
         ax.view_init(elev=24.0, azim=-58.0)
-        ax.set_xticks([-1.0, 0.0, 1.0], ["-5000", "0", "5000"])
-        ax.set_yticks([-1.0, 0.0, 1.0], ["-500", "0", "500"])
-        ax.set_zticks([-1.0, 0.0, 1.0], ["-500", "0", "500"])
-        ax.tick_params(labelsize=7.7, pad=0)
-        ax.set_xlabel("x (nm)", fontsize=8.5, labelpad=2)
-        ax.set_ylabel("y (nm)", fontsize=8.5, labelpad=2)
-        ax.set_zlabel("z (nm)", fontsize=8.5, labelpad=2)
         ax.set_title(f"({chr(96 + panel_index)}) {title}", fontsize=10.3, weight="bold", pad=4)
         ax.grid(False)
         for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
             axis.pane.set_alpha(0.0)
+        ax.set_axis_off()
 
     figure.text(
         0.5,
         0.008,
-        "三轴按各自显示范围归一化以辨识接触结构；几何判定始终使用原始 nm 坐标",
+        r"共享几何尺寸：$10\,000\times1\,000\times1\,000$ nm；显示时各轴归一化，接触判定使用原始坐标",
         ha="center",
         va="bottom",
         fontsize=8.6,
@@ -648,7 +643,7 @@ def load_q4_boundary_evidence(
     }
 
 
-def build_q4_boundary_figure(evidence: dict[str, Any]):
+def _build_q4_boundary_figure_legacy(evidence: dict[str, Any]):
     configure_fonts()
     excluded = evidence["excluded"]
     unresolved = evidence["unresolved"]
@@ -1097,6 +1092,237 @@ def build_q4_boundary_figure_compact(evidence: dict[str, Any]):
     }
 
 
+def build_q4_boundary_figure(evidence: dict[str, Any]):
+    configure_fonts()
+    excluded = evidence["excluded"]
+    unresolved = evidence["unresolved"]
+    candidate = evidence["candidate"]
+    interval = evidence["cost_interval"]
+    if (len(excluded), len(unresolved)) != (573, 46):
+        raise ValueError("正式 Q4 未决边界图必须绑定 573 个已排除点和 46 个未决点")
+
+    blue = "#2A5CAA"
+    amber = "#D98600"
+    teal = "#007F73"
+    ink = "#30343B"
+    near_excluded = excluded[-40:]
+
+    excluded_a = np.asarray([int(record["n_a"]) for record in near_excluded])
+    excluded_upper = 100.0 * np.asarray(
+        [float(record["clopper_pearson_one_sided_upper"]) for record in near_excluded]
+    )
+    unresolved_a = np.asarray([int(record["n_a"]) for record in unresolved])
+    unresolved_b = np.asarray([int(record["n_b"]) for record in unresolved])
+    unresolved_upper = 100.0 * np.asarray(
+        [float(record["clopper_pearson_one_sided_upper"]) for record in unresolved]
+    )
+    unresolved_costs = np.asarray([float(record["cost_yuan"]) for record in unresolved])
+    candidate_a = int(candidate["n_a"])
+    candidate_b = int(candidate["n_b"])
+    candidate_lower = 100.0 * float(candidate["clopper_pearson_one_sided_lower"])
+    lower_cost = float(interval["lower_cost_yuan"])
+    upper_cost = float(interval["upper_cost_yuan"])
+
+    figure = plt.figure(figsize=(7.6, 3.75), constrained_layout=True)
+    grid = figure.add_gridspec(
+        2,
+        2,
+        width_ratios=[1.28, 0.92],
+        height_ratios=[1.28, 0.72],
+        wspace=0.08,
+        hspace=0.12,
+    )
+    bound_ax = figure.add_subplot(grid[:, 0])
+    mix_ax = figure.add_subplot(grid[0, 1])
+    cost_ax = figure.add_subplot(grid[1, 1])
+
+    y_min = min(88.0, float(np.min(excluded_upper)) - 0.15)
+    y_max = max(float(np.max(unresolved_upper)), candidate_lower) + 0.20
+    bound_ax.axhspan(y_min, 90.0, color="#E8F0FA", zorder=0)
+    bound_ax.axhspan(90.0, y_max, color="#FFF5E5", zorder=0)
+    bound_ax.axhline(90.0, color=ink, linewidth=1.2, linestyle=(0, (5, 3)), zorder=1)
+    bound_ax.plot(excluded_a, excluded_upper, color=blue, linewidth=1.15, alpha=0.85)
+    bound_ax.scatter(excluded_a, excluded_upper, s=18, color=blue, edgecolor="white", linewidth=0.25, zorder=3)
+    bound_ax.plot(unresolved_a, unresolved_upper, color=amber, linewidth=1.0, alpha=0.72)
+    bound_ax.scatter(
+        unresolved_a,
+        unresolved_upper,
+        s=28,
+        marker="D",
+        facecolors="white",
+        edgecolors=amber,
+        linewidth=1.1,
+        zorder=4,
+    )
+    bound_ax.scatter(
+        [candidate_a],
+        [candidate_lower],
+        s=125,
+        marker="*",
+        color=teal,
+        edgecolor="#164D49",
+        linewidth=0.65,
+        zorder=5,
+    )
+    bound_ax.text(
+        0.03,
+        0.95,
+        "●  已排除 573（图中显示最临界 40 点）",
+        transform=bound_ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=7.4,
+        color=blue,
+        weight="bold",
+    )
+    bound_ax.text(
+        0.03,
+        0.885,
+        "◇  未决 46（全部显示）",
+        transform=bound_ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=7.4,
+        color="#9A5700",
+        weight="bold",
+    )
+    bound_ax.annotate(
+        "候选下限 90.619%",
+        xy=(candidate_a, candidate_lower),
+        xytext=(-8, 12),
+        textcoords="offset points",
+        ha="right",
+        fontsize=7.2,
+        color=teal,
+        weight="bold",
+        arrowprops={"arrowstyle": "-", "color": teal, "linewidth": 0.8},
+    )
+    bound_ax.text(
+        0.98,
+        0.025,
+        "未决仅表示上限尚未降到 90% 以下",
+        transform=bound_ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=7.0,
+        color="#835000",
+    )
+    bound_ax.set_xlim(int(excluded_a[0]) - 2, candidate_a + 3)
+    bound_ax.set_ylim(y_min, y_max)
+    bound_ax.set_xlabel("严格更便宜极大点的介质 A 数量 $N_A$")
+    bound_ax.set_ylabel("校正后单侧 Clopper--Pearson 界（%）")
+    bound_ax.set_title("(a) 90% 阈值附近的联合证据", loc="left", fontsize=9.7, pad=6)
+    bound_ax.grid(True, axis="y", linewidth=0.55, alpha=0.28)
+    bound_ax.grid(False, axis="x")
+
+    mix_ax.plot(unresolved_a, unresolved_b, color="#B6BDC5", linewidth=1.1, zorder=1)
+    mix_ax.scatter(
+        unresolved_a,
+        unresolved_b,
+        s=26,
+        marker="D",
+        facecolors="white",
+        edgecolors=amber,
+        linewidth=1.0,
+        zorder=3,
+    )
+    mix_ax.scatter(
+        [candidate_a],
+        [candidate_b],
+        s=105,
+        marker="*",
+        color=teal,
+        edgecolor="#164D49",
+        linewidth=0.6,
+        zorder=4,
+    )
+    mix_ax.annotate(
+        "首个未决点\n(573, 407)",
+        xy=(unresolved_a[0], unresolved_b[0]),
+        xytext=(12, -20),
+        textcoords="offset points",
+        fontsize=6.6,
+        color="#835000",
+        va="top",
+        bbox={"boxstyle": "square,pad=0.15", "facecolor": "white", "edgecolor": "none", "alpha": 0.82},
+    )
+    mix_ax.annotate(
+        "候选 (619, 0)",
+        xy=(candidate_a, candidate_b),
+        xytext=(-8, 11),
+        textcoords="offset points",
+        ha="right",
+        fontsize=6.8,
+        color=teal,
+        weight="bold",
+    )
+    mix_ax.set_xlim(int(np.min(unresolved_a)) - 2, candidate_a + 3)
+    mix_ax.set_ylim(-25, int(np.max(unresolved_b)) + 35)
+    mix_ax.set_xlabel("$N_A$")
+    mix_ax.set_ylabel("$N_B$")
+    mix_ax.set_title("(b) 46 个下一轮复核配比", loc="left", fontsize=9.2, pad=5)
+    mix_ax.grid(True, linewidth=0.5, alpha=0.24)
+
+    x_min = lower_cost - 0.16
+    x_max = upper_cost + 0.018
+    cost_ax.hlines(0.48, x_min, lower_cost, color=blue, linewidth=5.0)
+    cost_ax.hlines(0.48, lower_cost, upper_cost, color=amber, linewidth=5.0)
+    cost_ax.scatter([lower_cost], [0.48], s=34, color=blue, zorder=3)
+    cost_ax.scatter([upper_cost], [0.48], s=74, marker="*", color=teal, edgecolor="#164D49", linewidth=0.55, zorder=4)
+    cost_ax.vlines(unresolved_costs, 0.67, 0.86, color=amber, linewidth=0.75, alpha=0.70)
+    cost_ax.text(lower_cost, 0.29, f"$C_L$\n{lower_cost:.4f}", ha="center", va="top", fontsize=6.8, color=blue)
+    cost_ax.text(upper_cost, 0.29, f"$C_U$\n{upper_cost:.4f}", ha="center", va="top", fontsize=6.8, color=teal, weight="bold")
+    cost_ax.text(
+        (lower_cost + upper_cost) / 2,
+        0.54,
+        "成本证据区间",
+        ha="center",
+        va="bottom",
+        fontsize=7.1,
+        color="#835000",
+        weight="bold",
+    )
+    cost_ax.text(
+        (x_min + lower_cost) / 2,
+        0.54,
+        "已排除",
+        ha="center",
+        va="bottom",
+        fontsize=6.6,
+        color=blue,
+        weight="bold",
+    )
+    cost_ax.text(
+        upper_cost,
+        0.90,
+        "46 个未决点的实际成本",
+        ha="right",
+        va="bottom",
+        fontsize=6.5,
+        color="#835000",
+    )
+    cost_ax.set_xlim(x_min, x_max)
+    cost_ax.set_ylim(0.08, 1.02)
+    cost_ax.set_yticks([])
+    cost_ax.set_xlabel("成本（元）", labelpad=1)
+    cost_ax.set_title("(c) Q4 家族内成本证据", loc="left", fontsize=9.2, pad=5)
+    cost_ax.ticklabel_format(axis="x", style="plain", useOffset=False)
+    cost_ax.spines[["left", "right", "top"]].set_visible(False)
+    cost_ax.grid(False)
+
+    return figure, {
+        "excluded_frontier_count": len(excluded),
+        "not_excluded_frontier_count": len(unresolved),
+        "displayed_near_boundary_excluded_count": len(near_excluded),
+        "candidate_design": [candidate_a, candidate_b],
+        "candidate_cp_lower": float(candidate["clopper_pearson_one_sided_lower"]),
+        "cost_interval_yuan": [lower_cost, upper_cost],
+        "unresolved_cost_range_yuan": [float(np.min(unresolved_costs)), float(np.max(unresolved_costs))],
+        "unresolved_semantics": "not_excluded_not_confirmed_feasible",
+        "next_round_focus": "46_not_excluded_maximal_designs_only",
+    }
+
+
 def build_simulation_convergence_figure(
     q2_counts: list[int],
     q2_full: np.ndarray,
@@ -1379,7 +1605,7 @@ def main() -> int:
     validation_pdf, validation_png = save_figure(validation, VALIDATION_STEM)
     plt.close(validation)
 
-    q4_boundary, q4_boundary_stats = build_q4_boundary_figure_compact(q4_evidence)
+    q4_boundary, q4_boundary_stats = build_q4_boundary_figure(q4_evidence)
     q4_boundary_pdf, q4_boundary_png = save_figure(q4_boundary, Q4_BOUNDARY_STEM)
     plt.close(q4_boundary)
 

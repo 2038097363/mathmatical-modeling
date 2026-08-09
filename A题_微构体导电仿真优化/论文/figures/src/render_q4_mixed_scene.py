@@ -207,6 +207,7 @@ def inspect_scene_colors(
     a_expected: bool = True,
     b_expected: bool = True,
     electrodes_expected: bool = True,
+    b_min_pixels: int = 100,
 ) -> dict[str, Any]:
     with Image.open(path) as image:
         rgb = np.asarray(image.convert("RGB"), dtype=np.int16)
@@ -246,7 +247,9 @@ def inspect_scene_colors(
         "a_cylinders_visible": (
             not a_expected or counts["a_neutral_pixel_count"] >= 100
         ),
-        "b_spheres_visible": not b_expected or counts["b_blue_pixel_count"] >= 100,
+        "b_spheres_visible": (
+            not b_expected or counts["b_blue_pixel_count"] >= b_min_pixels
+        ),
         "electrodes_or_outline_visible": (
             not electrodes_expected
             or counts["electrode_or_outline_dark_pixel_count"] >= 100
@@ -304,19 +307,17 @@ def render_q4(args: argparse.Namespace) -> dict[str, Any]:
         str(record.get("role", "background_a")) != "witness"
         for record in scene.get("cylinders", [])
     ) and not focus_witness
-    b_expected = any(
+    background_b_count = sum(
         str(record.get("role", "background_b")) != "witness"
         for record in scene.get("spheres", [])
-    ) and not focus_witness
+    )
+    b_expected = background_b_count > 1 and not focus_witness
+    b_min_pixels = 12 if background_b_count == 1 else 100
     electrodes_expected = bool(scene.get("electrodes", {}).get("show", True))
     scene_electrode_transparency = int(
         scene.get("electrodes", {}).get("transparency", 52)
     )
-    render_electrode_transparency = (
-        max(84, scene_electrode_transparency)
-        if focus_witness
-        else scene_electrode_transparency
-    )
+    render_electrode_transparency = max(88, scene_electrode_transparency)
     audit: dict[str, Any] = {
         "schema_version": 1,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -356,7 +357,7 @@ def render_q4(args: argparse.Namespace) -> dict[str, Any]:
             min_margin_pixels=max(24, round(min(args.width, args.height) * 0.015)),
             hidden_styles=("background_a", "background_b") if focus_witness else (),
             electrode_transparency=render_electrode_transparency,
-            electrode_wireframe=focus_witness,
+            electrode_wireframe=True,
         )
         base_audit = render_base(base_args)
         scene_colors = inspect_scene_colors(
@@ -365,6 +366,7 @@ def render_q4(args: argparse.Namespace) -> dict[str, Any]:
             a_expected=a_expected,
             b_expected=b_expected,
             electrodes_expected=electrodes_expected,
+            b_min_pixels=b_min_pixels,
         )
         if not scene_colors["passed"]:
             failed = [

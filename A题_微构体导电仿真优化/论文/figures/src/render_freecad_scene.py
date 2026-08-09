@@ -267,7 +267,7 @@ def make_macro(
         ELECTRODE_WIREFRAME = bool(CONFIG["electrode_wireframe"])
 
         ROLE_STYLES = {{
-            "background_a": ((0.72, 0.75, 0.78), 62),
+            "background_a": ((0.72, 0.75, 0.78), 80),
             "background_b": ((0.20, 0.55, 0.82), 25),
             "witness": ((0.93, 0.36, 0.12), 0),
             "boundary_fragment": ((0.84, 0.20, 0.26), 5),

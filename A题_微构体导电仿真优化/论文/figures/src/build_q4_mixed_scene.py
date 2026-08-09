@@ -72,6 +72,7 @@ FINAL_PUBLICATION_STATUS = "final_random_trial_geometry"
 FINAL_RESULT_STATUSES = {
     "globally_certified_minimum_cost",
     "lowest_statistically_feasible_cost",
+    "positive_domain_empirical_minimum_with_conservative_recommendation",
 }
 FINAL_FORBIDDEN_TEXT = ("preview", "not an optimal design", "非最优")
 
@@ -165,8 +166,56 @@ def _validate_d_contract(contract: Any, context: str) -> None:
 def load_confirmed_design(path: Path) -> DesignSource:
     resolved = path.expanduser().resolve()
     payload = json.loads(resolved.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict) or payload.get("kind") != "q4_final_summary":
-        raise ValueError("设计文件必须是 kind=q4_final_summary 的最终问题4结果")
+    if not isinstance(payload, dict):
+        raise ValueError("问题4设计文件的 JSON 顶层必须为对象")
+    if payload.get("kind") == "q4_positive_domain_summary":
+        status = _normalized_status(payload.get("result_status"))
+        if status not in FINAL_RESULT_STATUSES:
+            raise ValueError(f"问题4正整数域结果尚不可发布：result_status={status!r}")
+        _validate_d_contract(payload.get("boundary_contract"), "正整数域 summary 的边界合同")
+        recommendation = payload.get("conservative_recommendation")
+        if not isinstance(recommendation, dict):
+            raise ValueError("正整数域 summary 缺少 conservative_recommendation")
+        n_a = _read_nonnegative_integer(recommendation, "n_a")
+        n_b = _read_nonnegative_integer(recommendation, "n_b")
+        if min(n_a, n_b) < 1:
+            raise ValueError("问题4最终推荐必须同时包含 A 和 B")
+        if float(recommendation.get("cp_one_sided_family_lower", 0.0)) < 0.90:
+            raise ValueError("问题4最终推荐未通过联合置信下界")
+        sources = payload.get("source_files")
+        artifact_record = sources.get("confirmation_artifact") if isinstance(sources, dict) else None
+        if not isinstance(artifact_record, dict):
+            raise ValueError("正整数域 summary 缺少确认前沿样本")
+        artifact_path = _resolve_evidence_path(artifact_record.get("path"), resolved)
+        artifact_hash = sha256(artifact_path)
+        if artifact_hash != str(artifact_record.get("sha256", "")).strip().upper():
+            raise ValueError("正整数域 summary 的确认样本哈希不一致")
+        artifact_payload = json.loads(artifact_path.read_text(encoding="utf-8-sig"))
+        artifact_config = MixedSimulationConfig.from_dict(
+            artifact_payload.get("configuration", {})
+        )
+        if artifact_payload.get("configuration_fingerprint") != artifact_config.fingerprint:
+            raise ValueError("确认前沿样本配置指纹不一致")
+        if n_a > artifact_config.n_a or n_b > artifact_config.n_b:
+            raise ValueError("最终推荐超过确认前沿样本的最大静态图")
+        selected_config = replace(artifact_config, n_a=n_a, n_b=n_b)
+        return DesignSource(
+            n_a=n_a,
+            n_b=n_b,
+            source_status=status,
+            publication_status=FINAL_PUBLICATION_STATUS,
+            source_path=resolved,
+            source_sha256=sha256(resolved),
+            boundary_primary=PRIMARY_BOUNDARY,
+            artifact_path=artifact_path,
+            artifact_sha256=artifact_hash,
+            artifact_configuration=artifact_config,
+            artifact_configuration_fingerprint=artifact_config.fingerprint,
+            selected_configuration_fingerprint=selected_config.fingerprint,
+            confirmation_proof_status="positive_domain_familywise_and_q3_monotonic_certificate",
+        )
+    if payload.get("kind") != "q4_final_summary":
+        raise ValueError("设计文件必须是问题4冻结结果摘要")
     status = _normalized_status(payload.get("result_status"))
     if status not in FINAL_RESULT_STATUSES:
         raise ValueError(f"问题4结果尚不可发布：result_status={payload.get('result_status')!r}")

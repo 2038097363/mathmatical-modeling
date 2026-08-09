@@ -12,8 +12,8 @@ import build_q4_witness_figure as witness_builder
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 FIGURE_ROOT = PROJECT_ROOT / "论文" / "figures"
-EXPECTED_N_A = 619
-EXPECTED_N_B = 0
+EXPECTED_N_A = 616
+EXPECTED_N_B = 1
 SELECTION_RULE = "minimum_trial_id_connected_in_confirmation_artifact"
 
 
@@ -113,9 +113,9 @@ def build_assets(args: argparse.Namespace) -> dict[str, Any]:
     scene = scene_builder.build_verified_trial_scene(source, trial_id)
     counts = scene["traceability"]["geometry_counts"]
     if counts["a_source_particles"] != EXPECTED_N_A:
-        raise RuntimeError("正式场景未覆盖全部 619 个 A 源粒子")
-    if counts["b_source_particles"] != 0 or scene.get("spheres"):
-        raise RuntimeError("N_B=0 的正式场景不得包含 B 几何")
+        raise RuntimeError("正式场景未覆盖全部 616 个 A 源粒子")
+    if counts["b_source_particles"] != EXPECTED_N_B or not scene.get("spheres"):
+        raise RuntimeError("正式场景必须覆盖 1 个 B 源粒子的实际球片")
     if scene["traceability"]["random_stream"]["trial_id"] != trial_id:
         raise RuntimeError("场景随机流 trial_id 与选择结果不一致")
 
@@ -208,7 +208,7 @@ def build_assets(args: argparse.Namespace) -> dict[str, Any]:
         },
         "checks": {
             "candidate_matches_frozen_counts": True,
-            "no_b_geometry_when_n_b_zero": True,
+            "positive_a_b_counts_match_recommendation": True,
             "minimum_connected_trial_selected": True,
             "freecad_build_passed": build_audit["status"] == "passed",
             "axonometric_render_passed": axonometric_audit["status"] == "passed",
