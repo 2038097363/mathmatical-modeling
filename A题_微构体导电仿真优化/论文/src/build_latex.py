@@ -261,11 +261,15 @@ def validate_identity(mode: str, group: str | None, competition_id: str | None) 
             raise ValueError(f"组别必须为 {sorted(ALLOWED_GROUPS)} 之一")
         if competition_id is not None and not CM_PATTERN.fullmatch(competition_id):
             raise ValueError("参赛编号必须为 CM 加 7 位数字")
+        if competition_id is not None and competition_id == "CM0000000":
+            raise ValueError("正式参赛编号不得使用全零占位符 CM0000000")
         return group or "内部审阅", competition_id or "INTERNAL-QA"
     if group not in ALLOWED_GROUPS:
         raise ValueError(f"正式模式必须提供组别，且为 {sorted(ALLOWED_GROUPS)} 之一")
     if competition_id is None or not CM_PATTERN.fullmatch(competition_id):
         raise ValueError("正式模式必须提供 CM 加 7 位数字的完整参赛编号")
+    if competition_id == "CM0000000":
+        raise ValueError("正式参赛编号不得使用全零占位符 CM0000000")
     return group, competition_id
 
 
