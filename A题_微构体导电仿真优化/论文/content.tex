@@ -57,7 +57,7 @@
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.96\textwidth]{figures/generated/model_workflow.pdf}
-  \caption{从三维几何到概率约束优化的统一证据链。四个分问共享同一几何与图模型，但分别采用与任务相匹配的确定性、概率和优化验证；图由正式程序按项目流程生成。}
+  \caption{从三维几何到概率约束优化的统一证据链。四个分问共享同一几何与接触图内核，并分别形成确定性、概率、临界区间和成本证据；图为结构示意，非按比例绘制。}
   \label{fig:model-workflow}
 \end{figure}
 
@@ -347,24 +347,8 @@ h_W=\frac{z}{1+z^2/n}
 
 \begin{figure}[htbp]
   \centering
-  \begin{subfigure}[t]{0.485\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{figures/rendered/q1_group1_axonometric.png}
-    \caption{组 1：未形成左右贯通簇}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.485\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{figures/rendered/q1_group2_axonometric.png}
-    \caption{组 2：存在电极间见证路径}
-  \end{subfigure}
-
-  \vspace{0.45em}
-  \begin{subfigure}[t]{0.72\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{figures/rendered/q1_group3_axonometric.png}
-    \caption{组 3：高密度介质中的贯通路径}
-  \end{subfigure}
-  \caption{附件三组微构体的 FreeCAD 三维轴测图。深灰面为左右电极，浅灰圆柱为其余介质，橙色圆柱为机器提取的见证片段；轴测投影中的线段交叉不等于三维接触。图像由 AI 辅助程序生成并经几何数量与通路逐项复核。}
+  \includegraphics[width=0.98\textwidth]{figures/generated/q1_groups_3d.pdf}
+  \caption{附件三组微构体的三维接触结构。浅灰线为有限平底圆柱轴线，橙色粗线为程序恢复的电极间见证片段；为提高薄层结构的可读性，三轴按各自显示范围归一化，接触判定仍使用原始 nm 坐标。轴测投影中的线段交叉不等于三维接触。}
   \label{fig:q1-groups}
 \end{figure}
 
@@ -445,7 +429,7 @@ trial 块 & \(N=354\) & \(N=424\) & \(N=495\) & \(N=707\) \\
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.94\textwidth]{figures/generated/q2_q3_probability.pdf}
-  \caption{全 A 介质导通概率曲线及问题三临界区间。颜色、点形和区间线共同区分可行、不可行与尚不能区分的整数点；图像由 AI 辅助程序从冻结结果生成，所有标注值已回查结果文件。}
+  \caption{全 A 介质导通概率曲线及问题三临界区间。颜色、点形和区间线共同区分可行、不可行与尚不能区分的整数点；全部数值来自冻结结果文件。}
   \label{fig:q2-q3-curve}
 \end{figure}
 
@@ -655,7 +639,7 @@ Y_s(N_A,N_B)=1
 
 从而全部 620 个单侧陈述的联合置信度至少为 \(95\%\)。确认阶段使用``共同随机数''是指同一 trial 的 620 个设计共享一套几何构型，便于逐设计配对并保持二维单调；它不等于重复使用探索数据， 也不破坏不同 trial 的独立性。Bonferroni 控制本身也不要求 620 个统计量彼此独立。
 
-在 \(50000\) 个独立确认样本中，代表性设计 \((N_A,N_B)=(619,0)\) 导通 \(45554\) 次，经验导通概率为 \(91.108\%\)； 其 Bonferroni 校正后的单侧 Clopper--Pearson 下限为 \(90.6186\%\)、上限为 \(91.5812\%\)，成本为 \(9.1884516534\) 元。在 Q4 预注册的 620 个陈述家族内，573 个严格更低成本极大设计已被排除，仍有 46 个未被同时排除，对应成本证据区间为 \([8.5056264901,9.1884516534]\) 元。另一个独立随机流已确认更便宜的全 A 设计 \((616,0)\) 统计可行，其成本为 \(9.1439195775\) 元。两个随机流对应不同的预注册置信家族，不能把两项点态可行证据拼接成全局最优性证明。 同一整数成本权重对应 10 个配比；本文只报告已确认统计可行的方案， 不作组成唯一性或全局最优性声明。 正式统计结果见表 \ref{tab:q4-confirmation}，成本有界整数域的探索与独立确认判定见 图 \ref{fig:q4-cost-frontier}。
+在 \(50000\) 个独立确认样本中，代表性设计 \((N_A,N_B)=(619,0)\) 导通 \(45554\) 次，经验导通概率为 \(91.108\%\)； 其 Bonferroni 校正后的单侧 Clopper--Pearson 下限为 \(90.6186\%\)、上限为 \(91.5812\%\)，成本为 \(9.1884516534\) 元。在 Q4 预注册的 620 个陈述家族内，573 个严格更低成本极大设计已被排除，仍有 46 个未被同时排除，对应成本证据区间为 \([8.5056264901,9.1884516534]\) 元。另一个独立随机流已确认更便宜的全 A 设计 \((616,0)\) 统计可行，其成本为 \(9.1439195775\) 元。两个随机流对应不同的预注册置信家族，不能把两项点态可行证据拼接成全局最优性证明。 同一整数成本权重对应 10 个配比；本文只报告已确认统计可行的方案， 不作组成唯一性或全局最优性声明。 正式统计结果见表 \ref{tab:q4-confirmation}；成本有界整数域的探索结构见 图 \ref{fig:q4-cost-frontier}，独立确认判定另见第 6.3 节。
 
 \begin{table}[htbp]
   \centering
@@ -696,12 +680,12 @@ Y_s(N_A,N_B)=1
 (N_A,N_B)=(619-64t,567t),\qquad t=0,1,\ldots,9.
 \]
 
-这些配比成本完全相同，但本次独立确认只证明冻结候选 \((619,0)\) 可行，不能据此断言同成本 组成唯一或其余 9 个配比可行。图 \ref{fig:q4-cost-frontier} 右图中，未排除点集中在 A 含量 较高的边界段，反映高长径比圆柱的连通效率在临界成本附近仍起主导作用；这是一项模型内结果， 不外推为所有材料体系的一般规律。
+这些配比成本完全相同，但本次独立确认只证明冻结候选 \((619,0)\) 可行，不能据此断言同成本 组成唯一或其余 9 个配比可行。图 \ref{fig:q4-cost-frontier} 右图显示，严格更便宜极大点虽然 集中在很窄的成本带内，其 \(2000\) 次探索经验导通率却横跨很宽范围；只有靠近 \(90\%\) 门槛的 少数点进入后续确认。该图解释候选如何定位，不用探索经验率替代正式的同时置信界。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.98\textwidth]{figures/generated/q4_cost_frontier.pdf}
-  \caption{问题四成本有界整数域中的可行成本与更便宜设计排除证据。左图以探索样本展示经验导通概率和等成本线，右图以独立确认样本区分已排除与尚未排除的严格更低成本极大设计；颜色、轮廓和点形共同编码，结论按单侧 Clopper--Pearson 同时置信界判定。}
+  \caption{问题四成本有界整数域的探索结构。左图给出完整整数域的经验导通概率、$90\%$ 等值线和候选等成本线；右图给出严格更便宜极大前沿的成本--经验概率分布。两图均基于每点 $2000$ 次探索样本，仅用于候选定位，不承担独立确认结论。}
   \label{fig:q4-cost-frontier}
 \end{figure}
 
@@ -710,14 +694,14 @@ Y_s(N_A,N_B)=1
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.72\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_axonometric.png}
-  \caption{问题四确认流内已确认统计可行方案 $(619,0)$ 的 FreeCAD 全局轴测图。深灰面为左右电极，浅灰实体为 A 介质截断片段，橙色实体为机器提取的贯通见证；该图只展示方案的空间结构，不将其表述为全局最低成本。}
+  \caption{问题四确认流内已确认统计可行方案 $(619,0)$ 的 FreeCAD 全局轴测图。深灰面为左右电极，浅灰实体为 A 介质截断片段，橙色实体为程序恢复的贯通见证；该图只展示方案的空间结构。}
   \label{fig:q4-global-3d}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.98\textwidth]{figures/rendered/q4_final_na000619_nb000000_trial000001_witness_focus.pdf}
-  \caption{问题四确认流内已确认统计可行方案的局部三维贯通见证与有序接触图。橙色粗实线实体为见证片段，青色虚线为接触图边，不表示连续空间电流轨迹；右侧有序接触图逐边给出电极与介质的连接次序。图像来自确认流中首个导通样本（\texttt{trial\_id=1}），已核对 $619$ 个 A 源、0 个 B 源、$1100$ 个截断片段、$12$ 个见证节点、$11$ 条接触图边，且同源内部边为 0；该场景不承担全局最低成本证明。}
+  \caption{问题四确认流内统计可行方案的局部三维贯通见证与有序接触链。橙色实体为见证片段，青色虚线为接触图边，不表示连续空间电流轨迹；链条按 $L\to1\to\cdots\to10\to R$ 给出 11 条经几何核验的接触边，同源内部边为 0。}
   \label{fig:q4-witness-3d}
 \end{figure}
 \FloatBarrier
@@ -781,7 +765,7 @@ Q4 确认最大图共记录 \(399988248\) 次窄相调用，其中 \(118176\) �
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.98\textwidth]{figures/generated/q4_unresolved_boundary_evidence.pdf}
-  \caption{问题四严格更便宜域的联合证据与后续计算对象。(a) 573 个已排除极大点、46 个未决极大点及已确认候选的单侧精确界；(b) Q4 家族内的成本证据区间与 46 个未决点局部放大。阴影和菱形均不表示可行，只表示尚不能排除。}
+  \caption{问题四严格更便宜域的联合证据与后续计算对象。(a) 573 个已排除极大点、46 个未决极大点及已确认候选的单侧精确界；(b) 已排除、未决和确认候选的成本状态带。空心菱形仅表示尚不能排除，不表示可行。}
   \label{fig:q4-unresolved-boundary}
 \end{figure}
 
