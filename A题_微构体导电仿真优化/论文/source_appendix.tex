@@ -1,30 +1,84 @@
-\noindent\textbf{源码生成说明：} 本附录共列入 4 个核心求解程序，对应四个问题的正式求解代码。\par
-\vspace{0.4em}
-\Needspace{6\baselineskip}
-\subsection{附录 C.1 问题一有限圆柱接触与导通判定程序}
-\noindent{}原项目相对路径：\texttt{问题/问题1/src/solve.py}\par
+\subsection{附录 C：核心程序源码}
+\noindent 本附录排印用户确认的四个正式求解器和七个核心依赖模块。
+源码基于 GitHub 提交 \texttt{6941682}，
+并对项目根目录发现方式作可移植适配；完整提交号与哈希见 \path{appendix-selection.json}。
+编号副本由源码附录构建脚本按清单自动生成，
+原始文件逐项核验 SHA-256；排印副本仅在关键逻辑前加入单行中文注释。\par
+\vspace{0.5em}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.1：问题一有限圆柱接触与导通判定程序}
+\noindent 原项目相对路径：\texttt{\detokenize{问题/问题1/src/solve.py}}\par
 \vspace{0.25em}
 {\fontsize{6.4pt}{7.2pt}\selectfont
 \VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/001.py}
 }
-\Needspace{6\baselineskip}
-\subsection{附录 C.2 问题二固定样本蒙特卡洛程序}
-\noindent{}原项目相对路径：\texttt{问题/问题2/src/solve.py}\par
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.2：问题二固定样本 Monte Carlo 概率估计程序}
+\noindent 原项目相对路径：\texttt{\detokenize{问题/问题2/src/solve.py}}\par
 \vspace{0.25em}
 {\fontsize{6.4pt}{7.2pt}\selectfont
 \VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/002.py}
 }
-\Needspace{6\baselineskip}
-\subsection{附录 C.3 问题三两阶段概率确认程序}
-\noindent{}原项目相对路径：\texttt{问题/问题3/src/solve.py}\par
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.3：问题三联合精确置信判定程序}
+\noindent 原项目相对路径：\texttt{\detokenize{问题/问题3/src/solve.py}}\par
 \vspace{0.25em}
 {\fontsize{6.4pt}{7.2pt}\selectfont
 \VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/003.py}
 }
-\Needspace{6\baselineskip}
-\subsection{附录 C.4 问题四混合介质成本优化程序}
-\noindent{}原项目相对路径：\texttt{问题/问题4/src/solve.py}\par
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.4：问题四混合介质成本优化程序}
+\noindent 原项目相对路径：\texttt{\detokenize{问题/问题4/src/solve.py}}\par
 \vspace{0.25em}
 {\fontsize{6.4pt}{7.2pt}\selectfont
 \VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/004.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.5：附件分段重建与参数审计程序}
+\noindent 原项目相对路径：\texttt{\detokenize{02_数据与参数/src/reconstruct_segments.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/005.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.6：有限平底圆柱与球体几何距离核}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/geometry_kernel.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/006.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.7：几何窄相加速模块}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/fast_geometry.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/007.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.8：单介质随机微构体仿真模块}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/microstructure_sim.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/008.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.9：混合介质随机微构体仿真模块}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/mixed_microstructure_sim.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/009.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.10：二维资源连通与 Pareto 前沿算法}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/pareto_connectivity.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/010.py}
+}
+\Needspace{8\baselineskip}
+\subsubsection{附录 C.11：结果登记与 LaTeX 导出模块}
+\noindent 原项目相对路径：\texttt{\detokenize{公共代码/result_registry.py}}\par
+\vspace{0.25em}
+{\fontsize{6.4pt}{7.2pt}\selectfont
+\VerbatimInput[breaklines=true,breakanywhere=true,numbers=left,numbersep=5pt,frame=single,framesep=2mm,rulecolor=\color{black!35}]{source_appendix/011.py}
 }

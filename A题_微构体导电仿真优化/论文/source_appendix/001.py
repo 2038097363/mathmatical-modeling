@@ -1,4 +1,3 @@
-# Q1：确定性接触图与电极导通判定程序
 from __future__ import annotations
 
 import argparse
@@ -6,6 +5,7 @@ import csv
 import hashlib
 import heapq
 import json
+import os
 import platform
 import sys
 import time
@@ -19,8 +19,19 @@ import openpyxl
 from scipy.optimize import minimize
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-QUESTION_ROOT = Path(__file__).resolve().parents[1]
+def _discover_project_root(script_path: Path) -> Path:
+    # 优先使用环境变量，否则向上查找项目标志目录，避免写死机器绝对路径。
+    configured = os.environ.get("MCM_PROJECT_ROOT")
+    candidates = [Path(configured).expanduser()] if configured else script_path.resolve().parents
+    for candidate in candidates:
+        root = candidate.resolve()
+        if (root / "公共代码").is_dir() and (root / "问题").is_dir():
+            return root
+    raise RuntimeError("无法定位项目根目录；请设置 MCM_PROJECT_ROOT")
+
+
+PROJECT_ROOT = _discover_project_root(Path(__file__))
+QUESTION_ROOT = PROJECT_ROOT / "问题" / "问题1"
 COMMON_DIR = PROJECT_ROOT / "公共代码"
 RECONSTRUCTION_DIR = PROJECT_ROOT / "02_数据与参数" / "src"
 for module_dir in (COMMON_DIR, RECONSTRUCTION_DIR):
@@ -68,7 +79,6 @@ SCENARIOS = {
 INTERNAL_MODES = ("disconnected_fragments", "connected_same_particle")
 
 
-# 附件行按原尺寸有限平底圆柱建模，短段不延长或补齐。
 @dataclass(frozen=True)
 class Segment:
     sheet: str
@@ -205,7 +215,6 @@ def _electrode_edge(sheet: str, side: str, segment: Segment, gap_nm: float) -> d
     }
 
 
-# 六变量凸约束优化独立复核 GJK 的窄相阈值分类。
 def _orthonormal_plane(axis: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     seed = np.array([1.0, 0.0, 0.0])
     if abs(float(np.dot(seed, axis))) > 0.8:
@@ -301,7 +310,6 @@ def slsqp_cylinder_distance(first: Cylinder, second: Cylinder) -> float:
     return distance_scale * float(np.sqrt(max(best.fun, 0.0)))
 
 
-# 胶囊宽相只作排除，候选均由平底圆柱 GJK 距离界判定。
 def _pair_record(sheet: str, first: Segment, second: Segment) -> dict[str, Any]:
     capsule_gap = capsule_cylinder_distance(first.cylinder, second.cylinder)
     base = {
@@ -372,6 +380,7 @@ def _pair_record(sheet: str, first: Segment, second: Segment) -> dict[str, Any]:
     }
 
 
+# 关键：生成有限圆柱两两接触与电极边的物理几何证据。
 def compute_physical_geometry(sheet: str, segments: list[Segment]) -> dict[str, Any]:
     contacts: list[dict[str, Any]] = []
     narrow_phase: list[dict[str, Any]] = []
@@ -539,7 +548,6 @@ def annotate_physical_edge(edge: dict[str, Any], lookup: dict[int, dict[str, Any
     return result
 
 
-# 并查集判定贯通，路径搜索仅恢复逐边见证。
 def connected_by_union_find(edges: Iterable[dict[str, Any]]) -> bool:
     union_find = GraphUnionFind()
     union_find.find("LEFT")
@@ -620,6 +628,7 @@ def particle_path(nodes: list[str] | None, lookup: dict[int, dict[str, Any]]) ->
     return compressed
 
 
+# 关键：在指定重建情景下判定导通并提取最短见证路径。
 def evaluate_scenario(
     scenario: str,
     sheet: str,

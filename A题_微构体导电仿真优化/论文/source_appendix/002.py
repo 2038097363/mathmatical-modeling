@@ -1,4 +1,3 @@
-# Q2：共同前缀 Monte Carlo 导通概率估计程序
 from __future__ import annotations
 
 import argparse
@@ -10,8 +9,19 @@ from pathlib import Path
 from typing import Sequence
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-QUESTION_ROOT = Path(__file__).resolve().parents[1]
+def _discover_project_root(script_path: Path) -> Path:
+    # 优先使用环境变量，否则向上查找项目标志目录，避免写死机器绝对路径。
+    configured = os.environ.get("MCM_PROJECT_ROOT")
+    candidates = [Path(configured).expanduser()] if configured else script_path.resolve().parents
+    for candidate in candidates:
+        root = candidate.resolve()
+        if (root / "公共代码").is_dir() and (root / "问题").is_dir():
+            return root
+    raise RuntimeError("无法定位项目根目录；请设置 MCM_PROJECT_ROOT")
+
+
+PROJECT_ROOT = _discover_project_root(Path(__file__))
+QUESTION_ROOT = PROJECT_ROOT / "问题" / "问题2"
 COMMON_DIR = PROJECT_ROOT / "公共代码"
 if str(COMMON_DIR) not in sys.path:
     sys.path.insert(0, str(COMMON_DIR))
@@ -49,6 +59,7 @@ def _write_json(path: Path, payload: dict) -> None:
     temporary.replace(path)
 
 
+# 关键：从固定样本产物计算阈值概率和置信区间。
 def analyze_threshold_artifact(
     artifact_path: Path | str,
     counts: Sequence[int] = Q2_COUNTS,
@@ -137,7 +148,7 @@ def register_formal_results(result: dict, summary_path: Path) -> None:
     export_latex()
 
 
-# 四个填充量共享同一批首次导通样本。
+# 关键：执行问题二正式样本流程并登记可复现结果。
 def run(args: argparse.Namespace) -> dict:
     config = SimulationConfig(
         max_count=args.max_count,

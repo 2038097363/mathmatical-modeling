@@ -1,9 +1,9 @@
-# Q3：独立流确认与 Bonferroni-Clopper-Pearson 联合精确界程序
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import os
 import sys
 import time
 from dataclasses import replace
@@ -15,8 +15,19 @@ import numpy as np
 from numpy.typing import ArrayLike
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-QUESTION_ROOT = Path(__file__).resolve().parents[1]
+def _discover_project_root(script_path: Path) -> Path:
+    # 优先使用环境变量，否则向上查找项目标志目录，避免写死机器绝对路径。
+    configured = os.environ.get("MCM_PROJECT_ROOT")
+    candidates = [Path(configured).expanduser()] if configured else script_path.resolve().parents
+    for candidate in candidates:
+        root = candidate.resolve()
+        if (root / "公共代码").is_dir() and (root / "问题").is_dir():
+            return root
+    raise RuntimeError("无法定位项目根目录；请设置 MCM_PROJECT_ROOT")
+
+
+PROJECT_ROOT = _discover_project_root(Path(__file__))
+QUESTION_ROOT = PROJECT_ROOT / "问题" / "问题3"
 COMMON_DIR = PROJECT_ROOT / "公共代码"
 if str(COMMON_DIR) not in sys.path:
     sys.path.insert(0, str(COMMON_DIR))
@@ -101,6 +112,7 @@ def _candidate_counts(
     return sorted(candidates)
 
 
+# 关键：冻结候选粒子数、样本量和随机流，避免事后改参。
 def build_confirmation_freeze(
     exploration_artifact: Path | str,
     *,
@@ -198,6 +210,7 @@ def build_confirmation_freeze(
     return freeze, confirmation_config
 
 
+# 关键：用联合精确置信界判定满足目标的最小整数设计。
 def analyze_confirmation_samples(
     first_connection_samples: ArrayLike,
     *,
@@ -430,6 +443,95 @@ def analyze_confirmation_artifact(
             None if selected_volume is None else round(selected_volume, 2)
         ),
     }
+
+
+def register_formal_results(result: dict[str, Any], summary_path: Path) -> None:
+    configuration = result["confirmation_configuration"]
+    decision = result["decision"]
+    if (
+        configuration["boundary_mode"] != "D"
+        or int(result["fixed_trial_count"]) < DEFAULT_CONFIRMATION_TRIALS
+        or int(configuration["stream_id"]) != DEFAULT_CONFIRMATION_STREAM_ID
+        or not bool(decision["reported_precision_confirmed"])
+    ):
+        raise ValueError("问题3尚未形成可登记的正式精度结论")
+
+    source_artifact = summary_path.resolve().relative_to(PROJECT_ROOT).as_posix()
+    bracket = [int(value) for value in decision["minimum_integer_bracket"]]
+    safe_count = int(result["reported_integer"])
+    safe_record = next(
+        record
+        for record in result["candidate_records"]
+        if int(record["particle_count"]) == safe_count
+    )
+    validation = (
+        "独立 50000 次确认；冻结 9 个候选后对 18 个单侧陈述作 Bonferroni 校正；"
+        "Clopper-Pearson 联合 95% 最小整数区间换算后在 0.01% 精度上相同"
+    )
+    register_result(
+        "q3_reported_minimum_volume_percent",
+        question=3,
+        value=float(decision["reported_volume_fraction_percent"]),
+        formatted=decision["reported_volume_fraction_formatted"],
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation=validation,
+        latex_macro="QThreeReportedVolume",
+    )
+    register_result(
+        "q3_minimum_integer_bracket",
+        question=3,
+        value=bracket,
+        formatted=f"{bracket[0]}--{bracket[1]}",
+        unit="根",
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation=validation,
+        latex_macro="QThreeMinimumBracket",
+    )
+    register_result(
+        "q3_conservative_particle_count",
+        question=3,
+        value=safe_count,
+        formatted=str(safe_count),
+        unit="根",
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation=validation,
+        latex_macro="QThreeSafeCount",
+    )
+    register_result(
+        "q3_conservative_probability",
+        question=3,
+        value=float(safe_record["estimate"]),
+        formatted=f"{100.0 * float(safe_record['estimate']):.3f}%",
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation=validation,
+        latex_macro="QThreeSafeProbability",
+    )
+    register_result(
+        "q3_conservative_cp_lower",
+        question=3,
+        value=float(safe_record["clopper_pearson_one_sided_bounds"]["lower"]),
+        formatted=(
+            f"{100.0 * float(safe_record['clopper_pearson_one_sided_bounds']['lower']):.4f}%"
+        ),
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation=validation,
+        latex_macro="QThreeSafeLower",
+    )
+    register_result(
+        "q3_unique_minimum_integer_confirmed",
+        question=3,
+        value=bool(decision["confirmed_minimum_integer"] is not None),
+        formatted="否" if decision["confirmed_minimum_integer"] is None else "是",
+        source_script="问题/问题3/src/solve.py",
+        source_artifact=source_artifact,
+        validation="有限样本下仅确认题设两位百分数精度，不宣称唯一最小整数",
+    )
+    export_latex()
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:

@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0",
+  "repository": "https://github.com/2038097363/mathmatical-modeling",
+  "commit": "694168246b3124631cdbc7fd115bdee8ed7277ab",
+  "selection_basis": "用户于 2026-08-10 确认纳入四问正式求解器及七个核心依赖模块，并要求将项目根目录改为可移植发现机制。",
+  "excluded": [
+    "回归测试",
+    "项目工作流",
+    "旧图件与三维资产生成程序",
+    "独立审计程序",
+    "性能基准程序",
+    "论文构建与提交工具",
+    "v23 实验代码"
+  ],
+  "files": [
+    {
+      "appendix_id": "C.1",
+      "path": "问题/问题1/src/solve.py",
+      "title": "问题一有限圆柱接触与导通判定程序",
+      "role": "正式求解器",
+      "upstream_sha256": "757f5a48bf2ff36ac52ce0cc05073f1fd23fbc988e698b8230787414239b8b85",
+      "sha256": "8243f54cec5f6c804c5a1825b5a479668bfcd8cf2163ea7b4aac2047970f0260",
+      "lines": 1184,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 383,
+          "comment": "生成有限圆柱两两接触与电极边的物理几何证据。"
+        },
+        {
+          "before_line": 630,
+          "comment": "在指定重建情景下判定导通并提取最短见证路径。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.2",
+      "path": "问题/问题2/src/solve.py",
+      "title": "问题二固定样本 Monte Carlo 概率估计程序",
+      "role": "正式求解器",
+      "upstream_sha256": "20eb06046b0c621e557960f4b5f35aedb434fa939357d1ac0d52a3f4c5adac2a",
+      "sha256": "e75139c48518e3c68ce7a33344c6c09a0265da003274aa414e27c1a32a745f6c",
+      "lines": 234,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 62,
+          "comment": "从固定样本产物计算阈值概率和置信区间。"
+        },
+        {
+          "before_line": 150,
+          "comment": "执行问题二正式样本流程并登记可复现结果。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.3",
+      "path": "问题/问题3/src/solve.py",
+      "title": "问题三联合精确置信判定程序",
+      "role": "正式求解器",
+      "upstream_sha256": "7cfa6e439cba90c8db68eeb809a1324bef80321614e6787a6fbc1de61d6d22d5",
+      "sha256": "167cddcc03e30d5a0a6e7de4928f37b9cbbcdeb3dd5a71eb0a636cbc4ca6a3b9",
+      "lines": 646,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 115,
+          "comment": "冻结候选粒子数、样本量和随机流，避免事后改参。"
+        },
+        {
+          "before_line": 212,
+          "comment": "用联合精确置信界判定满足目标的最小整数设计。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.4",
+      "path": "问题/问题4/src/solve.py",
+      "title": "问题四混合介质成本优化程序",
+      "role": "正式求解器",
+      "upstream_sha256": "5a7a644c1db62047bfb2c3de3d58fe46ce629ba4f7f8b748b9f22cd77311fd4a",
+      "sha256": "02af1502d5f705f77a50c47f56b82645b98be45c779f5165494cb4b08cbf4251",
+      "lines": 1307,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 155,
+          "comment": "将两类填料数量统一映射为精确整数成本权重。"
+        },
+        {
+          "before_line": 493,
+          "comment": "先筛选低成本候选设计并保存全部判定证据。"
+        },
+        {
+          "before_line": 793,
+          "comment": "在冻结候选集上进行独立确认并给出最终最优解。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.5",
+      "path": "02_数据与参数/src/reconstruct_segments.py",
+      "title": "附件分段重建与参数审计程序",
+      "role": "核心依赖",
+      "upstream_sha256": "87e78dfb861fcddf0795b57abef9e65f09a210b2e5bc62074b888823e8505f48",
+      "sha256": "90de889cb23b13b45a4ea296e2292c6614a536022f89af29e951d25f20453c5c",
+      "lines": 905,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 168,
+          "comment": "按周期边界和几何容差生成可连接端点候选。"
+        },
+        {
+          "before_line": 361,
+          "comment": "重建周期情景中的粒子链并核验总长度与残差。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.6",
+      "path": "公共代码/geometry_kernel.py",
+      "title": "有限平底圆柱与球体几何距离核",
+      "role": "核心依赖",
+      "sha256": "930c3b3ecd1c3362e370e8b20ef36a78f207270dcf44acea0316ef1d3de9de05",
+      "lines": 594,
+      "annotations": [
+        {
+          "before_line": 301,
+          "comment": "GJK 迭代给出凸体表面距离的上下界。"
+        },
+        {
+          "before_line": 399,
+          "comment": "统一调度闭式解、平行情形和通用 GJK 距离核。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.7",
+      "path": "公共代码/fast_geometry.py",
+      "title": "几何窄相加速模块",
+      "role": "核心依赖",
+      "sha256": "065f97eb3f3adc8ea08c95a3be03a2366a01c9f8b84621d7bac2dce7caae5f0a",
+      "lines": 823,
+      "annotations": [
+        {
+          "before_line": 448,
+          "comment": "使用 Numba 加速有限圆柱距离界的核心循环。"
+        },
+        {
+          "before_line": 766,
+          "comment": "依据距离界与接触阈值返回确定分类或不确定状态。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.8",
+      "path": "公共代码/microstructure_sim.py",
+      "title": "单介质随机微构体仿真模块",
+      "role": "核心依赖",
+      "sha256": "0f8e402c3a1469a3adbf4a7ca7d2a8f6754f532743074bdd9e479ca19212bf20",
+      "lines": 1288,
+      "annotations": [
+        {
+          "before_line": 275,
+          "comment": "按试验编号派生稳定随机流，保证并行运行可复现。"
+        },
+        {
+          "before_line": 745,
+          "comment": "扫描共同随机前缀并返回首次电极连通的粒子数。"
+        },
+        {
+          "before_line": 1125,
+          "comment": "计算二项分布 Clopper-Pearson 精确置信区间。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.9",
+      "path": "公共代码/mixed_microstructure_sim.py",
+      "title": "混合介质随机微构体仿真模块",
+      "role": "核心依赖",
+      "sha256": "7b5c82a8660c08f704a5d3107fcf7cdd4ca9fcc9ef961a7f9c50cbc514ce908c",
+      "lines": 1753,
+      "annotations": [
+        {
+          "before_line": 479,
+          "comment": "在固定圆柱样本上生成第二类球形填料几何。"
+        },
+        {
+          "before_line": 666,
+          "comment": "综合闭式判定、包围盒筛选和 GJK 精确接触判定。"
+        },
+        {
+          "before_line": 1090,
+          "comment": "一次求出给定混合微构体的二维 Pareto 连通前沿。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.10",
+      "path": "公共代码/pareto_connectivity.py",
+      "title": "二维资源连通与 Pareto 前沿算法",
+      "role": "核心依赖",
+      "sha256": "9f435c73e3ddcdbc193261fb5daa6c7002e9676bfb5c2a1165e05c0effde2e8e",
+      "lines": 490,
+      "annotations": [
+        {
+          "before_line": 55,
+          "comment": "删除被支配标签，仅保留二维 Pareto 前沿。"
+        },
+        {
+          "before_line": 137,
+          "comment": "在图上传播极小极大标签并生成连通阈值前沿。"
+        }
+      ]
+    },
+    {
+      "appendix_id": "C.11",
+      "path": "公共代码/result_registry.py",
+      "title": "结果登记与 LaTeX 导出模块",
+      "role": "核心依赖",
+      "upstream_sha256": "4d9077a32e1ef2b83dcbe7e1aaf4eca9f20331dad1c3a31cb037e662eb2800d8",
+      "sha256": "5ab614efc4fe7f35a53c84900d9b5f39f898d47d6a27d6baede2a8eda2688bf2",
+      "lines": 112,
+      "path_adaptation": "支持 MCM_PROJECT_ROOT；未设置时向上查找项目标志目录。",
+      "annotations": [
+        {
+          "before_line": 47,
+          "comment": "登记数值、来源、校验状态和可选 LaTeX 宏。"
+        },
+        {
+          "before_line": 88,
+          "comment": "将已登记结果导出为论文可直接引用的 LaTeX 宏。"
+        }
+      ]
+    }
+  ]
+}

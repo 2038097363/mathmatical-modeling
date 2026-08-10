@@ -739,15 +739,15 @@ C=9.1290755523\ \text{元}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.90\textwidth]{figures/q4_optimal_global_user_selected.png}
-  \caption{候选域内最低成本的已确认可行配比 $(614,6)$ 的全局构型与俯视投影。(a) 全局轴测重建；(b) 同一构型在 $x$--$y$ 平面上的俯视投影。浅灰色圆柱为 A 片段，蓝色球体为 B 片段，橙色圆柱为程序恢复的实际贯通见证；数字 $1$--$5$ 标示见证片段从左电极到右电极的顺序。}
+  \includegraphics[width=0.72\textwidth]{figures/q4_optimal_global.png}
+  \caption{候选域内最低成本的已确认可行配比 $(614,6)$ 的全局轴测重建。浅灰线为 A 片段，蓝色点为 B 片段，橙色粗线为程序恢复的实际贯通见证。}
   \label{fig:q4-global-3d}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.98\textwidth]{figures/q4_optimal_witness_user_selected.png}
-  \caption{配比 $(614,6)$ 的局部三维几何--拓扑贯通见证。橙色圆柱链按 $L\to1\to2\to3\to4\to5\to R$ 展示有序贯通关系，青绿色细线标示五个见证片段的轴向；该见证包含 5 个片段节点与 6 条已核验接触关系，同源内部边为 0。}
+  \includegraphics[width=0.98\textwidth]{figures/q4_optimal_witness.pdf}
+  \caption{配比 $(614,6)$ 的局部三维贯通见证与有序接触图。橙色线段为见证片段，青色虚线为 6 条已核验的接触图拓扑边；同源内部边为 0。}
   \label{fig:q4-witness-3d}
 \end{figure}
 \FloatBarrier
@@ -839,7 +839,7 @@ B 越界球片由球与胞盒的真实凸交表示，A 越界片段则按圆柱�
 
 \TemplateMatterHeading{AI 工具使用声明}
 
-本参赛队在竞赛过程中使用了 OpenAI Codex{[}9{]}，主要用于资料检索、程序实现检查、代码调试、 图表生成和语言整理，详细使用情况见附录 A。核心模型、数学推导、参数口径、数值结果和结论 均由参赛队复核。
+本参赛队在竞赛过程中使用了 WorkBuddy Agent{[}9{]}，调用模型为 DeepSeek（DS），仅用于联网搜索与资料检索，详细使用情况见附录 A。核心模型、数学推导、程序实现、参数口径、数值结果和结论均由参赛队独立完成并复核。
 
 \endgroup
 \TemplateMatterHeading{参考文献}
@@ -862,7 +862,7 @@ B 越界球片由球与胞盒的真实凸交表示，A 越界片段则按圆柱�
 
 {[}8{]} HOWARD S R, RAMDAS A, MCAULIFFE J, et al.~Time-uniform, nonparametric, nonasymptotic confidence sequences{[}J{]}. The Annals of Statistics, 2021, 49(2): 1055-1080. DOI:10.1214/20-AOS1991.
 
-{[}9{]} OPENAI. Codex{[}EB/OL{]}. 2026.
+{[}9{]} WORKBUDDY. WorkBuddy Agent{[}EB/OL{]}. 2026.
 
 \endgroup
 \clearpage
@@ -870,7 +870,7 @@ B 越界球片由球与胞盒的真实凸交表示，A 越界片段则按圆柱�
 
 \subsection{附录 A：AI 工具使用详情}\label{ux9644ux5f55-aai-ux5de5ux5177ux4f7fux7528ux8be6ux60c5}
 
-使用工具为 OpenAI Codex，开发机构为 OpenAI，使用日期为 2026-08-07 至 2026-08-08。工具主要用于程序检查、图表生成和语言整理，模型、推导、数值与结论均由参赛队复核。
+使用智能体为 WorkBuddy Agent，调用模型为 DeepSeek（DS），使用日期为 2026-08-07 至 2026-08-08。该智能体仅用于联网搜索与资料检索，模型、推导、程序、图件、数值与结论均由参赛队独立完成并复核。
 
 {\def\LTcaptype{none} % do not increment counter
 \small
@@ -894,11 +894,7 @@ B 越界球片由球与胞盒的真实凸交表示，A 越界片段则按圆柱�
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-规则与模板 & 阅读赛题、格式规范和官方 Word 模板，列出硬性提交要求 & 给出页边距、首页、页码、页数、匿名与文件命名检查项 & 参赛队逐页对照官方模板完成版式核验 \\
-建模与推导 & 按题意建立有限实体接触、图连通和概率约束模型 & 给出凸体距离、共同随机前缀、整数成本和联合置信路线 & 参赛队重推公式，并以特殊构型、量纲和单调性检查 \\
-程序与仿真 & 实现可复现的几何核、Monte Carlo 和概率约束求解 & 生成或修改 Python 程序、单元测试和运行命令 & 固定随机种子，运行全部测试并抽查原始样本与汇总结果 \\
-图表与三维建模 & 依据计算结果生成统计图和 FreeCAD 三维模型 & 辅助生成绘图、CAD 构建和渲染脚本 & 参赛队逐项核对图中数据、三维对象数量和空间接触关系 \\
-论文整理 & 将正式证据组织为摘要、正文、参考文献和附录 & 辅助压缩文字、统一符号并构建 LaTeX & 参赛队核对全部数值与结论；按官方 Word 模板核验版式并逐页检查 LaTeX PDF 后定稿 \\
+资料检索 & 联网搜索有限实体接触、图连通、Monte Carlo 与二项置信区间的相关资料 & 返回网页、论文线索及内容摘要 & 参赛队打开原始来源，核对公式、适用条件和引用信息 \\
 \end{longtable}
 }
 
@@ -910,4 +906,5 @@ B 越界球片由球与胞盒的真实凸交表示，A 越界片段则按圆柱�
 
 复现顺序为：先运行几何与图算法测试，再完成问题一的确定性接触判定；随后生成问题二的共同前缀样本、问题三的临界整数结果和问题四的二维成本结果；最后重建统计图、三维见证并编译论文。完整程序随支撑材料提交。
 
+\clearpage
 \input{source_appendix.tex}

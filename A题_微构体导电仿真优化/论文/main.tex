@@ -1,4 +1,4 @@
-\documentclass[UTF8,zihao=-4,fontset=windows,a4paper]{ctexart}
+\documentclass[UTF8,zihao=-4,fontset=none,a4paper]{ctexart}
 
 \usepackage{amsmath,amssymb,bm,mathtools}
 \usepackage{booktabs,array,tabularx,longtable,multirow}
@@ -11,11 +11,46 @@
 
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headheight=0pt,headsep=0pt,footskip=0.75cm}
 \graphicspath{{./}}
-\setmainfont{Times New Roman}
-\setmonofont{Consolas}
-\setCJKmainfont{SimSun}[BoldFont=SimHei]
-\setCJKsansfont{SimHei}[AutoFakeBold=2]
-\setCJKmonofont{FangSong}[AutoFakeBold=2]
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{TeX Gyre Termes}}
+\IfFontExistsTF{Menlo}
+  {\setmonofont{Menlo}}
+  {\IfFontExistsTF{Consolas}
+    {\setmonofont{Consolas}}
+    {\setmonofont{Latin Modern Mono}}}
+
+% 优先探测当前平台常用字体，避免 XeLaTeX 为缺失字体启动无效的字体生成流程。
+\IfFontExistsTF{Songti SC}{
+  \setCJKmainfont{Songti SC}[BoldFont=Heiti SC]
+  \setCJKsansfont{Heiti SC}[AutoFakeBold=2]
+  \setCJKmonofont{Songti SC}[AutoFakeBold=2]
+  \setCJKfamilyfont{mcmsong}{Songti SC}[BoldFont=Heiti SC]
+  \setCJKfamilyfont{mcmhei}{Heiti SC}[AutoFakeBold=2]
+  \setCJKfamilyfont{mcmfang}{Songti SC}[AutoFakeBold=2]
+}{
+  \IfFontExistsTF{SimSun}{
+    \setCJKmainfont{SimSun}[BoldFont=SimHei]
+    \setCJKsansfont{SimHei}[AutoFakeBold=2]
+    \setCJKmonofont{FangSong}[AutoFakeBold=2]
+    \setCJKfamilyfont{mcmsong}{SimSun}[BoldFont=SimHei]
+    \setCJKfamilyfont{mcmhei}{SimHei}[AutoFakeBold=2]
+    \setCJKfamilyfont{mcmfang}{FangSong}[AutoFakeBold=2]
+  }{
+    \setCJKmainfont{FandolSong-Regular}[BoldFont=FandolSong-Bold]
+    \setCJKsansfont{FandolHei-Regular}[AutoFakeBold=2]
+    \setCJKmonofont{FandolFang-Regular}[AutoFakeBold=2]
+    \setCJKfamilyfont{mcmsong}{FandolSong-Regular}[BoldFont=FandolSong-Bold]
+    \setCJKfamilyfont{mcmhei}{FandolHei-Regular}[AutoFakeBold=2]
+    \setCJKfamilyfont{mcmfang}{FandolFang-Regular}[AutoFakeBold=2]
+  }
+}
+\providecommand{\songti}{}
+\providecommand{\heiti}{}
+\providecommand{\fangsong}{}
+\renewcommand{\songti}{\CJKfamily{mcmsong}}
+\renewcommand{\heiti}{\CJKfamily{mcmhei}}
+\renewcommand{\fangsong}{\CJKfamily{mcmfang}}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
 \setlength{\emergencystretch}{3em}

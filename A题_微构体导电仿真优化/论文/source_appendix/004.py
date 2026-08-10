@@ -1,4 +1,3 @@
-# Q4：二维成本整数域 Pareto 前沿扫描与联合确认程序
 from __future__ import annotations
 
 import argparse
@@ -15,8 +14,19 @@ from typing import Any, Sequence
 import numpy as np
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-QUESTION_ROOT = Path(__file__).resolve().parents[1]
+def _discover_project_root(script_path: Path) -> Path:
+    # 优先使用环境变量，否则向上查找项目标志目录，避免写死机器绝对路径。
+    configured = os.environ.get("MCM_PROJECT_ROOT")
+    candidates = [Path(configured).expanduser()] if configured else script_path.resolve().parents
+    for candidate in candidates:
+        root = candidate.resolve()
+        if (root / "公共代码").is_dir() and (root / "问题").is_dir():
+            return root
+    raise RuntimeError("无法定位项目根目录；请设置 MCM_PROJECT_ROOT")
+
+
+PROJECT_ROOT = _discover_project_root(Path(__file__))
+QUESTION_ROOT = PROJECT_ROOT / "问题" / "问题4"
 COMMON_DIR = PROJECT_ROOT / "公共代码"
 if str(COMMON_DIR) not in sys.path:
     sys.path.insert(0, str(COMMON_DIR))
@@ -142,6 +152,7 @@ def _parse_design(text: str) -> tuple[int, int]:
     return design
 
 
+# 关键：将两类填料数量统一映射为精确整数成本权重。
 def cost_weight(n_a: int, n_b: int) -> int:
     if n_a < 0 or n_b < 0:
         raise ValueError("介质数量必须非负")
@@ -480,6 +491,7 @@ def _base_config(
     )
 
 
+# 关键：先筛选低成本候选设计并保存全部判定证据。
 def run_screening(
     designs: Sequence[tuple[int, int]],
     output_dir: Path,
@@ -780,6 +792,7 @@ def _validate_freeze_sources(freeze: dict[str, Any]) -> None:
             raise ValueError("冻结后探索证据文件缺失或哈希发生变化")
 
 
+# 关键：在冻结候选集上进行独立确认并给出最终最优解。
 def run_confirmation(
     freeze: dict[str, Any],
     output_dir: Path,
@@ -937,6 +950,145 @@ def _write_stage_summary(output_dir: Path, payload: dict[str, Any]) -> dict[str,
     payload["summary_path"] = str(path.resolve())
     _write_json(path, payload)
     return payload
+
+
+def register_formal_results(result: dict[str, Any], summary_path: Path) -> None:
+    if result.get("kind") != "q4_final_summary":
+        raise ValueError("问题4结果尚未完成独立确认")
+    if result.get("result_status") not in {
+        "globally_certified_minimum_cost",
+        "lowest_statistically_feasible_cost",
+    }:
+        raise ValueError("问题4候选尚未形成可发布的统计可行结论")
+    contract = result.get("boundary_contract")
+    if not isinstance(contract, dict) or contract.get("mode") != "D":
+        raise ValueError("问题4正式结果没有采用题设截断片段独立的边界合同")
+    freeze_path = Path(result["freeze_path"])
+    freeze = json.loads(freeze_path.read_text(encoding="utf-8-sig"))
+    protocol = freeze["confirmation_protocol"]
+    if (
+        int(protocol["fixed_trial_count"]) < DEFAULT_CONFIRMATION_TRIALS
+        or int(protocol["confirmation_stream_id"])
+        != DEFAULT_CONFIRMATION_STREAM_ID
+        or float(protocol["familywise_confidence"])
+        < DEFAULT_FAMILYWISE_CONFIDENCE
+    ):
+        raise ValueError("问题4确认样本数、独立流或联合置信水平未达到正式门禁")
+
+    candidate_records = [
+        row
+        for row in result.get("confirmation_records", [])
+        if row.get("role") == "candidate"
+    ]
+    if len(candidate_records) != 1:
+        raise ValueError("问题4正式结果必须恰有一个候选确认记录")
+    candidate = candidate_records[0]
+    if candidate.get("proof_status") != "candidate_statistically_feasible":
+        raise ValueError("问题4候选未通过独立单侧下限检验")
+    design = result.get("reported_design")
+    if not isinstance(design, dict):
+        raise ValueError("问题4正式结果缺少可报告配比")
+    for key in ("n_a", "n_b", "cost_weight"):
+        if int(design[key]) != int(candidate[key]):
+            raise ValueError(f"问题4 reported_design 与候选的 {key} 不一致")
+
+    source_artifact = summary_path.resolve().relative_to(PROJECT_ROOT).as_posix()
+    statement_count = int(protocol["bonferroni_statement_count"])
+    globally_certified = (
+        result["result_status"] == "globally_certified_minimum_cost"
+    )
+    validation = (
+        f"独立 {int(candidate['trials'])} 次共同随机数确认；冻结 {statement_count} 个"
+        "单侧陈述后作 Bonferroni 校正；候选用 Clopper-Pearson 下限，严格更便宜极大点"
+        "用 Clopper-Pearson 上限"
+    )
+    entries = (
+        (
+            "q4_reported_n_a",
+            int(design["n_a"]),
+            str(int(design["n_a"])),
+            "个",
+            "QFourNA",
+        ),
+        (
+            "q4_reported_n_b",
+            int(design["n_b"]),
+            str(int(design["n_b"])),
+            "个",
+            "QFourNB",
+        ),
+        (
+            "q4_cost_weight",
+            int(design["cost_weight"]),
+            str(int(design["cost_weight"])),
+            "",
+            "QFourCostWeight",
+        ),
+        (
+            "q4_reported_cost_yuan",
+            float(design["cost_yuan"]),
+            f"{float(design['cost_yuan']):.4f}",
+            "元",
+            "QFourCost",
+        ),
+        (
+            "q4_candidate_probability",
+            float(candidate["estimate"]),
+            f"{100.0 * float(candidate['estimate']):.3f}%",
+            "",
+            "QFourProbability",
+        ),
+        (
+            "q4_candidate_cp_lower",
+            float(candidate["clopper_pearson_one_sided_lower"]),
+            f"{100.0 * float(candidate['clopper_pearson_one_sided_lower']):.3f}%",
+            "",
+            "QFourLower",
+        ),
+    )
+    for key, value, formatted, unit, macro in entries:
+        register_result(
+            key,
+            question=4,
+            value=value,
+            formatted=formatted,
+            unit=unit,
+            source_script="问题/问题4/src/solve.py",
+            source_artifact=source_artifact,
+            validation=validation,
+            latex_macro=macro,
+        )
+
+    uncertainty = result["cost_uncertainty_interval"]
+    for key, field, macro in (
+        ("q4_cost_lower_yuan", "lower_cost_yuan", "QFourCostLower"),
+        ("q4_cost_upper_yuan", "upper_cost_yuan", "QFourCostUpper"),
+    ):
+        value = float(uncertainty[field])
+        register_result(
+            key,
+            question=4,
+            value=value,
+            formatted=f"{value:.4f}",
+            unit="元",
+            source_script="问题/问题4/src/solve.py",
+            source_artifact=source_artifact,
+            validation=validation,
+            latex_macro=macro,
+        )
+    register_result(
+        "q4_global_minimum_cost_certified",
+        question=4,
+        value=globally_certified,
+        formatted="是" if globally_certified else "否",
+        source_script="问题/问题4/src/solve.py",
+        source_artifact=source_artifact,
+        validation=(
+            validation
+            + ("；全部严格更便宜极大点均已排除" if globally_certified else "；仍有严格更便宜极大点未排除")
+        ),
+    )
+    export_latex()
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
