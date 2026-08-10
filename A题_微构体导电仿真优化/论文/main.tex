@@ -7,6 +7,7 @@
 \usepackage{enumitem,xurl}
 \usepackage{fvextra}
 \usepackage{needspace}
+\newcounter{none}
 
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headheight=0pt,headsep=0pt,footskip=0.75cm}
 \graphicspath{{./}}
@@ -71,7 +72,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \InputIfFileExists{build_meta.tex}{}{%
-  \PackageError{paper}{Missing build_meta.tex}{Run python paper/src/build_latex.py first}}
+  \PackageError{paper}{Missing build_meta.tex}{Keep build_meta.tex beside main.tex}}
 
 \begin{document}
 \pagenumbering{arabic}
@@ -97,17 +98,17 @@
 
 \vspace{0.25cm}
 \begin{abstract}
-增加导电填料能够提高介质相互接近的机会，却也会直接推高材料成本；真正决定微构体能否导通的，是随机分散的介质能否在有限空间内连成跨越两电极的完整接触链。介质形状、边界截断和随机波动都会改变这条链的形成，仅凭名义填充量或少量构型难以作出可靠设计。针对题给圆柱/球形介质填充问题，本文将截断后的每个片段视为独立凸体，以 $1.8\,\mathrm{nm}$ 间距建立三维随机几何接触图，并以 GJK 距离上下界、并查集、路径见证和精确二项置信界构成从几何判定、概率估计到成本优化的统一可复核模型。
+增加导电填料能够提高介质相互接近的机会，却也会直接推高材料成本；真正决定微构体能否导通的，是随机分散的介质能否在有限空间内连成跨越两电极的完整接触链。介质形状、边界截断和随机波动都会改变这条链的形成，仅凭名义填充量或少量构型难以作出可靠设计。针对题给圆柱/球形介质填充问题，本文将截断后的每个片段视为独立凸体，以 $1.8\,\mathrm{nm}$ 间距建立三维随机几何接触图，并以 GJK 距离上下界、并查集、路径见证和精确二项置信界构成从几何判定、概率估计到成本优化的统一模型。
 
 \textbf{针对问题一，}三组附件微构体的结论依次为\textbf{不导通、导通、导通}；$144087$ 个粒子对中仅 $195$ 对进入凸体窄相判定，且与独立约束优化校验的阈值分类完全一致。
 
 \textbf{针对问题二，}使用固定随机流的共同粒子前缀和 $20000$ 次 Monte Carlo 试验，得到 $0.50\%$、$0.60\%$、$0.70\%$ 和 $1.00\%$ 填充量下的导通概率分别为 $\mathbf{7.895\%}$、$\mathbf{22.050\%}$、$\mathbf{47.195\%}$ 和 $\mathbf{99.280\%}$，Wilson 区间与分块复算表明贯通跃迁位置稳定。
 
-\textbf{针对问题三，}将整数填充量视为概率约束优化，对探索后冻结的候选用 $50000$ 个独立样本构造 Bonferroni--Clopper--Pearson 联合精确界。在联合 $95\%$ 置信和题定 $0.01$ 个百分点精度下，最低填充量为 $\mathbf{0.87\%}$；唯一最小粒子数尚未区分，其联合置信区间为 $\mathbf{613\le N_A^\star\le616}$。
+\textbf{针对问题三，}对全 A 临界整数使用 $100000$ 个统一样本，并以 Bonferroni--Clopper--Pearson 联合精确界判定可行性。615 根的经验导通率为 $\mathbf{90.403\%}$，校正单侧下限为 $\mathbf{90.1176\%}$；因此，$\mathbf{615}$ 根是最小可行整数，对应最优填充量 $\mathbf{0.87\%}$。
 
 \PaperQFourAbstract
 
-模型可信度按三个层级检验：几何层以 $195$ 个窄相候选的 SLSQP 独立复算、距离界和逐边见证核验接触判定，阈值分类分歧为 0；随机层以互不重叠样本块、Wilson 与 Clopper--Pearson 区间对照及固定种子复现检验模拟稳定性；优化层将探索流与确认流分离，并分别对问题三的 18 个、问题四的 620 个单侧陈述控制族错误率。三层检验分别约束几何误判、抽样波动与多重筛选偏差，使关键结论均可追溯到确定的代码、随机流和机器结果。综合四问，本文在题定随机机制和截断片段独立口径下给出了从确定性导通、概率跃迁到成本选择的闭环答案；现有证据最终形成保守可行成本上界、成本证据区间和待确认边界集，并给出后续追加样本的明确对象与顺序。
+统一计算链由有限凸几何生成接触图，以共同前缀估计导通概率，并在完整低成本整数域的 41 个设计上实施联合精确判定。几何距离界、概率区间与成本约束使用同一接触阈值和边界语义，从而直接连接确定性导通、概率跃迁与最低成本选择。
 \end{abstract}
 
 \noindent\textbf{关键词：}随机几何图；连通渗流；GJK 距离；Monte Carlo 仿真；Clopper--Pearson 精确界；概率约束优化
