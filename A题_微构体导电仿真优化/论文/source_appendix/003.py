@@ -46,6 +46,26 @@ def _round_half_up(value: float, decimals: int) -> float:
     return float(Decimal(str(value)).quantize(quantum, rounding=ROUND_HALF_UP))
 
 
+def _write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    temporary.replace(path)
+
+
+def _write_or_validate_freeze(path: Path, payload: dict[str, Any]) -> None:
+    if path.exists():
+        stored = json.loads(path.read_text(encoding="utf-8-sig"))
+        if stored != payload:
+            raise ValueError(
+                "已有 Q3 冻结文件与本次协议不一致；请改用新的输出目录"
+            )
+        return
+    _write_json(path, payload)
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -409,3 +429,117 @@ def analyze_confirmation_artifact(
             None if selected_volume is None else round(selected_volume, 2)
         ),
     }
+
+
+def run(args: argparse.Namespace) -> dict[str, Any]:
+    freeze, confirmation_config = build_confirmation_freeze(
+        args.threshold_artifact,
+        target=args.target,
+        candidate_radius=args.candidate_radius,
+        candidates=args.candidates,
+        confirmation_trials=args.confirmation_trials,
+        confirmation_stream_id=args.confirmation_stream_id,
+        familywise_confidence=args.familywise_confidence,
+    )
+    output_dir = Path(args.output_dir)
+    freeze_path = output_dir / "q3_confirmation_freeze.json"
+    _write_or_validate_freeze(freeze_path, freeze)
+
+    started = time.perf_counter()
+    confirmation_artifact = run_simulation(
+        confirmation_config,
+        output_dir / "confirmation",
+        workers=args.workers,
+        batch_size=args.batch_size,
+        resume=args.resume,
+    )
+    result = analyze_confirmation_artifact(confirmation_artifact, freeze)
+    result["freeze_path"] = str(freeze_path.resolve())
+    result["freeze_sha256"] = _sha256(freeze_path)
+    result["wall_runtime_seconds"] = time.perf_counter() - started
+    summary_path = output_dir / "q3_summary.json"
+    result["summary_path"] = str(summary_path.resolve())
+    _write_json(summary_path, result)
+    if args.register_results:
+        register_formal_results(result, summary_path)
+    return result
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="问题3：由 Q2 探索流冻结候选，再用独立固定流确认 90% 最小整数"
+    )
+    parser.add_argument(
+        "--threshold-artifact",
+        type=Path,
+        default=(
+            PROJECT_ROOT
+            / "问题"
+            / "问题2"
+            / "results"
+            / "D_primary_n20000"
+            / "threshold_samples.json"
+        ),
+        help="Q2 正式 D 边界探索阈值流",
+    )
+    parser.add_argument("--output-dir", type=Path, default=QUESTION_ROOT / "results")
+    parser.add_argument("--target", type=float, default=0.90)
+    parser.add_argument(
+        "--familywise-confidence", type=float, default=DEFAULT_FAMILYWISE_CONFIDENCE
+    )
+    parser.add_argument(
+        "--candidate-radius", type=int, default=DEFAULT_CANDIDATE_RADIUS
+    )
+    parser.add_argument(
+        "--candidates",
+        type=int,
+        nargs="+",
+        default=None,
+        help="显式覆盖默认 t±radius 候选集",
+    )
+    parser.add_argument(
+        "--confirmation-trials", type=int, default=DEFAULT_CONFIRMATION_TRIALS
+    )
+    parser.add_argument(
+        "--confirmation-stream-id",
+        type=int,
+        default=DEFAULT_CONFIRMATION_STREAM_ID,
+    )
+    parser.add_argument("--workers", type=int, default=1)
+    parser.add_argument("--batch-size", type=int, default=100)
+    parser.add_argument(
+        "--resume", action=argparse.BooleanOptionalAction, default=True
+    )
+    parser.add_argument(
+        "--register-results",
+        action="store_true",
+        help="仅在正式独立确认完成后写入结果注册表并导出 LaTeX 宏",
+    )
+    return parser.parse_args(argv)
+
+
+def main() -> None:
+    result = run(parse_args())
+    print(
+        json.dumps(
+            {
+                "freeze": result["freeze_path"],
+                "confirmation_threshold_artifact": result[
+                    "confirmation_threshold_artifact"
+                ],
+                "summary": result["summary_path"],
+                "result_status": result["decision"]["result_status"],
+                "confirmed_minimum_integer": result["decision"][
+                    "confirmed_minimum_integer"
+                ],
+                "lowest_statistically_feasible_integer": result["decision"][
+                    "lowest_statistically_feasible_integer"
+                ],
+            },
+            ensure_ascii=False,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

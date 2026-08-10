@@ -479,6 +479,170 @@ def _base_config(
     )
 
 
+def run_screening(
+    designs: Sequence[tuple[int, int]],
+    output_dir: Path,
+    *,
+    trials: int,
+    confidence: float,
+    target: float,
+    master_seed: int,
+    stream_id: int,
+    workers: int,
+    batch_size: int,
+    resume: bool,
+    explicit_candidate: tuple[int, int] | None = None,
+    candidate_rule: str = "point_estimate",
+) -> dict[str, Any]:
+    if trials < 1:
+        raise ValueError("探索样本数必须为正整数")
+    if not 0.0 < confidence < 1.0:
+        raise ValueError("探索置信水平必须位于 (0,1)")
+    if not 0.0 < target < 1.0:
+        raise ValueError("目标概率必须位于 (0,1)")
+    if not designs:
+        raise ValueError("探索设计集不能为空")
+    if candidate_rule not in SCREENING_CANDIDATE_RULES:
+        raise ValueError(f"未知探索候选规则：{candidate_rule}")
+    maximum_n_a = max(n_a for n_a, _ in designs)
+    maximum_n_b = max(n_b for _, n_b in designs)
+    config = _base_config(
+        maximum_n_a,
+        maximum_n_b,
+        trials=trials,
+        master_seed=master_seed,
+        stream_id=stream_id,
+    )
+    artifact = run_pareto_frontier_simulation(
+        config,
+        output_dir
+        / "screening"
+        / ("pareto_max_" + _design_tag(maximum_n_a, maximum_n_b)),
+        workers=workers,
+        batch_size=batch_size,
+        resume=resume,
+    )
+    stored_config, frontiers, _ = load_pareto_frontier_artifact(artifact)
+    if (stored_config.n_a, stored_config.n_b) != (maximum_n_a, maximum_n_b):
+        raise RuntimeError("二维静态图产物与完整整数域上限不一致")
+    success_counts = integer_domain_success_counts(
+        frontiers, maximum_n_a, maximum_n_b
+    )
+    counts_path = output_dir / "q4_screening_integer_domain_counts.npz"
+    _write_integer_domain_counts(counts_path, success_counts, trials=trials)
+
+    records = []
+    for n_a, n_b in designs:
+        record = _analyze_pareto_design(
+            artifact, n_a, n_b, confidence=confidence
+        )
+        record["screening_empirically_feasible"] = record["estimate"] >= target
+        record["screening_cp_lower_feasible"] = (
+            record["clopper_pearson_one_sided_lower"] >= target
+        )
+        records.append(record)
+
+    minimum = None
+    if explicit_candidate is not None:
+        candidate = select_screening_candidate(
+            records, target=target, explicit_candidate=explicit_candidate
+        )
+    else:
+        minimum = minimum_screening_feasible_design(
+            success_counts,
+            trials=trials,
+            target=target,
+            confidence=confidence,
+            rule=candidate_rule,
+        )
+        if minimum is None:
+            candidate = None
+        else:
+            candidate_design = minimum[0], minimum[1]
+            indexed_records = {
+                (int(row["n_a"]), int(row["n_b"])): row for row in records
+            }
+            candidate = indexed_records.get(candidate_design)
+            if candidate is None:
+                candidate = _analyze_pareto_design(
+                    artifact,
+                    candidate_design[0],
+                    candidate_design[1],
+                    confidence=confidence,
+                )
+                candidate["screening_empirically_feasible"] = True
+                candidate["screening_cp_lower_feasible"] = (
+                    candidate["clopper_pearson_one_sided_lower"] >= target
+                )
+                candidate["screening_record_role"] = "integer_domain_candidate"
+                records.append(candidate)
+                records.sort(
+                    key=lambda row: (
+                        int(row["cost_weight"]),
+                        int(row["n_a"]),
+                        int(row["n_b"]),
+                    )
+                )
+    return {
+        "kind": "q4_screening_results",
+        "schema_version": SCHEMA_VERSION,
+        "question": 4,
+        "result_scope": "screening_only_not_final_probability_evidence",
+        "boundary_contract": BOUNDARY_CONTRACT,
+        "target_probability": target,
+        "pointwise_confidence": confidence,
+        "fixed_trial_count": trials,
+        "master_seed": master_seed,
+        "stream_id": stream_id,
+        "shared_crn_across_designs": True,
+        "one_static_graph_per_trial": True,
+        "maximum_static_graph_design": [maximum_n_a, maximum_n_b],
+        "integer_domain_bounds": {
+            "n_a": [0, maximum_n_a],
+            "n_b": [0, maximum_n_b],
+        },
+        "integer_domain_design_count": (maximum_n_a + 1) * (maximum_n_b + 1),
+        "integer_domain_success_counts": str(counts_path.resolve()),
+        "integer_domain_success_counts_sha256": _sha256(counts_path),
+        "pareto_frontier_artifact": str(artifact.resolve()),
+        "pareto_frontier_artifact_sha256": _sha256(artifact),
+        "design_count": len(records),
+        "records": records,
+        "screening_candidate": candidate,
+        "candidate_selection_rule_id": candidate_rule,
+        "candidate_required_successes": None if minimum is None else minimum[3],
+        "candidate_selection_rule": (
+            "在完整整数域点估计不低于目标的设计中，按整数成本权重、N_A、N_B依次取最小"
+            if candidate_rule == "point_estimate"
+            else "在完整整数域探索单侧 Clopper-Pearson 下限不低于目标的设计中，"
+            "按整数成本权重、N_A、N_B依次取最小；探索区间只用于冻结候选"
+        ),
+    }
+
+
+def select_screening_candidate(
+    records: Sequence[dict[str, Any]],
+    *,
+    target: float,
+    explicit_candidate: tuple[int, int] | None = None,
+) -> dict[str, Any] | None:
+    indexed = {(int(row["n_a"]), int(row["n_b"])): row for row in records}
+    if explicit_candidate is not None:
+        if explicit_candidate not in indexed:
+            raise ValueError("显式候选不在冻结前的探索设计集中")
+        candidate = indexed[explicit_candidate]
+        if float(candidate["estimate"]) < target:
+            raise ValueError("显式候选的探索点估计尚未达到目标概率")
+        return candidate
+    feasible = [row for row in records if float(row["estimate"]) >= target]
+    if not feasible:
+        return None
+    return min(
+        feasible,
+        key=lambda row: (int(row["cost_weight"]), int(row["n_a"]), int(row["n_b"])),
+    )
+
+
 def build_confirmation_freeze(
     screening_manifest: dict[str, Any],
     *,
@@ -603,6 +767,68 @@ def build_confirmation_freeze(
     }
 
 
+def _validate_freeze_sources(freeze: dict[str, Any]) -> None:
+    source = freeze["source_screening"]
+    for path_key, hash_key in (
+        ("json_path", "json_sha256"),
+        ("csv_path", "csv_sha256"),
+        ("pareto_artifact_path", "pareto_artifact_sha256"),
+    ):
+        path = Path(source[path_key])
+        if not path.is_file() or _sha256(path) != source[hash_key]:
+            raise ValueError("冻结后探索证据文件缺失或哈希发生变化")
+
+
+def run_confirmation(
+    freeze: dict[str, Any],
+    output_dir: Path,
+    *,
+    workers: int,
+    batch_size: int,
+    resume: bool,
+) -> list[dict[str, Any]]:
+    _validate_freeze_sources(freeze)
+    protocol = freeze["confirmation_protocol"]
+    confidence = float(protocol["per_statement_confidence"])
+    target = float(freeze["candidate_freeze"]["target_probability"])
+    config = MixedSimulationConfig.from_dict(protocol["configuration"])
+    if config.fingerprint != protocol["configuration_fingerprint"]:
+        raise ValueError("冻结的二维确认配置指纹不一致")
+    artifact = run_pareto_frontier_simulation(
+        config,
+        output_dir
+        / "confirmation"
+        / ("pareto_max_" + _design_tag(config.n_a, config.n_b)),
+        workers=workers,
+        batch_size=batch_size,
+        resume=resume,
+    )
+    records = []
+    for frozen in freeze["confirmation_designs"]:
+        record = _analyze_pareto_design(
+            artifact,
+            int(frozen["n_a"]),
+            int(frozen["n_b"]),
+            confidence=confidence,
+        )
+        record["role"] = frozen["role"]
+        record["proof_bound"] = frozen["proof_bound"]
+        if frozen["proof_bound"] == "lower":
+            record["proof_status"] = (
+                "candidate_statistically_feasible"
+                if record["clopper_pearson_one_sided_lower"] >= target
+                else "candidate_not_confirmed"
+            )
+        else:
+            record["proof_status"] = (
+                "strictly_cheaper_design_excluded"
+                if record["clopper_pearson_one_sided_upper"] < target
+                else "strictly_cheaper_design_not_excluded"
+            )
+        records.append(record)
+    return records
+
+
 def analyze_confirmation_records(
     freeze: dict[str, Any], records: Sequence[dict[str, Any]]
 ) -> dict[str, Any]:
@@ -705,3 +931,227 @@ def analyze_confirmation_records(
     }
 
 
+def _write_stage_summary(output_dir: Path, payload: dict[str, Any]) -> dict[str, Any]:
+    path = output_dir / "q4_summary.json"
+    payload["summary_path"] = str(path.resolve())
+    _write_json(path, payload)
+    return payload
+
+
+def run(args: argparse.Namespace) -> dict[str, Any]:
+    output_dir = Path(args.output_dir)
+    screening_json = output_dir / "q4_screening.json"
+    screening_csv = output_dir / "q4_screening.csv"
+    freeze_path = output_dir / "q4_confirmation_freeze.json"
+
+    if args.stage == "confirm":
+        if not freeze_path.is_file():
+            raise FileNotFoundError("确认阶段要求先生成 q4_confirmation_freeze.json")
+        freeze = json.loads(freeze_path.read_text(encoding="utf-8-sig"))
+        if freeze.get("kind") != "q4_confirmation_freeze":
+            raise ValueError("文件不是 Q4 确认冻结协议")
+    else:
+        designs = screening_designs(
+            max_n_a=args.max_n_a,
+            max_n_b=args.max_n_b,
+            step_n_a=args.step_n_a,
+            step_n_b=args.step_n_b,
+            explicit_designs=args.designs,
+            maximum_designs=args.max_screening_designs,
+        )
+        screening = run_screening(
+            designs,
+            output_dir,
+            trials=args.screening_trials,
+            confidence=args.screening_confidence,
+            target=args.target,
+            master_seed=args.seed,
+            stream_id=args.screening_stream_id,
+            workers=args.workers,
+            batch_size=args.screening_batch_size,
+            resume=args.resume,
+            explicit_candidate=args.candidate,
+            candidate_rule=args.screening_candidate_rule,
+        )
+        _write_json(screening_json, screening)
+        _write_csv(screening_csv, screening["records"], SCREENING_CSV_FIELDS)
+        if args.stage == "screen":
+            return _write_stage_summary(
+                output_dir,
+                {
+                    "kind": "q4_stage_summary",
+                    "schema_version": SCHEMA_VERSION,
+                    "question": 4,
+                    "result_status": "screening_complete",
+                    "screening_json": str(screening_json.resolve()),
+                    "screening_csv": str(screening_csv.resolve()),
+                    "screening_candidate": screening["screening_candidate"],
+                    "candidate_selection_rule_id": screening[
+                        "candidate_selection_rule_id"
+                    ],
+                    "final_evidence_available": False,
+                },
+            )
+        freeze = build_confirmation_freeze(
+            screening,
+            screening_json_path=screening_json,
+            screening_csv_path=screening_csv,
+            confirmation_trials=args.confirmation_trials,
+            confirmation_stream_id=args.confirmation_stream_id,
+            familywise_confidence=args.familywise_confidence,
+        )
+        _write_or_validate_freeze(freeze_path, freeze)
+        if args.stage == "freeze":
+            return _write_stage_summary(
+                output_dir,
+                {
+                    "kind": "q4_stage_summary",
+                    "schema_version": SCHEMA_VERSION,
+                    "question": 4,
+                    "result_status": "confirmation_protocol_frozen",
+                    "freeze_path": str(freeze_path.resolve()),
+                    "freeze_sha256": _sha256(freeze_path),
+                    "confirmation_design_count": len(freeze["confirmation_designs"]),
+                    "final_evidence_available": False,
+                },
+            )
+
+    records = run_confirmation(
+        freeze,
+        output_dir,
+        workers=args.workers,
+        batch_size=args.confirmation_batch_size,
+        resume=args.resume,
+    )
+    confirmation_json = output_dir / "q4_confirmation.json"
+    confirmation_csv = output_dir / "q4_confirmation.csv"
+    confirmation_payload = {
+        "kind": "q4_confirmation_results",
+        "schema_version": SCHEMA_VERSION,
+        "question": 4,
+        "freeze_path": str(freeze_path.resolve()),
+        "freeze_sha256": _sha256(freeze_path),
+        "records": records,
+    }
+    _write_json(confirmation_json, confirmation_payload)
+    _write_csv(confirmation_csv, records, CONFIRMATION_CSV_FIELDS)
+    decision = analyze_confirmation_records(freeze, records)
+    summary = _write_stage_summary(
+        output_dir,
+        {
+            "kind": "q4_final_summary",
+            "schema_version": SCHEMA_VERSION,
+            "question": 4,
+            "boundary_contract": BOUNDARY_CONTRACT,
+            "b_geometry_status": "exact_ball_cell_intersection_fragments",
+            "a_geometry_status": "centerline_cut_approximation",
+            "boundary_b_sensitivity_status": "not_run_not_claimed",
+            "freeze_path": str(freeze_path.resolve()),
+            "freeze_sha256": _sha256(freeze_path),
+            "confirmation_json": str(confirmation_json.resolve()),
+            "confirmation_json_sha256": _sha256(confirmation_json),
+            "confirmation_csv": str(confirmation_csv.resolve()),
+            "confirmation_csv_sha256": _sha256(confirmation_csv),
+            "confirmation_records": records,
+            **decision,
+        },
+    )
+    if args.register_results:
+        register_formal_results(summary, Path(summary["summary_path"]))
+    return summary
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="问题4：D 主边界下 A/B 混合填充的两阶段最低成本统计优化"
+    )
+    parser.add_argument(
+        "--stage", choices=("screen", "freeze", "confirm", "all"), default="screen"
+    )
+    parser.add_argument("--output-dir", type=Path, default=QUESTION_ROOT / "results")
+    parser.add_argument("--target", type=float, default=DEFAULT_TARGET)
+    parser.add_argument(
+        "--screening-trials", type=int, default=DEFAULT_SCREENING_TRIALS
+    )
+    parser.add_argument(
+        "--confirmation-trials", type=int, default=DEFAULT_CONFIRMATION_TRIALS
+    )
+    parser.add_argument("--screening-confidence", type=float, default=0.95)
+    parser.add_argument(
+        "--screening-candidate-rule",
+        choices=SCREENING_CANDIDATE_RULES,
+        default="point_estimate",
+        help=(
+            "探索候选规则：point_estimate 复现经验边界；cp_lower 要求探索单侧"
+            " Clopper-Pearson 下限达到目标"
+        ),
+    )
+    parser.add_argument(
+        "--familywise-confidence", type=float, default=DEFAULT_FAMILYWISE_CONFIDENCE
+    )
+    parser.add_argument("--max-na", dest="max_n_a", type=int, default=720)
+    parser.add_argument("--max-nb", dest="max_n_b", type=int, default=6000)
+    parser.add_argument("--step-na", dest="step_n_a", type=int, default=120)
+    parser.add_argument("--step-nb", dest="step_n_b", type=int, default=1000)
+    parser.add_argument(
+        "--design",
+        dest="designs",
+        action="append",
+        type=_parse_design,
+        default=None,
+        help="显式探索设计 N_A,N_B；重复传入时覆盖矩形网格",
+    )
+    parser.add_argument(
+        "--candidate",
+        type=_parse_design,
+        default=None,
+        help="从已探索且点估计可行的设计中显式冻结候选",
+    )
+    parser.add_argument("--max-screening-designs", type=int, default=500)
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=int(os.environ.get("MATH_MODELING_SEED", "20260801")),
+    )
+    parser.add_argument(
+        "--screening-stream-id", type=int, default=DEFAULT_SCREENING_STREAM_ID
+    )
+    parser.add_argument(
+        "--confirmation-stream-id", type=int, default=DEFAULT_CONFIRMATION_STREAM_ID
+    )
+    parser.add_argument("--workers", type=int, default=1)
+    parser.add_argument("--screening-batch-size", type=int, default=20)
+    parser.add_argument("--confirmation-batch-size", type=int, default=100)
+    parser.add_argument(
+        "--resume", action=argparse.BooleanOptionalAction, default=True
+    )
+    parser.add_argument(
+        "--register-results",
+        action="store_true",
+        help="仅在正式独立确认形成可发布结论后写入结果注册表",
+    )
+    args = parser.parse_args(argv)
+    if args.register_results and args.stage in {"screen", "freeze"}:
+        parser.error("--register-results 只能与 --stage confirm 或 all 同用")
+    return args
+
+
+def main() -> None:
+    result = run(parse_args())
+    print(
+        json.dumps(
+            {
+                "summary": result["summary_path"],
+                "result_status": result["result_status"],
+                "reported_design": result.get("reported_design"),
+                "final_evidence_available": result.get(
+                    "final_evidence_available", True
+                ),
+            },
+            ensure_ascii=False,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
