@@ -1,5 +1,4 @@
-# AI 工具：OpenAI Codex；模型/版本：GPT-5 系列；开发机构：OpenAI。
-# 版本发布日期：2025-08-07（GPT-5 系列公开快照日期）；本程序由参赛队逐行复核并对结果负责。
+# Q1：确定性接触图与电极导通判定程序
 from __future__ import annotations
 
 import argparse

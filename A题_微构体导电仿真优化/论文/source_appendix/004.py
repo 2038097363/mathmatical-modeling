@@ -1,3 +1,4 @@
+# Q4：二维成本整数域 Pareto 前沿扫描与联合确认程序
 from __future__ import annotations
 
 import argparse
